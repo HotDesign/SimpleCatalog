@@ -1,0 +1,9 @@
+/web/bundles/
+/app/bootstrap*
+/app/cache/*
+/app/logs/*
+/vendor/
+/app/config/parameters.ini
+
+#Ignoramos los archivos terminados en pelito que son los temporales de algunos Editores como Kate y Gedit
+*~

@@ -1,0 +1,20 @@
+; These parameters can be imported into other config files
+; by enclosing the key with % (like %database_user%)
+; Comments start with ';', as in php.ini
+[parameters]
+    database_driver   = pdo_sqlite
+    database_host     = localhost
+    database_port     =
+    database_name     = symfony
+    database_user     = SC_USER
+    database_password = SC_PASS
+    database_path     = %kernel.root_dir%/db/sc_database.db
+
+    mailer_transport  = smtp
+    mailer_host       = localhost
+    mailer_user       =
+    mailer_password   =
+
+    locale            = en
+
+    secret            = this_is_my_secret1312312

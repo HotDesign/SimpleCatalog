@@ -7,3 +7,6 @@
 
 #Ignoramos los archivos terminados en pelito que son los temporales de algunos Editores como Kate y Gedit
 *~
+
+#Ignoramos la base de datos Sqlite
+/app/db/*

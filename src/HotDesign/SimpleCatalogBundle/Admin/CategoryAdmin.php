@@ -2,6 +2,8 @@
 
 namespace HotDesign\SimpleCatalogBundle\Admin;
 
+use HotDesign\SimpleCatalogBundle\Entity\ItemTypes;
+
 use Sonata\AdminBundle\Admin\Admin;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
@@ -24,6 +26,7 @@ class CategoryAdmin extends Admin {
 //                ->add('author', 'sonata_type_model', array(), array('edit' => 'list'))
                 ->add('title')
                 ->add('description')
+                 ->add('type', 'choice', array('label' => 'Tipo de Categoria', 'choices' => ItemTypes::getChoices() ))
                 ->add('tags', null, array('required' => FALSE))
                 ->add('parent')
                 ->end()

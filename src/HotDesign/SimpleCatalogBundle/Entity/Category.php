@@ -120,12 +120,11 @@ class Category {
     }
 
     public function __construct() {
-        $tipos =  new ItemTypes();
         
         $this->base_entities = new \Doctrine\Common\Collections\ArrayCollection();
         $this->ordercat = 0;
         $this->allowed_pics = 1;
-        $this->type = $tipos->getIdDefault();
+        $this->type = ItemTypes::getIdDefault();
     }
 
     /**

@@ -14,9 +14,6 @@ class DefaultController extends Controller {
 
         $c->setTitle('Categorías Base');
         $c->setDescription('Categoría Padre de Todas');
-        $c->setLft(1);
-        $c->setRgt(1);
-        $c->setLvl(0);
         
 
         $em->persist($c);

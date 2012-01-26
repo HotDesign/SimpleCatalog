@@ -7,25 +7,25 @@ namespace HotDesign\SimpleCatalogBundle\Entity;
  * 
  */
 class ItemTypes {
+     //Array ( NOMBRE , CLASE EXTENDS )
+    private static $types = array(
+        0 => array('Rodados', 'Automobiles'),
+        1 => array('Rubros', 'BaseEntity'),
+        2 => array('Inmuebles', 'Housing'),
+        
+    );
+    private static $id_default = 1;
 
-    private $types;
-    private $id_default;
 
-    public function __construct() {
-        $this->types = array();
-
-        //Array ( NOMBRE , CLASE EXTENDS )
-        $this->types[0] = array('Rodados', 'Automobiles');
-        $this->types[1] = array('Rubros', 'BaseEntity');
-        $this->types[2] = array('Inmuebles', 'Housing');
-
-        $this->id_default = 1; //Default Rubros
-
-        return $this->types;
+    public static function getIdDefault() {
+        return self::$id_default;
     }
-
-    public function getIdDefault() {
-        return $this->id_default;
+    
+    public static function getChoices() {
+        $output = array();
+        foreach (self::$types as $k => $tipo)
+            $output[$k] = $tipo[0];
+        return $output;
     }
 
 }

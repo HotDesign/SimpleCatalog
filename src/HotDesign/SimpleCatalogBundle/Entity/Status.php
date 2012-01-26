@@ -6,8 +6,9 @@ namespace HotDesign\SimpleCatalogBundle\Entity;
  * 
  */
 
-class Currencies {
+class Status {
     private $status;
+    private $id_default;
     
     
     public function __construct() {
@@ -20,6 +21,8 @@ class Currencies {
         
         //Definimos el ID de la currency por default
         $this->id_default = 0;
+        
+        return $this->status;
         
     }
     

@@ -40,14 +40,21 @@ class BaseEntity {
     /**
      * @var integer $currency
      *
-     * @ORM\Column(name="currency", type="integer")
+     * @ORM\Column(name="currency", type="integer", nullable=true)
      */
     private $currency;
 
     /**
+     * @var boolean $is_billable
+     *
+     * @ORM\Column(name="is_billable", type="boolean" )
+     */
+    private $is_billable;
+
+    /**
      * @var float $price
      *
-     * @ORM\Column(name="price", type="float")
+     * @ORM\Column(name="price", type="float", nullable=true)
      */
     private $price;
 
@@ -70,31 +77,23 @@ class BaseEntity {
     private $updated_at;
 
     /**
-     * @var datetime $published_at
-     *
-     * @ORM\Column(name="published_at", type="datetime")
-     * 
-     */
-    private $published_at;
-
-    /**
      * @var decimal $lat
      *
-     * @ORM\Column(name="lat", type="decimal")
+     * @ORM\Column(name="lat", type="decimal", nullable=true )
      */
     private $lat;
 
     /**
      * @var decimal $lng
      *
-     * @ORM\Column(name="lng", type="decimal")
+     * @ORM\Column(name="lng", type="decimal", nullable=true)
      */
     private $lng;
 
     /**
      * @var text $tags
      *
-     * @ORM\Column(name="tags", type="text")
+     * @ORM\Column(name="tags", type="text", nullable=true)
      */
     private $tags;
 
@@ -104,14 +103,6 @@ class BaseEntity {
      * @ORM\Column(name="visits", type="integer")
      */
     private $visits;
-
-    /**
-     * @var integer $reports
-     *
-     * @ORM\Column(name="reports", type="integer")
-     */
-    private $reports;
-
 
     /**
      * @var string $pics
@@ -144,14 +135,23 @@ class BaseEntity {
     public function __construct() {
         $this->pics = new \Doctrine\Common\Collections\ArrayCollection();
         $this->children_entity_id = 0;
+        
+        $currencies = new Currencies();
+        
+        $this->is_billable = true;
+        $this->currency = $currencies->getIdDefault();
+        
+        $this->visits = 0;
     }
+
 
     /**
      * Get id
      *
      * @return integer 
      */
-    public function getId() {
+    public function getId()
+    {
         return $this->id;
     }
 
@@ -160,7 +160,8 @@ class BaseEntity {
      *
      * @param string $title
      */
-    public function setTitle($title) {
+    public function setTitle($title)
+    {
         $this->title = $title;
     }
 
@@ -169,7 +170,8 @@ class BaseEntity {
      *
      * @return string 
      */
-    public function getTitle() {
+    public function getTitle()
+    {
         return $this->title;
     }
 
@@ -178,7 +180,8 @@ class BaseEntity {
      *
      * @param text $description
      */
-    public function setDescription($description) {
+    public function setDescription($description)
+    {
         $this->description = $description;
     }
 
@@ -187,7 +190,8 @@ class BaseEntity {
      *
      * @return text 
      */
-    public function getDescription() {
+    public function getDescription()
+    {
         return $this->description;
     }
 
@@ -196,7 +200,8 @@ class BaseEntity {
      *
      * @param integer $currency
      */
-    public function setCurrency($currency) {
+    public function setCurrency($currency)
+    {
         $this->currency = $currency;
     }
 
@@ -205,8 +210,29 @@ class BaseEntity {
      *
      * @return integer 
      */
-    public function getCurrency() {
+    public function getCurrency()
+    {
         return $this->currency;
+    }
+
+    /**
+     * Set is_billable
+     *
+     * @param boolean $isBillable
+     */
+    public function setIsBillable($isBillable)
+    {
+        $this->is_billable = $isBillable;
+    }
+
+    /**
+     * Get is_billable
+     *
+     * @return boolean 
+     */
+    public function getIsBillable()
+    {
+        return $this->is_billable;
     }
 
     /**
@@ -214,7 +240,8 @@ class BaseEntity {
      *
      * @param float $price
      */
-    public function setPrice($price) {
+    public function setPrice($price)
+    {
         $this->price = $price;
     }
 
@@ -223,7 +250,8 @@ class BaseEntity {
      *
      * @return float 
      */
-    public function getPrice() {
+    public function getPrice()
+    {
         return $this->price;
     }
 
@@ -232,7 +260,8 @@ class BaseEntity {
      *
      * @param datetime $createdAt
      */
-    public function setCreatedAt($createdAt) {
+    public function setCreatedAt($createdAt)
+    {
         $this->created_at = $createdAt;
     }
 
@@ -241,7 +270,8 @@ class BaseEntity {
      *
      * @return datetime 
      */
-    public function getCreatedAt() {
+    public function getCreatedAt()
+    {
         return $this->created_at;
     }
 
@@ -250,7 +280,8 @@ class BaseEntity {
      *
      * @param datetime $updatedAt
      */
-    public function setUpdatedAt($updatedAt) {
+    public function setUpdatedAt($updatedAt)
+    {
         $this->updated_at = $updatedAt;
     }
 
@@ -259,26 +290,9 @@ class BaseEntity {
      *
      * @return datetime 
      */
-    public function getUpdatedAt() {
+    public function getUpdatedAt()
+    {
         return $this->updated_at;
-    }
-
-    /**
-     * Set published_at
-     *
-     * @param datetime $publishedAt
-     */
-    public function setPublishedAt($publishedAt) {
-        $this->published_at = $publishedAt;
-    }
-
-    /**
-     * Get published_at
-     *
-     * @return datetime 
-     */
-    public function getPublishedAt() {
-        return $this->published_at;
     }
 
     /**
@@ -286,7 +300,8 @@ class BaseEntity {
      *
      * @param decimal $lat
      */
-    public function setLat($lat) {
+    public function setLat($lat)
+    {
         $this->lat = $lat;
     }
 
@@ -295,7 +310,8 @@ class BaseEntity {
      *
      * @return decimal 
      */
-    public function getLat() {
+    public function getLat()
+    {
         return $this->lat;
     }
 
@@ -304,7 +320,8 @@ class BaseEntity {
      *
      * @param decimal $lng
      */
-    public function setLng($lng) {
+    public function setLng($lng)
+    {
         $this->lng = $lng;
     }
 
@@ -313,7 +330,8 @@ class BaseEntity {
      *
      * @return decimal 
      */
-    public function getLng() {
+    public function getLng()
+    {
         return $this->lng;
     }
 
@@ -322,7 +340,8 @@ class BaseEntity {
      *
      * @param text $tags
      */
-    public function setTags($tags) {
+    public function setTags($tags)
+    {
         $this->tags = $tags;
     }
 
@@ -331,7 +350,8 @@ class BaseEntity {
      *
      * @return text 
      */
-    public function getTags() {
+    public function getTags()
+    {
         return $this->tags;
     }
 
@@ -340,7 +360,8 @@ class BaseEntity {
      *
      * @param integer $visits
      */
-    public function setVisits($visits) {
+    public function setVisits($visits)
+    {
         $this->visits = $visits;
     }
 
@@ -349,26 +370,9 @@ class BaseEntity {
      *
      * @return integer 
      */
-    public function getVisits() {
+    public function getVisits()
+    {
         return $this->visits;
-    }
-
-    /**
-     * Set reports
-     *
-     * @param integer $reports
-     */
-    public function setReports($reports) {
-        $this->reports = $reports;
-    }
-
-    /**
-     * Get reports
-     *
-     * @return integer 
-     */
-    public function getReports() {
-        return $this->reports;
     }
 
     /**
@@ -376,7 +380,8 @@ class BaseEntity {
      *
      * @param integer $status
      */
-    public function setStatus($status) {
+    public function setStatus($status)
+    {
         $this->status = $status;
     }
 
@@ -385,116 +390,9 @@ class BaseEntity {
      *
      * @return integer 
      */
-    public function getStatus() {
+    public function getStatus()
+    {
         return $this->status;
-    }
-
-    /**
-     * Set period
-     *
-     * @param integer $period
-     */
-    public function setPeriod($period) {
-        $this->period = $period;
-    }
-
-    /**
-     * Get period
-     *
-     * @return integer 
-     */
-    public function getPeriod() {
-        return $this->period;
-    }
-
-    /**
-     * Set in_vl
-     *
-     * @param boolean $inVl
-     */
-    public function setInVl($inVl) {
-        $this->in_vl = $inVl;
-    }
-
-    /**
-     * Get in_vl
-     *
-     * @return boolean 
-     */
-    public function getInVl() {
-        return $this->in_vl;
-    }
-
-    /**
-     * Set owner
-     *
-     * @param VentaLocal\UserBundle\Entity\User $owner
-     */
-    public function setOwner(\VentaLocal\UserBundle\Entity\User $owner) {
-        $this->owner = $owner;
-    }
-
-    /**
-     * Get owner
-     *
-     * @return VentaLocal\UserBundle\Entity\User 
-     */
-    public function getOwner() {
-        return $this->owner;
-    }
-
-    /**
-     * Set profile
-     *
-     * @param VentaLocal\VentaLocalBundle\Entity\Profile $profile
-     */
-    public function setProfile(\VentaLocal\VentaLocalBundle\Entity\Profile $profile) {
-        $this->profile = $profile;
-    }
-
-    /**
-     * Get profile
-     *
-     * @return VentaLocal\VentaLocalBundle\Entity\Profile 
-     */
-    public function getProfile() {
-        return $this->profile;
-    }
-
-    /**
-     * Add pics
-     *
-     * @param VentaLocal\VentaLocalBundle\Entity\Pic $pics
-     */
-    public function addPic(\VentaLocal\VentaLocalBundle\Entity\Pic $pics) {
-        $this->pics[] = $pics;
-    }
-
-    /**
-     * Get pics
-     *
-     * @return Doctrine\Common\Collections\Collection 
-     */
-    public function getPics() {
-        return $this->pics;
-    }
-
-    /**
-     * Add category
-     *
-     * @param VentaLocal\VentaLocalBundle\Entity\Category $category
-     */
-    public function addCategory(\VentaLocal\VentaLocalBundle\Entity\Category $category) {
-        $this->category[] = $category;
-    }
-
-    /**
-     * Get category
-     *
-     * @return Doctrine\Common\Collections\Collection 
-     */
-    public function getCategory() {
-        return $this->category;
     }
 
     /**
@@ -502,7 +400,8 @@ class BaseEntity {
      *
      * @param integer $childrenEntityId
      */
-    public function setChildrenEntityId($childrenEntityId) {
+    public function setChildrenEntityId($childrenEntityId)
+    {
         $this->children_entity_id = $childrenEntityId;
     }
 
@@ -511,8 +410,48 @@ class BaseEntity {
      *
      * @return integer 
      */
-    public function getChildrenEntityId() {
+    public function getChildrenEntityId()
+    {
         return $this->children_entity_id;
     }
 
+    /**
+     * Add pics
+     *
+     * @param HotDesign\SimpleCatalogBundle\Entity\Pic $pics
+     */
+    public function addPic(\HotDesign\SimpleCatalogBundle\Entity\Pic $pics)
+    {
+        $this->pics[] = $pics;
+    }
+
+    /**
+     * Get pics
+     *
+     * @return Doctrine\Common\Collections\Collection 
+     */
+    public function getPics()
+    {
+        return $this->pics;
+    }
+
+    /**
+     * Add category
+     *
+     * @param HotDesign\SimpleCatalogBundle\Entity\Category $category
+     */
+    public function addCategory(\HotDesign\SimpleCatalogBundle\Entity\Category $category)
+    {
+        $this->category[] = $category;
+    }
+
+    /**
+     * Get category
+     *
+     * @return Doctrine\Common\Collections\Collection 
+     */
+    public function getCategory()
+    {
+        return $this->category;
+    }
 }

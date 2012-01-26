@@ -4,7 +4,7 @@ imports:
 
 framework:
     #esi:             ~
-    #translator:      { fallback: %locale% }
+    translator:      { fallback: %locale% }
     secret:          %secret%
     charset:         UTF-8
     router:          { resource: "%kernel.root_dir%/config/routing.yml" }
@@ -56,6 +56,7 @@ doctrine:
 stof_doctrine_extensions: 
     orm: 
         default: 
+            tree: true
             sluggable: true
 
 # Swiftmailer Configuration
@@ -68,3 +69,32 @@ swiftmailer:
 jms_security_extra:
     secure_controllers:  true
     secure_all_services: false
+    
+##SERVICIOS
+
+services:
+    twig.extension.text:
+        class: Twig_Extensions_Extension_Text
+        tags:
+            - { name: twig.extension }        
+    hotdesign.simplecatalog.admin.category:
+        class:  HotDesign\SimpleCatalogBundle\Admin\CategoryAdmin
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: ~, label: Categorías }
+        arguments: [null, HotDesign\SimpleCatalogBundle\Entity\Category, SimpleCatalogBundle:CategoryAdmin]
+           
+
+sonata_admin:
+    title:      Sonata Project
+    title_logo: /bundles/sonataadmin/logo_title.png
+    templates:
+        # default global templates
+        layout:  SonataAdminBundle::standard_layout.html.twig
+        ajax:    SonataAdminBundle::ajax_layout.html.twig
+
+        # default actions templates, should extend a global templates
+        list:    SonataAdminBundle:CRUD:list.html.twig
+        show:    SonataAdminBundle:CRUD:show.html.twig
+        edit:    SonataAdminBundle:CRUD:edit.html.twig
+    dashboard_groups:
+        default: ~

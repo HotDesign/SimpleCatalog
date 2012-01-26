@@ -2,22 +2,17 @@
 
 namespace HotDesign\SimpleCatalogBundle\Entity;
 
+use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * HotDesign\SimpleCatalogBundle\Entity\Category
  *
+ * @Gedmo\Tree(type="nested")
  * @ORM\Table(name="vl_category")
  * @ORM\Entity
  */
 class Category {
-    
-    
-    public $types = array(
-        '1' => 'No extiende',
-        '2' => 'Rodados',
-        '3' => 'Inmuebles',
-    );
 
     /**
      * @var integer $id
@@ -38,14 +33,14 @@ class Category {
     /**
      * @var text $description
      *
-     * @ORM\Column(name="description", type="text")
+     * @ORM\Column(name="description", type="text", nullable=true)
      */
     private $description;
 
     /**
      * @var string $tags
      *
-     * @ORM\Column(name="tags", type="string", length=255)
+     * @ORM\Column(name="tags", type="string", length=255, nullable=true)
      */
     private $tags;
 
@@ -55,7 +50,7 @@ class Category {
      * @ORM\Column(name="ordercat", type="integer")
      */
     private $ordercat;
-    
+
     /**
      * @var array $base_entities
      *
@@ -76,10 +71,61 @@ class Category {
      * @ORM\Column(name="allowed_pics", type="integer")
      */
     private $allowed_pics;
+    
+    
+    public function __toString() {
+        return $this->title;
+    }
 
+
+
+
+    //TREE DOCTRINE EXTENSION
+    /**
+     * @Gedmo\TreeLeft
+     * @ORM\Column(name="lft", type="integer")
+     */
+    private $lft;
+
+    /**
+     * @Gedmo\TreeRight
+     * @ORM\Column(name="rgt", type="integer")
+     */
+    private $rgt;
+
+    /**
+     * @Gedmo\TreeLevel
+     * @ORM\Column(name="lvl", type="integer")
+     */
+    private $lvl;
+
+    /**
+     * @Gedmo\TreeParent
+     * @ORM\ManyToOne(targetEntity="Category", inversedBy="children")
+     * @ORM\JoinColumn(name="parent_id", referencedColumnName="id", onDelete="SET NULL", nullable=true)
+     */
+    private $parent;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Category", mappedBy="parent")
+     */
+    private $children;
+
+    public function setParent(Category $parent) {
+        $this->parent = $parent;
+    }
+
+    public function getParent() {
+        return $this->parent;
+    }
 
     public function __construct() {
+        $tipos =  new ItemTypes();
+        
         $this->base_entities = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->ordercat = 0;
+        $this->allowed_pics = 1;
+        $this->type = $tipos->getIdDefault();
     }
 
     /**
@@ -236,29 +282,11 @@ class Category {
     }
 
     /**
-     * Set group
-     *
-     * @param VentaLocal\VentaLocalBundle\Entity\Groups $group
-     */
-    public function setGroup(\VentaLocal\VentaLocalBundle\Entity\Groups $group) {
-        $this->group = $group;
-    }
-
-    /**
-     * Get group
-     *
-     * @return VentaLocal\VentaLocalBundle\Entity\Groups 
-     */
-    public function getGroup() {
-        return $this->group;
-    }
-
-    /**
      * Add base_entities
      *
-     * @param VentaLocal\VentaLocalBundle\Entity\BaseEntity $baseEntities
+     * @param HotDesign\SimpleCatalogBundle\Entity\BaseEntity $baseEntities
      */
-    public function addBaseEntity(\VentaLocal\VentaLocalBundle\Entity\BaseEntity $baseEntities) {
+    public function addBaseEntity(\HotDesign\SimpleCatalogBundle\Entity\BaseEntity $baseEntities) {
         $this->base_entities[] = $baseEntities;
     }
 
@@ -271,4 +299,84 @@ class Category {
         return $this->base_entities;
     }
 
+
+    /**
+     * Set lft
+     *
+     * @param integer $lft
+     */
+    public function setLft($lft)
+    {
+        $this->lft = $lft;
+    }
+
+    /**
+     * Get lft
+     *
+     * @return integer 
+     */
+    public function getLft()
+    {
+        return $this->lft;
+    }
+
+    /**
+     * Set rgt
+     *
+     * @param integer $rgt
+     */
+    public function setRgt($rgt)
+    {
+        $this->rgt = $rgt;
+    }
+
+    /**
+     * Get rgt
+     *
+     * @return integer 
+     */
+    public function getRgt()
+    {
+        return $this->rgt;
+    }
+
+    /**
+     * Set lvl
+     *
+     * @param integer $lvl
+     */
+    public function setLvl($lvl)
+    {
+        $this->lvl = $lvl;
+    }
+
+    /**
+     * Get lvl
+     *
+     * @return integer 
+     */
+    public function getLvl()
+    {
+        return $this->lvl;
+    }
+
+    /**
+     * Add children
+     *
+     * @param HotDesign\SimpleCatalogBundle\Entity\Category $children
+     */
+    public function addCategory(\HotDesign\SimpleCatalogBundle\Entity\Category $children)
+    {
+        $this->children[] = $children;
+    }
+
+    /**
+     * Get children
+     *
+     * @return Doctrine\Common\Collections\Collection 
+     */
+    public function getChildren()
+    {
+        return $this->children;
+    }
 }

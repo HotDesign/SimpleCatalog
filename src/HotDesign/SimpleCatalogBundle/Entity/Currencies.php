@@ -14,6 +14,7 @@ class Currencies {
     
     public function __construct() {
         //Definimos nuestro array de tipos de monedas disponibles
+        //ARRAY( NOMBRE MONEDA, SIMBOLO MONETARIO)
         $this->currencies = array();
         $currencies[0] = array('Pesos Argentinos', '$AR');
         $currencies[1] = array('Dólares Estadounidences', 'U$S');
@@ -21,6 +22,8 @@ class Currencies {
         
         //Definimos el ID de la currency por default
         $this->id_default = 0;
+        
+        return $this->currencies;
         
     }
     
@@ -43,4 +46,7 @@ class Currencies {
         return $this->currencies[$this->id_default];
     }
     
+    public function getIdDefault() {
+        return $this->id_default;
+    }
 };

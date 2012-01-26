@@ -20,6 +20,8 @@ framework:
 twig:
     debug:            %kernel.debug%
     strict_variables: %kernel.debug%
+    globals:
+        nombre_empresa: "Empresa"
 
 # Assetic Configuration
 assetic:
@@ -48,6 +50,13 @@ doctrine:
     orm:
         auto_generate_proxy_classes: %kernel.debug%
         auto_mapping: true
+        
+        
+#Doctrine Extensions
+stof_doctrine_extensions: 
+    orm: 
+        default: 
+            sluggable: true
 
 # Swiftmailer Configuration
 swiftmailer:

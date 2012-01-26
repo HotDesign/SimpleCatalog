@@ -7,11 +7,17 @@ namespace HotDesign\SimpleCatalogBundle\Entity;
  * 
  */
 class ItemTypes {
+    
+     const AUTOMOBILES =  0;
+     const BASE =  1;
+     const HOUSING =  2;
+    
+    
      //Array ( NOMBRE , CLASE EXTENDS )
     private static $types = array(
-        0 => array('Rodados', 'Automobiles'),
-        1 => array('Rubros', 'BaseEntity'),
-        2 => array('Inmuebles', 'Housing'),
+        self::AUTOMOBILES => array('Rodados', 'Automobiles'),
+        self::BASE => array('Rubros', 'BaseEntity'),
+        self::HOUSING => array('Inmuebles', 'Housing'),
         
     );
     private static $id_default = 1;

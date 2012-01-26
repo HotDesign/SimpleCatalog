@@ -6,47 +6,65 @@ namespace HotDesign\SimpleCatalogBundle\Entity;
  * Clase estática que se encarga de hacer un manejo de las monedas 
  * 
  */
-
 class Currencies {
-    private $currencies;
-    private $id_default;
-    
-    
-    public function __construct() {
-        //Definimos nuestro array de tipos de monedas disponibles
-        //ARRAY( NOMBRE MONEDA, SIMBOLO MONETARIO)
-        $this->currencies = array();
-        $currencies[0] = array('Pesos Argentinos', '$AR');
-        $currencies[1] = array('Dólares Estadounidences', 'U$S');
-        $currencies[2] = array('Euros', '€');
+    const PESO_AR = 0;
+    const DOLAR = 1;
+    const EURO = 2;
+
+    //Arreglo de monedas Disponibles....
+    //
+    // array(NOMBRE_MONEDA, SIMBOLO, INDICE PARA LLEVAR A DOLAR)
+
+    private static $currencies = array(
+        self::PESO_AR => array(
+            'label' => 'Pesos Argentinos',
+            'symbol' => '$AR', 
+            'index' =>4.31
+        ),
         
-        //Definimos el ID de la currency por default
-        $this->id_default = 0;
+        self::DOLAR => array(
+            'label' => 'Dólares Estadounidences',
+            'symbol' => 'U$S',
+            'index' => 1 
+        ),
         
-        return $this->currencies;
-        
-    }
-    
-    public function getCurrencyName($id) {
-        if (isset($this->currencies[$id][0])) {
-            return $this->currencies[$id][0];
+        self::EURO => array(
+            'label' => 'Euros',
+            'symbol' =>'€',
+            'index' => 2.1
+       ),
+    );
+    private static $id_default = self::PESO_AR;
+
+    public static function getCurrencyName($id) {
+        if (isset($this->currencies[$id]['label'])) {
+            return $this->currencies[$id]['label'];
         }
         return false;
     }
-    
-    
-    public function getCurrencySymbol($id) {
-        if (isset($this->currencies[$id][1])) {
-            return $this->currencies[$id][1];
+
+    public static function getCurrencySymbol($id) {
+        if (isset($this->currencies[$id]['symbol'])) {
+            return $this->currencies[$id]['symbol'];
         }
         return false;
     }
-    
+
+    public static function getCurrencyIndex($id) {
+        if (isset($this->currencies[$id]['index'])) {
+            return $this->currencies[$id]['index'];
+        }
+        return false;
+    }
+
     public function getDefaultCurrency() {
-        return $this->currencies[$this->id_default];
+        return $this->currencies[self::id_default];
     }
-    
+
     public function getIdDefault() {
-        return $this->id_default;
+        return self::id_default;
     }
-};
+
+}
+
+;

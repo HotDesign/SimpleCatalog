@@ -82,6 +82,11 @@ services:
         tags:
             - { name: sonata.admin, manager_type: orm, group: ~, label: Categorías }
         arguments: [null, HotDesign\SimpleCatalogBundle\Entity\Category, SimpleCatalogBundle:CategoryAdmin]
+    ## El callback para actualizar price_to_uss
+    hotdesign.simplecatalog.calc.price_to_uss:
+        class: HotDesign\SimpleCatalogBundle\Listener\BaseEntityListener
+        tags:
+            - { name: doctrine.event_listener, event: postPersist }
            
 
 sonata_admin:

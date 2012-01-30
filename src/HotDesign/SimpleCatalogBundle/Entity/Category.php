@@ -11,6 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @Gedmo\Tree(type="nested")
  * @ORM\Table(name="vl_category")
  * @ORM\Entity
+ * @ORM\Entity(repositoryClass="HotDesign\SimpleCatalogBundle\Entity\CategoryRepository")
  */
 class Category {
 

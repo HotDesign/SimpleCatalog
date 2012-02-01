@@ -1,0 +1,19 @@
+{% extends 'SimpleCatalogBundle:Layouts:base.html.twig' %}
+{% form_theme form 'SimpleCatalogBundle:Form:fields.html.twig' %}
+
+{% block title %} Nueva Categoría {% endblock %}
+
+{% block content %}
+<h2>{{ block('title') }}</h2>
+
+<form action="{{ path('category_create') }}" method="post" {{ form_enctype(form) }}>
+    <fieldset>
+    {{ form_widget(form) }}
+        </fieldset>
+
+        <div class="actions">
+            <input type="submit" class="btn primary" value="Crear">
+            <a href="{{ path('category') }}" class="btn small">Volver al Listado</a>
+        </div>
+    </form>
+{% endblock %}

@@ -11,7 +11,7 @@ class CategoryRepository extends NestedTreeRepository {
             if (!isset($rama['title']))
                 return; //No tiene sentido una categoria sin nombre.
             $rama['title'] = str_repeat('_', $rama['lvl']) . $rama['title'];
-            $output[ $rama['id'] ] = $rama['title'];
+            $output[] = $rama;
             if (!empty($rama['__children'])) {
                 $this->IndentRec($rama['__children'], $output);
             }
@@ -19,17 +19,11 @@ class CategoryRepository extends NestedTreeRepository {
     }
 
     public function getIndentedChoicesTree() {
-
-
-        $arrayTree = $this->childrenHierarchy();
-
-
-        $out = array();
-
-
-
-        $this->IndentRec($arrayTree, $out);
-        return $out;
+        $entities = $this->findBy(array(), array('lft' => 'ASC'));
+        foreach ($entities as & $entity) {
+            $entity->setTitle(\str_repeat('_', $entity->getLvl() . $entity->getTitle() ));
+        }
+        return $entities;
     }
 
 // your code here

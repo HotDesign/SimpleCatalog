@@ -1,0 +1,30 @@
+category:
+    pattern:  /
+    defaults: { _controller: "SimpleCatalogBundle:Category:index" }
+
+category_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "SimpleCatalogBundle:Category:show" }
+
+category_new:
+    pattern:  /new
+    defaults: { _controller: "SimpleCatalogBundle:Category:new" }
+
+category_create:
+    pattern:  /create
+    defaults: { _controller: "SimpleCatalogBundle:Category:create" }
+    requirements: { _method: post }
+
+category_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "SimpleCatalogBundle:Category:edit" }
+
+category_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "SimpleCatalogBundle:Category:update" }
+    requirements: { _method: post }
+
+category_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "SimpleCatalogBundle:Category:delete" }
+    requirements: { _method: post }

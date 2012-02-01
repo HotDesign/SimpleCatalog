@@ -1,3 +1,8 @@
 SimpleCatalogBundle_homepage:
     pattern:  /hello/{name}
     defaults: { _controller: SimpleCatalogBundle:Default:index }
+    
+    
+AdminCategory:
+    resource: "@SimpleCatalogBundle/Resources/config/routing/category.yml"
+    prefix:   /admin/category

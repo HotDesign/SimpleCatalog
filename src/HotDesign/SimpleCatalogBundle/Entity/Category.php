@@ -72,14 +72,22 @@ class Category {
      * @ORM\Column(name="allowed_pics", type="integer")
      */
     private $allowed_pics;
-    
-    
+
     public function __toString() {
         return $this->title;
     }
 
+    public function __construct() {
 
-
+        $this->base_entities = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->ordercat = 0;
+        $this->allowed_pics = 1;
+        $this->type = ItemTypes::getIdDefault();
+    }
+    
+    public function getIndent($symbol = '_') {
+        return str_repeat($symbol, $this->getLvl());
+    }
 
     //TREE DOCTRINE EXTENSION
     /**
@@ -120,13 +128,7 @@ class Category {
         return $this->parent;
     }
 
-    public function __construct() {
-        
-        $this->base_entities = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->ordercat = 0;
-        $this->allowed_pics = 1;
-        $this->type = ItemTypes::getIdDefault();
-    }
+    //Fin Tree extension ....... `
 
     /**
      * Get id
@@ -299,14 +301,12 @@ class Category {
         return $this->base_entities;
     }
 
-
     /**
      * Set lft
      *
      * @param integer $lft
      */
-    public function setLft($lft)
-    {
+    public function setLft($lft) {
         $this->lft = $lft;
     }
 
@@ -315,8 +315,7 @@ class Category {
      *
      * @return integer 
      */
-    public function getLft()
-    {
+    public function getLft() {
         return $this->lft;
     }
 
@@ -325,8 +324,7 @@ class Category {
      *
      * @param integer $rgt
      */
-    public function setRgt($rgt)
-    {
+    public function setRgt($rgt) {
         $this->rgt = $rgt;
     }
 
@@ -335,8 +333,7 @@ class Category {
      *
      * @return integer 
      */
-    public function getRgt()
-    {
+    public function getRgt() {
         return $this->rgt;
     }
 
@@ -345,8 +342,7 @@ class Category {
      *
      * @param integer $lvl
      */
-    public function setLvl($lvl)
-    {
+    public function setLvl($lvl) {
         $this->lvl = $lvl;
     }
 
@@ -355,8 +351,7 @@ class Category {
      *
      * @return integer 
      */
-    public function getLvl()
-    {
+    public function getLvl() {
         return $this->lvl;
     }
 
@@ -365,8 +360,7 @@ class Category {
      *
      * @param HotDesign\SimpleCatalogBundle\Entity\Category $children
      */
-    public function addCategory(\HotDesign\SimpleCatalogBundle\Entity\Category $children)
-    {
+    public function addCategory(\HotDesign\SimpleCatalogBundle\Entity\Category $children) {
         $this->children[] = $children;
     }
 
@@ -375,8 +369,8 @@ class Category {
      *
      * @return Doctrine\Common\Collections\Collection 
      */
-    public function getChildren()
-    {
+    public function getChildren() {
         return $this->children;
     }
+
 }

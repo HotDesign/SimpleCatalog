@@ -2469,43 +2469,7 @@ button.btn::-moz-focus-inner, input[type=submit].btn::-moz-focus-inner {
 /*
 END BOOTSTRAP
 */
-.cThis {
-    clear: both;
-}
 
-.xlarge.rememberMeInput {
-    width: 245px !important; 
-}
-
-.block-message.fos_user_success {
-    margin: 10px 0;
-   font-weight: bold;
-   font-size: 18px;   
-}
-
-#theme_main_content {
-    min-height: 400px;
-}
-
-.well.listingAvisosTopActions {
-    text-align: right;
-    
-}
-
-
-
-.classifieldDescription { 
-    text-align: justify 
-}
-
-.showActionDelete, .showActionDelete #form {
+div#form {
     display: inline;
-}
-
-.listingRowDescription {
-    width: 305px;
-}
-
-.list-icon.media-grid {
-    width: 100px;
 }

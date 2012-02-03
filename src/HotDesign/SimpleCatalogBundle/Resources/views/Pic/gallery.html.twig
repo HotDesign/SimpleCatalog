@@ -1,0 +1,48 @@
+{% extends 'SimpleCatalogBundle:Layouts:base.html.twig' %}
+{% block title %} Lista de Imágenes{% endblock %}
+
+{% block content %}
+<h2>{{ block('title') }} (<small> {{ baseentity.title | truncate(20) }} </small>)</h2>
+
+<table class="table table-striped ">
+    <thead>
+        <tr>
+            <th class="sc_index_table">#</th>
+            <th class="sc_thumb_table">Thumb</th>
+            <th>Título</th>
+            <th class="sc_actions_table">Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for entity in entities %}
+            <tr>
+                <td>{{ loop.index }}</td>
+                <td>
+                    <a href="#" class="thumbnail">
+                        <img src="http://localhost/SimpleCatalog/web/catalog/images/{{ entity.path }}" alt="" width="160px" height="120px" />
+                    </a>
+                </td>
+                <td>{{ entity.title }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('pic_show', { 'id': entity.id }) }}">Ver</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('pic_edit', { 'id': entity.id }) }}">Editar</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+    {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
+
+{% block sidebar %}
+    <div class="sc_actions">
+        <a href="{{ path('pic_new', { 'id_baseentity': baseentity.id } ) }}" class="btn btn-small btn-primary"><i class="icon-plus icon-white"></i> Nueva Imágen</a>
+
+        <a href="{{ path('baseentity_edit', { 'id': baseentity.id } ) }}" class="btn btn-small btn-info" style="margin-top: 15px"><i class="icon-pencil icon-white"></i> Editar Item</a>
+    </div>
+{% endblock %}

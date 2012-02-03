@@ -4,13 +4,13 @@
 {% block content %}
 <h2>{{ block('title') }}</h2>
 
-<table class="bordered-table zebra-striped">
+<table class="table table-striped ">
     <thead>
         <tr>
-            <th>#</th>
+            <th class="sc_index_table">#</th>
             <th>Nombre</th>
             <th>Descripción</th>
-            <th>Acciones</th>
+            <th class="sc_actions_table">Acciones</th>
         </tr>
     </thead>
     <tbody>
@@ -36,5 +36,7 @@
 {% endblock %}
 
 {% block sidebar %}
-    <a href="{{ path('category_new') }}" class="btn small primary">Nueva Categoría</a>
+    <div class="sc_actions">
+        <a href="{{ path('category_new') }}" class="btn btn-small btn-primary"><i class="icon-plus icon-white"></i> Nueva Categoría</a>
+    </div>
 {% endblock %}

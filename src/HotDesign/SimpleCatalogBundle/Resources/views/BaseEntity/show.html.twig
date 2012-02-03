@@ -1,0 +1,93 @@
+<h1>BaseEntity</h1>
+
+<table class="record_properties">
+    <tbody>
+        <tr>
+            <th>Id</th>
+            <td>{{ entity.id }}</td>
+        </tr>
+        <tr>
+            <th>Title</th>
+            <td>{{ entity.title }}</td>
+        </tr>
+        <tr>
+            <th>Description</th>
+            <td>{{ entity.description }}</td>
+        </tr>
+        <tr>
+            <th>Currency</th>
+            <td>{{ entity.currency }}</td>
+        </tr>
+        <tr>
+            <th>Is_billable</th>
+            <td>{{ entity.isbillable }}</td>
+        </tr>
+        <tr>
+            <th>Price</th>
+            <td>{{ entity.price }}</td>
+        </tr>
+        <tr>
+            <th>Price_to_uss</th>
+            <td>{{ entity.pricetouss }}</td>
+        </tr>
+        <tr>
+            <th>Created_at</th>
+            <td>{{ entity.createdat|date('Y-m-d H:i:s') }}</td>
+        </tr>
+        <tr>
+            <th>Updated_at</th>
+            <td>{{ entity.updatedat|date('Y-m-d H:i:s') }}</td>
+        </tr>
+        <tr>
+            <th>Lat</th>
+            <td>{{ entity.lat }}</td>
+        </tr>
+        <tr>
+            <th>Lng</th>
+            <td>{{ entity.lng }}</td>
+        </tr>
+        <tr>
+            <th>Tags</th>
+            <td>{{ entity.tags }}</td>
+        </tr>
+        <tr>
+            <th>Visits</th>
+            <td>{{ entity.visits }}</td>
+        </tr>
+        <tr>
+            <th>Enabled</th>
+            <td>{{ entity.enabled }}</td>
+        </tr>
+        <tr>
+            <th>Important_general</th>
+            <td>{{ entity.importantgeneral }}</td>
+        </tr>
+        <tr>
+            <th>Important_category</th>
+            <td>{{ entity.importantcategory }}</td>
+        </tr>
+        <tr>
+            <th>Children_entity_id</th>
+            <td>{{ entity.childrenentityid }}</td>
+        </tr>
+    </tbody>
+</table>
+
+<ul class="record_actions">
+    <li>
+        <a href="{{ path('baseentity') }}">
+            Back to the list
+        </a>
+    </li>
+    <li>
+        <a href="{{ path('baseentity_edit', { 'id': entity.id }) }}">
+            Edit
+        </a>
+    </li>
+    <li>
+        <form action="{{ path('baseentity_delete', { 'id': entity.id }) }}" method="post">
+            {{ form_widget(delete_form) }}
+            <button type="submit">Delete</button>
+        </form>
+    </li>
+</ul>

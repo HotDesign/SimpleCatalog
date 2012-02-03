@@ -1,0 +1,20 @@
+{% extends 'SimpleCatalogBundle:Layouts:base.html.twig' %}
+{% form_theme form 'SimpleCatalogBundle:Form:fields.html.twig' %}
+
+{% block title %} Nuevo Item {% endblock %}
+
+{% block content %}
+<h2>{{ block('title') }}</h2>
+
+<form class="form-horizontal sc_form" action="{{ path('baseentity_create') }}" method="post" {{ form_enctype(form) }}>
+    <fieldset>
+    {{ form_widget(form) }}
+        </fieldset>
+
+        <div class="form-actions">
+            <input type="submit" class="btn btn-primary" value="Crear">
+            <a href="{{ path('baseentity') }}" class="btn btn-small"><i class="icon-repeat"></i> Volver al Listado</a>
+        </div>
+    </form>
+
+{% endblock %}

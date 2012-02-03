@@ -1,0 +1,30 @@
+baseentity:
+    pattern:  /
+    defaults: { _controller: "SimpleCatalogBundle:BaseEntity:index" }
+
+baseentity_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "SimpleCatalogBundle:BaseEntity:show" }
+
+baseentity_new:
+    pattern:  /new
+    defaults: { _controller: "SimpleCatalogBundle:BaseEntity:new" }
+
+baseentity_create:
+    pattern:  /create
+    defaults: { _controller: "SimpleCatalogBundle:BaseEntity:create" }
+    requirements: { _method: post }
+
+baseentity_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "SimpleCatalogBundle:BaseEntity:edit" }
+
+baseentity_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "SimpleCatalogBundle:BaseEntity:update" }
+    requirements: { _method: post }
+
+baseentity_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "SimpleCatalogBundle:BaseEntity:delete" }
+    requirements: { _method: post }

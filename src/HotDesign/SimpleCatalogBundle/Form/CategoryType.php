@@ -17,7 +17,7 @@ class CategoryType extends AbstractType {
                 ->add('description', NULL, array('label' => 'Descripción'))
                 ->add('tags', NULL, array('label' => 'Etiquetas'))
                 ->add('type', 'choice', array(
-                    'label' => 'Tipo de Productos',
+                    'label' => 'Tipo de Item',
                     'choices' => ItemTypes::getChoices(),
                     'required' => true,
                 ))

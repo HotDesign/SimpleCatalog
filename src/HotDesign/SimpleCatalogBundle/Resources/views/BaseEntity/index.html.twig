@@ -1,0 +1,56 @@
+{% extends 'SimpleCatalogBundle:Layouts:base.html.twig' %}
+{% block title %} Lista de Items {% endblock %}
+
+{% block content %}
+<h2>{{ block('title') }}</h2>
+
+<table class="table table-striped ">
+    <thead>
+        <tr>
+            <th class="sc_index_table">#</th>
+            <th>Categoría</th>
+            <th>Título</th>
+            <th>Precio</th>
+            <th>Destacado</th>
+            <th>Ult Modif.</th>
+            <th class="sc_actions_table">Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for entity in entities %}
+            <tr>
+                <td>{{ loop.index }}</td>
+                <td>{{ entity.category }}</td>
+                <td>{% if not entity.enabled %}<a href="#" rel="tooltip" data-original-title="first tooltip"><span class="label label-warning">!</span></a> {% endif%}{{ entity.title | truncate(30) }}</td>
+                <td>{{ entity.getFormattedPrice }}</td>
+                <td>{{ entity.get_important_string_detail }}</td>
+                <td>{% if entity.updatedat %}{{ entity.updatedat|date('d-m-Y H:i:s') }}{% endif%}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('baseentity_show', { 'id': entity.id }) }}">Ver</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('baseentity_edit', { 'id': entity.id }) }}">Editar</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('pic_gallery', { 'id_baseentity': entity.id }) }}">Imagenes</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+    {% endfor %}
+        </tbody>
+    </table>
+    <script type="text/javascript">
+              $('.tooltip-demo.well').tooltip({
+      selector: "a[rel=tooltip]"
+    })
+        </script>
+{% endblock %}
+
+{% block sidebar %}
+        <div class="sc_actions">
+            <a href="{{ path('baseentity_new') }}" class="btn btn-small btn-primary"><i class="icon-plus icon-white"></i> Nuevo Item</a>
+        </div>
+{% endblock %}

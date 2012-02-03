@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
     <head>
         <meta charset="utf-8">
         <title>{{ block('title') }} - SimpleCatalog {{ nombre_empresa }} - Powered by HotDesign</title>
@@ -11,102 +11,44 @@
           <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
         <![endif]-->
 
-        <link href="{{ asset('bundles/simplecatalog/css/style.css') }}" type="text/css" rel="stylesheet" />
+        <link href="{{ asset('bundles/simplecatalog/css/custom.css') }}" type="text/css" rel="stylesheet" />
+        <link href="{{ asset('bundles/simplecatalog/css/bootstrap.css') }}" type="text/css" rel="stylesheet" />
+        <link href="{{ asset('bundles/simplecatalog/css/bootstrap-responsive.css') }}" type="text/css" rel="stylesheet" />
 
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js" type="text/javascript"></script>
-        <script src="{{ asset('bundles/simplecatalog/js/site.js') }}" type="text/javascript"></script>
+        <!-- Le fav and touch icons -->
+        <link rel="shortcut icon" href="images/favicon.ico">
+        <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+        <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
+        <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+    </head>
 
-
-
-        <style type="text/css">
-                /* Override some defaults */
-                html, body {
-                    background-color: #eee;
-                }
-                body {
-                    padding-top: 40px; /* 40px to make the container go all the way to the bottom of the topbar */
-                }
-                .container > footer p {
-                    text-align: center; /* center align it with the container */
-                }
-                .container {
-                    width: 820px; /* downsize our container to make the content feel a bit tighter and more cohesive. NOTE: this removes two full columns from the grid, meaning you only go to 14 columns and not 16. */
-                }
-
-                /* The white background content wrapper */
-                .content {
-                    background-color: #fff;
-                    padding: 20px;
-                    margin: 0 -20px; /* negative indent the amount of the padding to maintain the grid system */
-                    -webkit-border-radius: 0 0 6px 6px;
-                    -moz-border-radius: 0 0 6px 6px;
-                    border-radius: 0 0 6px 6px;
-                    -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.15);
-                    -moz-box-shadow: 0 1px 2px rgba(0,0,0,.15);
-                    box-shadow: 0 1px 2px rgba(0,0,0,.15);
-                }
-
-                /* Page header tweaks */
-                .page-header {
-                    background-color: #f5f5f5;
-                    padding: 20px 20px 10px;
-                    margin: -20px -20px 20px;
-                }
-
-                /* Styles you shouldn't keep as they are for displaying this base example only */
-                .content .span10,
-                .content .span4 {
-                    min-height: 500px;
-                }
-                /* Give a quick and non-cross-browser friendly divider */
-                .content .span4 {
-                    margin-left: 0;
-                    padding-left: 19px;
-                    border-left: 1px solid #eee;
-                }
-
-                .topbar .btn {
-                    border: 0;
-                }
-
-            </style>
-
-            <!-- Le fav and touch icons -->
-            <link rel="shortcut icon" href="images/favicon.ico">
-            <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
-            <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
-            <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
-        </head>
-
-        <body>
+    <body>
 
         {% include 'SimpleCatalogBundle:Layouts:navbar.html.twig' %}
 
-            <div class="container">
-
-                <div class="content">
-                    <div class="page-header">
-                        <h1>{{ nombre_empresa }} <small>SimpleCatalog Powered by HotDesign</small></h1>
+        <div class="container">
+            <!-- Example row of columns -->
+            <div class="row">
+                <div class="span10">
+                {% block content %}
+                        SOME DEFAULT
+                {% endblock %}
                     </div>
-                    <div class="row">
-                        <div class="span12">
-                        {% block content %}
-                                SOME CONTENT
-                        {% endblock %}
-                            </div>
-                            <div class="span2">
-                        {% block sidebar %}
-                                    Sidebar
-                        {% endblock %}
-                                </div>
-                            </div>
+                    <div class="span2">
+                {% block sidebar %}
+                            Default Sidebar
+                {% endblock %}
                         </div>
+                    </div>
+                    <hr>
+                    <footer>
+                        <p>&copy; <strong>SimpleCatalog</strong> powered by HotDesign 2012 - {{ nombre_empresa }}</p>
+                    </footer>
 
-                        <footer>
-                            <p>&copy; Company 2011</p>
-                        </footer>
+                </div> 
+                <!-- Javascript Here for Loading pages faster -->
 
-                    </div> <!-- /container -->
-
-                </body>
-            </html>
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js" type="text/javascript"></script>
+                <script src="{{ asset('bundles/simplecatalog/js/bootstrap.js') }}" type="text/javascript"></script>
+            </body>
+        </html>

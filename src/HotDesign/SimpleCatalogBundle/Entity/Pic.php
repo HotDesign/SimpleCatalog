@@ -3,6 +3,7 @@
 namespace HotDesign\SimpleCatalogBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * HotDesign\SimpleCatalogBundle\Entity\Pic
@@ -29,18 +30,86 @@ class Pic {
     private $title;
 
     /**
-     * @var string $path
+     * @var string $file
      *
-     * @ORM\Column(name="path", type="string", length=255)
+     * @Assert\File(maxSize="6000000")
+     */
+    private $file;
+
+    /**
+     * @var string $path : "stores the relative path to the file and is persisted to the database."
+     *
+     * @ORM\Column(name="path", type="string", length=255, nullable=true)
      */
     private $path;
 
     /**
-     * @var integer $relationship
+     * @var integer $entity
      *
      * @ORM\ManyToOne(targetEntity="HotDesign\SimpleCatalogBundle\Entity\BaseEntity", inversedBy="pics")
      */
-    private $relationship;
+    private $entity;
+
+    //" is a convenience method that returns the absolute path to the file"
+    public function getAbsolutePath() {
+        return null === $this->path ? null : $this->getUploadRootDir() . '/' . $this->path;
+    }
+
+    //is a convenience method that returns the web path, which can be used in a template to link to the uploaded file.
+    public function getWebPath() {
+        return null === $this->path ? null : $this->getUploadDir() . '/' . $this->path;
+    }
+
+    protected function getUploadRootDir() {
+        // the absolute directory path where uploaded documents should be saved
+        return __DIR__ . '/../../../../web/' . $this->getUploadDir();
+    }
+
+    protected function getUploadDir() {
+        // get rid of the __DIR__ so it doesn't screw when displaying uploaded doc/image in the view.
+        return 'catalog/images/';
+    }
+
+    public function upload() {
+        // the file property can be empty if the field is not required
+        if (null === $this->file || $this->file->getClientOriginalName() === null) {
+            return;
+        }
+        //Get de filename and extension of file uploaded.
+        $path_parts = pathinfo($this->file->getClientOriginalName());
+        $new_name = $path_parts['filename'];
+        $extension = '.' . $path_parts['extension']; //Could try catch GuessExtension()
+        
+        
+        //Verificaremos si existe el archivo
+        $max_iterations = 10;
+        $i = 0;
+        while (is_file($this->getUploadRootDir() . $new_name . $extension)) {
+            $new_name = substr($new_name, 0, 15) . substr(md5(microtime()), 0, 10);
+            if ($max_iterations == $i) {
+                return; //Exit because max_iterations. No new name could be found.
+            }
+            $i++;
+        }
+        $new_name = $new_name . $extension;
+
+        // we use the original file name here but you should
+        // sanitize it at least to avoid any security issues
+        // move takes the target directory and then the target filename to move to
+        $this->file->move($this->getUploadRootDir(), $new_name);
+
+        // set the path property to the filename where you'ved saved the file
+        $this->path = $new_name;
+
+        // clean up the file property as you won't need it anymore
+        $this->file = null;
+    }
+
+    /**
+     * INICIO DE METODOS AUTOGENERADOS  
+     * INICIO DE METODOS AUTOGENERADOS  
+     * INICIO DE METODOS AUTOGENERADOS  
+     */
 
     /**
      * Get id
@@ -70,11 +139,49 @@ class Pic {
     }
 
     /**
+     * Set relationship
+     *
+     * @param HotDesign\SimpleCatalogBundle\Entity\BaseEntity $relationship
+     */
+    public function setEntity(\HotDesign\SimpleCatalogBundle\Entity\BaseEntity $relationship) {
+        $this->entity = $relationship;
+    }
+
+    /**
+     * Get relationship
+     *
+     * @return HotDesign\SimpleCatalogBundle\Entity\BaseEntity 
+     */
+    public function getEntity() {
+        return $this->entity;
+    }
+
+    /**
+     * Set file
+     *
+     * @param string $file
+     */
+    public function setFile($file) {
+        $this->file = $file;
+    }
+
+    /**
+     * Get file
+     *
+     * @return string 
+     */
+    public function getFile() {
+        return $this->file;
+    }
+
+
+    /**
      * Set path
      *
      * @param string $path
      */
-    public function setPath($path) {
+    public function setPath($path)
+    {
         $this->path = $path;
     }
 
@@ -83,44 +190,8 @@ class Pic {
      *
      * @return string 
      */
-    public function getPath() {
+    public function getPath()
+    {
         return $this->path;
     }
-
-    /**
-     * Set relationship_id
-     *
-     * @param VentaLocal\VentaLocalBundle\Entity\BaseEntity $relationshipId
-     */
-    public function setRelationshipId(\VentaLocal\VentaLocalBundle\Entity\BaseEntity $relationshipId) {
-        $this->relationship_id = $relationshipId;
-    }
-
-    /**
-     * Get relationship_id
-     *
-     * @return VentaLocal\VentaLocalBundle\Entity\BaseEntity 
-     */
-    public function getRelationshipId() {
-        return $this->relationship_id;
-    }
-
-    /**
-     * Set relationship
-     *
-     * @param VentaLocal\VentaLocalBundle\Entity\BaseEntity $relationship
-     */
-    public function setRelationship(\VentaLocal\VentaLocalBundle\Entity\BaseEntity $relationship) {
-        $this->relationship = $relationship;
-    }
-
-    /**
-     * Get relationship
-     *
-     * @return VentaLocal\VentaLocalBundle\Entity\BaseEntity 
-     */
-    public function getRelationship() {
-        return $this->relationship;
-    }
-
 }

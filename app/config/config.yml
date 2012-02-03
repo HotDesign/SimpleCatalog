@@ -21,7 +21,7 @@ twig:
     debug:            %kernel.debug%
     strict_variables: %kernel.debug%
     globals:
-        nombre_empresa: "Empresa"
+        nombre_empresa: %nombre_empresa%
 
 # Assetic Configuration
 assetic:
@@ -58,6 +58,7 @@ stof_doctrine_extensions:
         default: 
             tree: true
             sluggable: true
+            timestampable: true
 
 # Swiftmailer Configuration
 swiftmailer:

@@ -1,0 +1,34 @@
+pic:
+    pattern:  /
+    defaults: { _controller: "SimpleCatalogBundle:Pic:index" }
+
+pic_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "SimpleCatalogBundle:Pic:show" }
+
+pic_new:
+    pattern:  /{id_baseentity}/new
+    defaults: { _controller: "SimpleCatalogBundle:Pic:new" }
+
+pic_create:
+    pattern:  /{id_baseentity}/create
+    defaults: { _controller: "SimpleCatalogBundle:Pic:create" }
+    requirements: { _method: post }
+
+pic_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "SimpleCatalogBundle:Pic:edit" }
+
+pic_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "SimpleCatalogBundle:Pic:update" }
+    requirements: { _method: post }
+
+pic_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "SimpleCatalogBundle:Pic:delete" }
+    requirements: { _method: post }
+
+pic_gallery:
+    pattern:  /{id_baseentity}/pic_gallery
+    defaults: { _controller: "SimpleCatalogBundle:Pic:gallery" }

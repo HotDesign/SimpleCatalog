@@ -1,4 +1,5 @@
 /web/bundles/
+/web/catalog/images/*
 /app/bootstrap*
 /app/cache/*
 /app/logs/*

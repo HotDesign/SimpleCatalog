@@ -6,14 +6,14 @@
 {% block content %}
 <h2>{{ block('title') }}</h2>
 
-<form action="{{ path('category_create') }}" method="post" {{ form_enctype(form) }}>
-    <fieldset>
-    {{ form_widget(form) }}
+<form class="form-horizontal sc_form" action="{{ path('category_create') }}" method="post" {{ form_enctype(form) }}>
+        <fieldset>
+            {{ form_widget(form) }}
         </fieldset>
 
-        <div class="actions">
-            <input type="submit" class="btn primary" value="Crear">
-            <a href="{{ path('category') }}" class="btn small">Volver al Listado</a>
+        <div class="form-actions">
+            <input type="submit" class="btn btn-primary" value="Crear">
+            <a href="{{ path('category') }}" class="btn btn-small"><i class="icon-repeat"></i> Volver al Listado</a>
         </div>
     </form>
 {% endblock %}

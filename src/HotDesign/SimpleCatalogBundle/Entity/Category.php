@@ -46,13 +46,6 @@ class Category {
     private $tags;
 
     /**
-     * @var integer $ordercat
-     *
-     * @ORM\Column(name="ordercat", type="integer")
-     */
-    private $ordercat;
-
-    /**
      * @var array $base_entities
      *
      * @ORM\OneToMany(targetEntity="HotDesign\SimpleCatalogBundle\Entity\BaseEntity", mappedBy="category")
@@ -80,11 +73,10 @@ class Category {
     public function __construct() {
 
         $this->base_entities = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->ordercat = 0;
         $this->allowed_pics = 1;
         $this->type = ItemTypes::getIdDefault();
     }
-    
+
     public function getIndent($symbol = '_') {
         return str_repeat($symbol, $this->getLvl());
     }
@@ -129,6 +121,11 @@ class Category {
     }
 
     //Fin Tree extension ....... `
+    /**
+     * INICIO DE METODOS AUTOGENERADOS  
+     * INICIO DE METODOS AUTOGENERADOS  
+     * INICIO DE METODOS AUTOGENERADOS  
+     */
 
     /**
      * Get id
@@ -210,25 +207,7 @@ class Category {
     public function getTags() {
         return $this->tags;
     }
-
-    /**
-     * Set ordercat
-     *
-     * @param integer $ordercat
-     */
-    public function setOrdercat($ordercat) {
-        $this->ordercat = $ordercat;
-    }
-
-    /**
-     * Get ordercat
-     *
-     * @return integer 
-     */
-    public function getOrdercat() {
-        return $this->ordercat;
-    }
-
+    
     /**
      * Set type
      *

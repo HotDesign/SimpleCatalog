@@ -1,3 +1,6 @@
+;Configuraciones de SimpleCatalog
+;Para leer desde el controller usar: $parameter = sfConfig::get('param_name', $default_value);
+
 ; These parameters can be imported into other config files
 ; by enclosing the key with % (like %database_user%)
 ; Comments start with ';', as in php.ini
@@ -18,3 +21,9 @@
     locale            = en
 
     secret            = this_is_my_secret1312312
+
+;Configuraciones de la Aplicacion
+    
+    nombre_empresa  = MiEmpresa
+    upload_path     = productos ; /web/uploads/...
+    

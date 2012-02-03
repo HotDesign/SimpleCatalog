@@ -5,6 +5,8 @@ namespace HotDesign\SimpleCatalogBundle\Entity;
 use Symfony\Component\Validator\Constraints as Assert;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ORM\Mapping as ORM;
+use HotDesign\SimpleCatalogBundle\Entity\Currencies;
+use HotDesign\SimpleCatalogBundle\Entity\ItemTypes;
 
 /**
  * HotDesign\SimpleCatalogBundle\Entity\BaseEntity
@@ -107,9 +109,30 @@ class BaseEntity {
     /**
      * @var integer $visits
      *
-     * @ORM\Column(name="visits", type="integer")
+     * @ORM\Column(name="visits", type="integer", nullable=true)
      */
     private $visits;
+
+    /**
+     * @var integer $enabled
+     *
+     * @ORM\Column(name="enabled", type="boolean")
+     */
+    private $enabled;
+
+    /**
+     * @var integer $important_general
+     *
+     * @ORM\Column(name="important_general", type="boolean")
+     */
+    private $important_general;
+
+    /**
+     * @var integer $important_category
+     *
+     * @ORM\Column(name="important_category", type="boolean")
+     */
+    private $important_category;
 
     /**
      * @var string $pics
@@ -119,37 +142,56 @@ class BaseEntity {
     private $pics;
 
     /**
-     * @var integer $category_id
+     * @var integer $category
      *
-     * @ORM\OneToMany(targetEntity="HotDesign\SimpleCatalogBundle\Entity\Category", mappedBy="base_entities")
+     * @ORM\ManyToOne(targetEntity="HotDesign\SimpleCatalogBundle\Entity\Category", inversedBy="base_entities")
      */
     private $category;
 
     /**
-     * @var integer $status
-     *
-     * @ORM\Column(name="status", type="integer")
-     */
-    private $status;
-
-    /**
      * @var integer $children_entity_id
      *
-     * @ORM\Column(name="children_entity_id", type="integer")
+     * @ORM\Column(name="children_entity_id", type="integer", nullable=true)
      */
     private $children_entity_id;
 
     public function __construct() {
-        $this->pics = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->children_entity_id = 0;
-
-        $currencies = new Currencies();
-
         $this->is_billable = true;
-        $this->currency = $currencies->getIdDefault();
-
+        $this->currency = Currencies::getIdDefault();
         $this->visits = 0;
+        $this->pics = new \Doctrine\Common\Collections\ArrayCollection();
+
+        $this->enabled = true;
+        $this->important_category = false;
+        $this->important_general = false;
     }
+
+    public function getFormattedPrice() {
+        if ($this->is_billable && isset($this->currency) && is_numeric($this->price)) {
+            return Currencies::getCurrencySymbol($this->currency) . ' ' . $this->price;
+        } else {
+            return 'Consultar';
+        }
+    }
+
+    public function get_important_string_detail() {
+        $out = '';
+        if ($this->important_general) {
+            $out .= 'Principal';
+        }
+        if ($this->important_general && $this->important_category)
+            $out .= ' & ';
+        if ($this->important_category) {
+            $out .= 'Categoría';
+        }
+        return $out;
+    }
+
+    /**
+     * INICIO DE METODOS AUTOGENERADOS  
+     * INICIO DE METODOS AUTOGENERADOS  
+     * INICIO DE METODOS AUTOGENERADOS  
+     */
 
     /**
      * Get id
@@ -359,24 +401,6 @@ class BaseEntity {
     }
 
     /**
-     * Set status
-     *
-     * @param integer $status
-     */
-    public function setStatus($status) {
-        $this->status = $status;
-    }
-
-    /**
-     * Get status
-     *
-     * @return integer 
-     */
-    public function getStatus() {
-        return $this->status;
-    }
-
-    /**
      * Set children_entity_id
      *
      * @param integer $childrenEntityId
@@ -430,14 +454,12 @@ class BaseEntity {
         return $this->category;
     }
 
-
     /**
      * Set price_to_uss
      *
      * @param float $priceToUss
      */
-    public function setPriceToUss($priceToUss)
-    {
+    public function setPriceToUss($priceToUss) {
         $this->price_to_uss = $priceToUss;
     }
 
@@ -446,8 +468,72 @@ class BaseEntity {
      *
      * @return float 
      */
-    public function getPriceToUss()
-    {
+    public function getPriceToUss() {
         return $this->price_to_uss;
+    }
+
+    /**
+     * Set enabled
+     *
+     * @param boolean $enabled
+     */
+    public function setEnabled($enabled) {
+        $this->enabled = $enabled;
+    }
+
+    /**
+     * Get enabled
+     *
+     * @return boolean 
+     */
+    public function getEnabled() {
+        return $this->enabled;
+    }
+
+    /**
+     * Set important_general
+     *
+     * @param boolean $importantGeneral
+     */
+    public function setImportantGeneral($importantGeneral) {
+        $this->important_general = $importantGeneral;
+    }
+
+    /**
+     * Get important_general
+     *
+     * @return boolean 
+     */
+    public function getImportantGeneral() {
+        return $this->important_general;
+    }
+
+    /**
+     * Set important_category
+     *
+     * @param boolean $importantCategory
+     */
+    public function setImportantCategory($importantCategory) {
+        $this->important_category = $importantCategory;
+    }
+
+    /**
+     * Get important_category
+     *
+     * @return boolean 
+     */
+    public function getImportantCategory() {
+        return $this->important_category;
+    }
+
+
+    /**
+     * Set category
+     *
+     * @param HotDesign\SimpleCatalogBundle\Entity\Category $category
+     */
+    public function setCategory(\HotDesign\SimpleCatalogBundle\Entity\Category $category)
+    {
+        $this->category = $category;
     }
 }

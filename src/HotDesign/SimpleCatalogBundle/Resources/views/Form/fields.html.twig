@@ -12,9 +12,9 @@
 {% set custom_class = 'error' %}
 {% endif %}
 
-<div class="clearfix {{custom_class}}">
-    {{ form_label(form) }}
-    <div class="input">
+<div class="control-group {{custom_class}}">
+    {{ form_label(form, null, { 'attr': {'class': 'control-label'} } ) }}
+    <div class="controls">
         {{ form_widget(form) }}
         {% if form_error %}
         {% autoescape false %}

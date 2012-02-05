@@ -19,13 +19,6 @@ class AppKernel extends Kernel {
             new HotDesign\SimpleCatalogBundle\SimpleCatalogBundle(),
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
             
-            //Sonata ADmin Bundle
-            new Sonata\AdminBundle\SonataAdminBundle(),
-            new Sonata\jQueryBundle\SonatajQueryBundle(),
-            new Knp\Bundle\MenuBundle\KnpMenuBundle(),
-            new Sonata\DoctrineORMAdminBundle\SonataDoctrineORMAdminBundle(),
-          //  new SimpleThings\EntityAudit\SimpleThingsEntityAuditBundle(),
-            
             //Fixtures
              new Symfony\Bundle\DoctrineFixturesBundle\DoctrineFixturesBundle(),
         );

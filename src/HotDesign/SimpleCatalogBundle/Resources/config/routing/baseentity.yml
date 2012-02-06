@@ -2,9 +2,9 @@ baseentity:
     pattern:  /
     defaults: { _controller: "SimpleCatalogBundle:BaseEntity:index" }
 
-baseentity_show:
-    pattern:  /{id}/show
-    defaults: { _controller: "SimpleCatalogBundle:BaseEntity:show" }
+#baseentity_show:
+#    pattern:  /{id}/show
+#    defaults: { _controller: "SimpleCatalogBundle:BaseEntity:show" }
 
 baseentity_new:
     pattern:  /new

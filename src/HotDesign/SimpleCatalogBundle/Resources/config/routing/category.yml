@@ -2,9 +2,9 @@ category:
     pattern:  /
     defaults: { _controller: "SimpleCatalogBundle:Category:index" }
 
-category_show:
-    pattern:  /{id}/show
-    defaults: { _controller: "SimpleCatalogBundle:Category:show" }
+#category_show:
+#    pattern:  /{id}/show
+#    defaults: { _controller: "SimpleCatalogBundle:Category:show" }
 
 category_new:
     pattern:  /new

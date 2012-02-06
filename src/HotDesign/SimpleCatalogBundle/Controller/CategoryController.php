@@ -31,22 +31,22 @@ class CategoryController extends Controller {
      * Finds and displays a Category entity.
      *
      */
-    public function showAction($id) {
-        $em = $this->getDoctrine()->getEntityManager();
-
-        $entity = $em->getRepository('SimpleCatalogBundle:Category')->find($id);
-
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Category entity.');
-        }
-
-        $deleteForm = $this->createDeleteForm($id);
-
-        return $this->render('SimpleCatalogBundle:Category:show.html.twig', array(
-                    'entity' => $entity,
-                    'delete_form' => $deleteForm->createView(),
-                ));
-    }
+//    public function showAction($id) {
+//        $em = $this->getDoctrine()->getEntityManager();
+//
+//        $entity = $em->getRepository('SimpleCatalogBundle:Category')->find($id);
+//
+//        if (!$entity) {
+//            throw $this->createNotFoundException('Unable to find Category entity.');
+//        }
+//
+//        $deleteForm = $this->createDeleteForm($id);
+//
+//        return $this->render('SimpleCatalogBundle:Category:show.html.twig', array(
+//                    'entity' => $entity,
+//                    'delete_form' => $deleteForm->createView(),
+//                ));
+//    }
 
     /**
      * Displays a form to create a new Category entity.

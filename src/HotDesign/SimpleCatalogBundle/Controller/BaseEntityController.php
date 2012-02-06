@@ -32,24 +32,24 @@ class BaseEntityController extends Controller
      * Finds and displays a BaseEntity entity.
      *
      */
-    public function showAction($id)
-    {
-        $em = $this->getDoctrine()->getEntityManager();
-
-        $entity = $em->getRepository('SimpleCatalogBundle:BaseEntity')->find($id);
-
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find BaseEntity entity.');
-        }
-
-        $deleteForm = $this->createDeleteForm($id);
-
-        return $this->render('SimpleCatalogBundle:BaseEntity:show.html.twig', array(
-            'entity'      => $entity,
-            'delete_form' => $deleteForm->createView(),
-
-        ));
-    }
+//    public function showAction($id)
+//    {
+//        $em = $this->getDoctrine()->getEntityManager();
+//
+//        $entity = $em->getRepository('SimpleCatalogBundle:BaseEntity')->find($id);
+//
+//        if (!$entity) {
+//            throw $this->createNotFoundException('Unable to find BaseEntity entity.');
+//        }
+//
+//        $deleteForm = $this->createDeleteForm($id);
+//
+//        return $this->render('SimpleCatalogBundle:BaseEntity:show.html.twig', array(
+//            'entity'      => $entity,
+//            'delete_form' => $deleteForm->createView(),
+//
+//        ));
+//    }
 
     /**
      * Displays a form to create a new BaseEntity entity.

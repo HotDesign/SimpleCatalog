@@ -19,15 +19,12 @@
                 <td>{{ loop.index }}</td>
                 <td>
                     <a href="#" class="thumbnail">
-                        <img src="http://localhost/SimpleCatalog/web/catalog/images/{{ entity.path }}" alt="" width="160px" height="120px" />
+                        <img src="{{ asset('catalog/images/' ~ entity.path  ) }}" alt="" width="160px" height="120px" />
                     </a>
                 </td>
                 <td>{{ entity.title }}</td>
                 <td>
                     <ul>
-                        <li>
-                            <a href="{{ path('pic_show', { 'id': entity.id }) }}">Ver</a>
-                        </li>
                         <li>
                             <a href="{{ path('pic_edit', { 'id': entity.id }) }}">Editar</a>
                         </li>

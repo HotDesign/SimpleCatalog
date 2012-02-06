@@ -17,13 +17,10 @@
     {% for entity in entities %}
             <tr>
                 <td>{{ loop.index }}</td>
-                <td>{{ entity.getIndent }}{{ entity.title }}</td>
+                <td><a href="{{ path('category_edit', { 'id': entity.id }) }}">{{ entity.getIndent }}{{ entity.title }}</a></td>
                 <td>{{ entity.description | striptags |truncate(100) }}</td>
                 <td>
                     <ul>
-                        <li>
-                            <a href="{{ path('category_show', { 'id': entity.id }) }}">Ver</a>
-                        </li>
                         <li>
                             <a href="{{ path('category_edit', { 'id': entity.id }) }}">Editar</a>
                         </li>

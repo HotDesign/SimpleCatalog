@@ -6,14 +6,14 @@
 {% block content %}
 <h2>{{ block('title') }}</h2>
 
-<form action="{{ path('pic_create', { 'id_baseentity': baseentity.id }) }}" method="post" {{ form_enctype(form) }}>
+<form class="form-horizontal sc_form" action="{{ path('pic_create', { 'id_baseentity': baseentity.id }) }}" method="post" {{ form_enctype(form) }}>
     <fieldset>
     {{ form_widget(form) }}
         </fieldset>
 
-        <div class="actions">
-            <input type="submit" class="btn primary" value="Crear">
-            <a href="{{ path('pic_gallery', { 'id_baseentity': baseentity.id }) }}" class="btn small">Volver al Listado</a>
+        <div class="form-actions">
+            <input type="submit" class="btn btn-primary" value="Crear">
+            <a href="{{ path('pic_gallery', { 'id_baseentity': baseentity.id }) }}" class="btn"><i class="icon-repeat"></i> Volver al Listado</a>
         </div>
     </form>
 {% endblock %}

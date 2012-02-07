@@ -83,3 +83,14 @@ services:
         class: HotDesign\SimpleCatalogBundle\Listener\BaseEntityListener
         tags:
             - { name: doctrine.event_listener, event: postPersist }
+
+            
+##AVALANCHE
+avalanche_imagine:
+    web_root:     %kernel.root_dir%/../web
+    cache_prefix: catalog/cache
+    driver:       gd
+    filters:
+        my_thumb:
+            type:    thumbnail
+            options: { size: [120, 90], mode: outbound }

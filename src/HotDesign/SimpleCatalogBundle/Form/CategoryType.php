@@ -23,6 +23,7 @@ class CategoryType extends AbstractType {
                 ))
                 ->add('parent', 'entity', array(
                     'label' => 'Dentro de',
+                    'required' => false,
                     'class' => 'SimpleCatalogBundle:Category',
                     'query_builder' => function(EntityRepository $er) {
                         return $er->createQueryBuilder('u')

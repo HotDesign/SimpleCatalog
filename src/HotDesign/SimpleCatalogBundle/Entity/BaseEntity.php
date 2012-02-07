@@ -137,7 +137,7 @@ class BaseEntity {
     /**
      * @var string $pics
      *
-     * @ORM\OneToMany(targetEntity="HotDesign\SimpleCatalogBundle\Entity\Pic", mappedBy="relationship_id")
+     * @ORM\OneToMany(targetEntity="HotDesign\SimpleCatalogBundle\Entity\Pic", mappedBy="entity")
      */
     private $pics;
 
@@ -185,6 +185,12 @@ class BaseEntity {
             $out .= 'Categoría';
         }
         return $out;
+    }
+    
+    public function get_default_pic() {
+        if ($this->getPics()->first())
+            return $this->getPics()->first()->getPath();
+        return false; 
     }
 
     /**

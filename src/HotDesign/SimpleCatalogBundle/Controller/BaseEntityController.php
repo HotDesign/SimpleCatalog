@@ -3,7 +3,6 @@
 namespace HotDesign\SimpleCatalogBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-
 use HotDesign\SimpleCatalogBundle\Entity\BaseEntity;
 use HotDesign\SimpleCatalogBundle\Form\BaseEntityType;
 
@@ -11,21 +10,20 @@ use HotDesign\SimpleCatalogBundle\Form\BaseEntityType;
  * BaseEntity controller.
  *
  */
-class BaseEntityController extends Controller
-{
+class BaseEntityController extends Controller {
+
     /**
      * Lists all BaseEntity entities.
      *
      */
-    public function indexAction()
-    {
+    public function indexAction() {
         $em = $this->getDoctrine()->getEntityManager();
 
         $entities = $em->getRepository('SimpleCatalogBundle:BaseEntity')->findAll();
 
         return $this->render('SimpleCatalogBundle:BaseEntity:index.html.twig', array(
-            'entities' => $entities
-        ));
+                    'entities' => $entities
+                ));
     }
 
     /**
@@ -55,26 +53,24 @@ class BaseEntityController extends Controller
      * Displays a form to create a new BaseEntity entity.
      *
      */
-    public function newAction()
-    {
+    public function newAction() {
         $entity = new BaseEntity();
-        $form   = $this->createForm(new BaseEntityType(), $entity);
+        $form = $this->createForm(new BaseEntityType(), $entity);
 
         return $this->render('SimpleCatalogBundle:BaseEntity:new.html.twig', array(
-            'entity' => $entity,
-            'form'   => $form->createView()
-        ));
+                    'entity' => $entity,
+                    'form' => $form->createView()
+                ));
     }
 
     /**
      * Creates a new BaseEntity entity.
      *
      */
-    public function createAction()
-    {
-        $entity  = new BaseEntity();
+    public function createAction() {
+        $entity = new BaseEntity();
         $request = $this->getRequest();
-        $form    = $this->createForm(new BaseEntityType(), $entity);
+        $form = $this->createForm(new BaseEntityType(), $entity);
         $form->bindRequest($request);
 
         if ($form->isValid()) {
@@ -82,22 +78,23 @@ class BaseEntityController extends Controller
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('baseentity_show', array('id' => $entity->getId())));
-            
+            $this->container->get('session')->setFlash('alert-success', 'Item agregado con éxito.');
+            return $this->redirect($this->generateUrl('baseentity_edit', array('id' => $entity->getId())));
+        } else {
+            $this->container->get('session')->setFlash('alert-error', 'No se pudo crear el Item.');
         }
 
         return $this->render('SimpleCatalogBundle:BaseEntity:new.html.twig', array(
-            'entity' => $entity,
-            'form'   => $form->createView()
-        ));
+                    'entity' => $entity,
+                    'form' => $form->createView()
+                ));
     }
 
     /**
      * Displays a form to edit an existing BaseEntity entity.
      *
      */
-    public function editAction($id)
-    {
+    public function editAction($id) {
         $em = $this->getDoctrine()->getEntityManager();
 
         $entity = $em->getRepository('SimpleCatalogBundle:BaseEntity')->find($id);
@@ -110,18 +107,17 @@ class BaseEntityController extends Controller
         $deleteForm = $this->createDeleteForm($id);
 
         return $this->render('SimpleCatalogBundle:BaseEntity:edit.html.twig', array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
-        ));
+                    'entity' => $entity,
+                    'edit_form' => $editForm->createView(),
+                    'delete_form' => $deleteForm->createView(),
+                ));
     }
 
     /**
      * Edits an existing BaseEntity entity.
      *
      */
-    public function updateAction($id)
-    {
+    public function updateAction($id) {
         $em = $this->getDoctrine()->getEntityManager();
 
         $entity = $em->getRepository('SimpleCatalogBundle:BaseEntity')->find($id);
@@ -130,7 +126,7 @@ class BaseEntityController extends Controller
             throw $this->createNotFoundException('Unable to find BaseEntity entity.');
         }
 
-        $editForm   = $this->createForm(new BaseEntityType(), $entity);
+        $editForm = $this->createForm(new BaseEntityType(), $entity);
         $deleteForm = $this->createDeleteForm($id);
 
         $request = $this->getRequest();
@@ -141,22 +137,26 @@ class BaseEntityController extends Controller
             $em->persist($entity);
             $em->flush();
 
+            $this->container->get('session')->setFlash('alert-success', 'El item se ha modificado con éxito.');
             return $this->redirect($this->generateUrl('baseentity_edit', array('id' => $id)));
+        } else {
+
+            $this->container->get('session')->setFlash('alert-error', 'No se pudo modificar el Item.');
         }
 
+
         return $this->render('SimpleCatalogBundle:BaseEntity:edit.html.twig', array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
-        ));
+                    'entity' => $entity,
+                    'edit_form' => $editForm->createView(),
+                    'delete_form' => $deleteForm->createView(),
+                ));
     }
 
     /**
      * Deletes a BaseEntity entity.
      *
      */
-    public function deleteAction($id)
-    {
+    public function deleteAction($id) {
         $form = $this->createDeleteForm($id);
         $request = $this->getRequest();
 
@@ -172,16 +172,19 @@ class BaseEntityController extends Controller
 
             $em->remove($entity);
             $em->flush();
+            $this->container->get('session')->setFlash('alert-success', 'El item se ha eliminado con éxito.');
+        } else {
+            $this->container->get('session')->setFlash('alert-error', 'No se ha podido eliminar el Item.');
         }
 
         return $this->redirect($this->generateUrl('baseentity'));
     }
 
-    private function createDeleteForm($id)
-    {
+    private function createDeleteForm($id) {
         return $this->createFormBuilder(array('id' => $id))
-            ->add('id', 'hidden')
-            ->getForm()
+                        ->add('id', 'hidden')
+                        ->getForm()
         ;
     }
+
 }

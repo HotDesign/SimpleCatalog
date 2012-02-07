@@ -1,6 +1,11 @@
 SimpleCatalogBundle:
     resource: "@SimpleCatalogBundle/Resources/config/routing.yml"
     prefix:   /
+    
+    
+_imagine:
+    resource: .
+    type:     imagine
 
 # Internal routing configuration to handle ESI
 #_internal:

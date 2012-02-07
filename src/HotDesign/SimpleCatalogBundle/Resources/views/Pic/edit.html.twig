@@ -5,14 +5,16 @@
 
 {% block content %}
 <h2>{{ block('title') }}</h2>
+{% include 'SimpleCatalogBundle:Layouts:flashes_messages.html.twig'%}
 
+<img src="{{ ('catalog/images/' ~ entity.path) | apply_filter('my_thumb') }}" style="margin-left: 150px" />
 <form class="form-horizontal sc_form" action="{{ path('pic_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
     {{ form_widget(edit_form) }}
 
 
         <div class="form-actions">
             <input type="submit" class="btn btn-primary" value="Guardar">
-            <a href="{{ path('pic_gallery', { 'id_baseentity': entity.id }) }}" class="btn"><i class="icon-repeat"></i> Ir al Listado</a>
+            <a href="{{ path('pic_gallery', { 'id_baseentity': baseentity.id }) }}" class="btn"><i class="icon-repeat"></i> Ir al Listado</a>
             <form action="{{ path('pic_delete', { 'id': entity.id }) }}" method="post">
             {{ form_widget(delete_form) }}
                     <button type="submit" class="btn btn-danger">Borrar</button>

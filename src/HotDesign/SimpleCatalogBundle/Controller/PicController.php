@@ -56,22 +56,22 @@ class PicController extends Controller {
      * Finds and displays a Pic entity.
      *
      */
-    public function showAction($id) {
-        $em = $this->getDoctrine()->getEntityManager();
-
-        $entity = $em->getRepository('SimpleCatalogBundle:Pic')->find($id);
-
-        if (!$entity) {
-            throw $this->createNotFoundException('Unable to find Pic entity.');
-        }
-
-        $deleteForm = $this->createDeleteForm($id);
-
-        return $this->render('SimpleCatalogBundle:Pic:show.html.twig', array(
-                    'entity' => $entity,
-                    'delete_form' => $deleteForm->createView(),
-                ));
-    }
+//    public function showAction($id) {
+//        $em = $this->getDoctrine()->getEntityManager();
+//
+//        $entity = $em->getRepository('SimpleCatalogBundle:Pic')->find($id);
+//
+//        if (!$entity) {
+//            throw $this->createNotFoundException('Unable to find Pic entity.');
+//        }
+//
+//        $deleteForm = $this->createDeleteForm($id);
+//
+//        return $this->render('SimpleCatalogBundle:Pic:show.html.twig', array(
+//                    'entity' => $entity,
+//                    'delete_form' => $deleteForm->createView(),
+//                ));
+//    }
 
     /**
      * Displays a form to create a new Pic entity.
@@ -101,7 +101,7 @@ class PicController extends Controller {
 
         $entity = new Pic();
         $entity->setEntity($baseentity);
-        
+
         $request = $this->getRequest();
         $form = $this->createForm(new PicType(), $entity);
         $form->bindRequest($request);
@@ -114,9 +114,12 @@ class PicController extends Controller {
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('pic_show', array('id' => $entity->getId())));
-        }
+            $this->container->get('session')->setFlash('alert-success', 'Imágen agregada con éxito.');
 
+            return $this->redirect($this->generateUrl('pic_edit', array('id' => $entity->getId())));
+        } else {
+            $this->container->get('session')->setFlash('alert-success', 'No se pudo agregar la imágen.');
+        }
         return $this->render('SimpleCatalogBundle:Pic:new.html.twig', array(
                     'entity' => $entity,
                     'form' => $form->createView()
@@ -136,10 +139,13 @@ class PicController extends Controller {
             throw $this->createNotFoundException('Unable to find Pic entity.');
         }
 
+        $baseentity = $this->getBaseEntity($entity->getEntity()->getId());
+        
         $editForm = $this->createForm(new PicType(), $entity);
         $deleteForm = $this->createDeleteForm($id);
 
         return $this->render('SimpleCatalogBundle:Pic:edit.html.twig', array(
+                    'baseentity' => $baseentity,
                     'entity' => $entity,
                     'edit_form' => $editForm->createView(),
                     'delete_form' => $deleteForm->createView(),
@@ -170,7 +176,10 @@ class PicController extends Controller {
             $em->persist($entity);
             $em->flush();
 
+            $this->container->get('session')->setFlash('alert-success', 'La imágen se ha actualizado correctamente.');
             return $this->redirect($this->generateUrl('pic_edit', array('id' => $id)));
+        } else {
+            $this->container->get('session')->setFlash('alert-error', 'No se pudo actualizar la imágen.');
         }
 
         return $this->render('SimpleCatalogBundle:Pic:edit.html.twig', array(
@@ -200,8 +209,10 @@ class PicController extends Controller {
 
             $em->remove($entity);
             $em->flush();
+            $this->container->get('session')->setFlash('alert-success', 'La imágen se eliminó correctamente.');
+        } else {
+            $this->container->get('session')->setFlash('alert-error', 'No se pudo eliminar la imágen.');
         }
-
         return $this->redirect($this->generateUrl('pic'));
     }
 

@@ -21,6 +21,8 @@ class AppKernel extends Kernel {
             
             //Fixtures
              new Symfony\Bundle\DoctrineFixturesBundle\DoctrineFixturesBundle(),
+            //Avalanche
+            new Avalanche\Bundle\ImagineBundle\AvalancheImagineBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

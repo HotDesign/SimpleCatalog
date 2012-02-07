@@ -1,5 +1,5 @@
 {% for key, message in app.session.getFlashes() %}
-<div class="alert-message {{ key }} fade in" data-alert="alert" >
+<div class="alert {{ key }} fade in" data-alert="alert" >
     <a class="close" href="#">×</a>
    <strong> {{ message }} </strong>
 </div>

@@ -5,6 +5,7 @@
 
 {% block content %}
 <h2>{{ block('title') }}</h2>
+{% include 'SimpleCatalogBundle:Layouts:flashes_messages.html.twig'%}
 
 <form class="form-horizontal sc_form" action="{{ path('baseentity_create') }}" method="post" {{ form_enctype(form) }}>
     <fieldset>

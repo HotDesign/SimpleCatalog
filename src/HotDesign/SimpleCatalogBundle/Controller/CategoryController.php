@@ -77,7 +77,7 @@ class CategoryController extends Controller {
             $em->persist($entity);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('category_show', array('id' => $entity->getId())));
+            return $this->redirect($this->generateUrl('category_edit', array('id' => $entity->getId())));
         }
 
         return $this->render('SimpleCatalogBundle:Category:new.html.twig', array(
@@ -133,7 +133,10 @@ class CategoryController extends Controller {
             $em->persist($entity);
             $em->flush();
 
+            $this->container->get('session')->setFlash('alert-success', 'La categoría se ha modificado con éxito.');
             return $this->redirect($this->generateUrl('category_edit', array('id' => $id)));
+        } else {
+            $this->container->get('session')->setFlash('alert-error', 'No se pudo modificar la categoría.');
         }
 
         return $this->render('SimpleCatalogBundle:Category:edit.html.twig', array(
@@ -163,8 +166,10 @@ class CategoryController extends Controller {
 
             $em->remove($entity);
             $em->flush();
+            $this->container->get('session')->setFlash('alert-success', 'La categoría se ha eliminado con éxito.');
+        } else {
+            $this->container->get('session')->setFlash('alert-error', 'No se pudo eliminar la categoría.');
         }
-
         return $this->redirect($this->generateUrl('category'));
     }
 

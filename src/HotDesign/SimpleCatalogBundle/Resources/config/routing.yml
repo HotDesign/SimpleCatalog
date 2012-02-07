@@ -15,3 +15,8 @@ AdminPic:
 AdminBaseEntity:
     resource: "@SimpleCatalogBundle/Resources/config/routing/baseentity.yml"
     prefix:   /admin/baseentity
+    
+    
+_imagine:
+    resource: .
+    type:     imagine

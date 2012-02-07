@@ -3,13 +3,14 @@
 
 {% block content %}
 <h2>{{ block('title') }}</h2>
+{% include 'SimpleCatalogBundle:Layouts:flashes_messages.html.twig'%}
 
 <table class="table table-striped ">
     <thead>
         <tr>
             <th class="sc_index_table">#</th>
-            <th>Categoría</th>
-            <th>Título</th>
+            <th>Imágen</th>
+            <th>Título / Categoría</th>
             <th>Precio</th>
             <th>Destacado</th>
             <th>Ult Modif.</th>
@@ -20,8 +21,14 @@
     {% for entity in entities %}
             <tr>
                 <td>{{ loop.index }}</td>
-                <td>{{ entity.category }}</td>
-                <td>{% if not entity.enabled %}<a href="#" rel="tooltip" data-original-title="first tooltip"><span class="label label-warning">!</span></a> {% endif%}{{ entity.title | truncate(30) }}</td>
+                <td>
+                    {% if entity.get_default_pic %}
+                        <img src="{{ ('catalog/images/' ~ entity.get_default_pic) | apply_filter('my_thumb') }}" alt="" />
+                    {% else %}
+                        <img src="{{ 'bundles/simplecatalog/img/default.gif' | apply_filter('my_thumb') }}" alt="" />
+                    {% endif %}                
+                </td>
+                <td>{% if not entity.enabled %}<a href="#" rel="tooltip" data-original-title="first tooltip"><span class="label label-warning">!</span></a> {% endif%} <strong> {{ entity.title | truncate(30) }} </strong>- <i>{{ entity.category }}</i></td>
                 <td>{{ entity.getFormattedPrice }}</td>
                 <td>{{ entity.get_important_string_detail }}</td>
                 <td>{% if entity.updatedat %}{{ entity.updatedat|date('d-m-Y H:i:s') }}{% endif%}</td>

@@ -1,11 +1,3 @@
-pic:
-    pattern:  /
-    defaults: { _controller: "SimpleCatalogBundle:Pic:index" }
-
-pic_show:
-    pattern:  /{id}/show
-    defaults: { _controller: "SimpleCatalogBundle:Pic:show" }
-
 pic_new:
     pattern:  /{id_baseentity}/new
     defaults: { _controller: "SimpleCatalogBundle:Pic:new" }

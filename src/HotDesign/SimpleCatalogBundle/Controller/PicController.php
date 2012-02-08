@@ -138,10 +138,13 @@ class PicController extends Controller {
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find Pic entity.');
         }
-
         $baseentity = $this->getBaseEntity($entity->getEntity()->getId());
-        
+
         $editForm = $this->createForm(new PicType(), $entity);
+        
+        //Eliminamos la foto del formulario osea que el usuario no podra modificarla.
+        // Lo ideal seria....... hacerla NO REQUIRED
+        $editForm ->remove('file');
         $deleteForm = $this->createDeleteForm($id);
 
         return $this->render('SimpleCatalogBundle:Pic:edit.html.twig', array(
@@ -213,7 +216,7 @@ class PicController extends Controller {
         } else {
             $this->container->get('session')->setFlash('alert-error', 'No se pudo eliminar la imágen.');
         }
-        return $this->redirect($this->generateUrl('pic'));
+        return $this->redirect($this->generateUrl('pic_gallery', array('id_baseentity' => $entity->getEntity()->getId()) ));
     }
 
     private function createDeleteForm($id) {

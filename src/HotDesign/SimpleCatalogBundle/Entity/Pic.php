@@ -10,6 +10,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  * @ORM\Table(name="vl_pic")
  * @ORM\Entity
+ * @ORM\HasLifecycleCallbacks
  */
 class Pic {
 
@@ -79,8 +80,6 @@ class Pic {
         $path_parts = pathinfo($this->file->getClientOriginalName());
         $new_name = $path_parts['filename'];
         $extension = '.' . $path_parts['extension']; //Could try catch GuessExtension()
-        
-        
         //Verificaremos si existe el archivo
         $max_iterations = 10;
         $i = 0;
@@ -103,6 +102,16 @@ class Pic {
 
         // clean up the file property as you won't need it anymore
         $this->file = null;
+    }
+
+    /**
+     * @ORM\PostRemove()
+     */
+    public function removeUpload() {
+        if ($file = $this->getAbsolutePath()) {
+            
+            unlink($file);
+        }
     }
 
     /**
@@ -174,14 +183,12 @@ class Pic {
         return $this->file;
     }
 
-
     /**
      * Set path
      *
      * @param string $path
      */
-    public function setPath($path)
-    {
+    public function setPath($path) {
         $this->path = $path;
     }
 
@@ -190,8 +197,8 @@ class Pic {
      *
      * @return string 
      */
-    public function getPath()
-    {
+    public function getPath() {
         return $this->path;
     }
+
 }

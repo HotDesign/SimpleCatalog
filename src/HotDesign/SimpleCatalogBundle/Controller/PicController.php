@@ -29,7 +29,8 @@ class PicController extends Controller {
     public function galleryAction($id_baseentity) {
         $em = $this->getDoctrine()->getEntityManager();
 
-        $entities = $em->getRepository('SimpleCatalogBundle:Pic')->findAll(array('entity' => $id_baseentity));
+        $entities = $em->getRepository('SimpleCatalogBundle:Pic')->findBy( array('entity' => $id_baseentity) );
+        
         $baseentity = $this->getBaseEntity($id_baseentity);
 
         return $this->render('SimpleCatalogBundle:Pic:gallery.html.twig', array(

@@ -11,8 +11,9 @@
     {{ form_widget(edit_form) }}
         <div class="form-actions">
             <input type="submit" class="btn btn-primary" value="Guardar">
-            <a href="{{ path('baseentity') }}" class="btn"><i class="icon-repeat"></i> Ir al Listado</a>
             <button type="button" class="btn btn-danger" onclick="javascript:delete_form(this)">Borrar</button>
+            <a href="{{ path('baseentity') }}" class="btn"><i class="icon-repeat"></i> Ir al Listado</a>
+            <a href="{{ path('pic_gallery', { 'id_baseentity': entity.id }) }}" class="btn"><i class="icon-picture"></i> Ir a Imágenes</a>
         </div>
 </form>
 
@@ -36,6 +37,7 @@
 
 {% block sidebar %}
         <div class="sc_actions">
-            <a href="{{ path('baseentity_new') }}" class="btn btn-small btn-primary"><i class="icon-plus icon-white"></i> Nuevo Item</a>
+            <a href="{{ path('baseentity_new') }}" class="btn btn-small btn-primary"><i class="icon-plus icon-white"></i> Nuevo Item</a>            
+            <a href="{{ path('pic_gallery', { 'id_baseentity': entity.id }) }}" class="btn"><i class="icon-picture"></i> Ir a Imágenes</a>
         </div>
 {% endblock %}

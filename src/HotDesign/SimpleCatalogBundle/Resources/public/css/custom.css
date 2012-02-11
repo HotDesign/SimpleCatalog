@@ -16,6 +16,10 @@ label.required {
 
 }
 
+.sc_actions a {
+    margin-bottom: 10px;
+}
+
 .sc_thumb_table {
     width: 180px;
 }

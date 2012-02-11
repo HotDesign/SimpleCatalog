@@ -86,20 +86,6 @@ class BaseEntity {
     private $updated_at;
 
     /**
-     * @var decimal $lat
-     *
-     * @ORM\Column(name="lat", type="decimal", nullable=true )
-     */
-    private $lat;
-
-    /**
-     * @var decimal $lng
-     *
-     * @ORM\Column(name="lng", type="decimal", nullable=true)
-     */
-    private $lng;
-
-    /**
      * @var text $tags
      *
      * @ORM\Column(name="tags", type="text", nullable=true)
@@ -333,43 +319,6 @@ class BaseEntity {
     public function getUpdatedAt() {
         return $this->updated_at;
     }
-
-    /**
-     * Set lat
-     *
-     * @param decimal $lat
-     */
-    public function setLat($lat) {
-        $this->lat = $lat;
-    }
-
-    /**
-     * Get lat
-     *
-     * @return decimal 
-     */
-    public function getLat() {
-        return $this->lat;
-    }
-
-    /**
-     * Set lng
-     *
-     * @param decimal $lng
-     */
-    public function setLng($lng) {
-        $this->lng = $lng;
-    }
-
-    /**
-     * Get lng
-     *
-     * @return decimal 
-     */
-    public function getLng() {
-        return $this->lng;
-    }
-
     /**
      * Set tags
      *

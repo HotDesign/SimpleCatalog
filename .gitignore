@@ -1,14 +1,37 @@
-/web/bundles/
-/web/catalog/images/*
-/web/catalog/cache/*
-/app/bootstrap*
-/app/cache/*
-/app/logs/*
-/vendor/
-/app/config/parameters.ini
+# Bootstrap
+app/bootstrap*
 
-#Ignoramos los archivos terminados en pelito que son los temporales de algunos Editores como Kate y Gedit
+# Symfony directories
+vendor/*
+*/logs/*
+*/cache/*
+web/uploads/*
+web/bundles/*
+
+# Configuration files
+app/config/parameters.ini
+
+#Ignoramos los archivos terminados en pelito que son los temporales de
+algunos Editores como Kate y Gedit
 *~
 
-#Ignoramos la base de datos Sqlite
+# archivos creados por los IDEs Eclipse, Zend Studio, Netbeans y PHPStorm
+.buildpath
+.project
+.settings
+nbproject
+.idea
+
+
+# Archivos terminados en pelito que son los temporales de algunos Editores
+como Kate y Gedit
+*~
+
+# Base de datos Sqlite
 /app/db/*
+
+# Imagenes subidas y cache de imágenes
+/web/catalog/images/*
+/web/catalog/cache/*
+
+

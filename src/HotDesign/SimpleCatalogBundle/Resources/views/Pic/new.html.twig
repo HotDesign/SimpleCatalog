@@ -18,3 +18,11 @@
         </div>
     </form>
 {% endblock %}
+
+
+{% block sidebar %}
+    <div class="sc_actions">
+        <a href="{{ path('pic_gallery', { 'id_baseentity': baseentity.id }) }}" class="btn"><i class="icon-repeat"></i> Volver al Listado</a>
+        <a href="{{ path('baseentity_edit', { 'id': baseentity.id } ) }}" class="btn btn-small btn-info"><i class="icon-pencil icon-white"></i> Editar Item</a>
+    </div>
+{% endblock %}

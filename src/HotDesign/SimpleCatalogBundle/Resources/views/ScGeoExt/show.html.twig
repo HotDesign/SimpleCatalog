@@ -1,0 +1,10 @@
+<legend>Coordenadas Geográficas</legend>
+{% if entity %}
+    <p>Latitud: {{ entity.lat}}</p>
+    <p>Longitud: {{ entity.lng }}</p>
+    <input type="submit" class="btn btn-primary" value="Editar">
+{% else %}
+    <div class="alert alert-info">
+        Aún no se han cargado coordenadas.
+    </div>
+{% endif %}

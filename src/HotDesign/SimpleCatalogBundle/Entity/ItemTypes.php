@@ -15,9 +15,18 @@ class ItemTypes {
     
      //Array ( NOMBRE , CLASE EXTENDS )
     private static $types = array(
-        self::AUTOMOBILES => array('Rodados', 'Automobiles'),
-        self::BASE => array('Rubros', 'BaseEntity'),
-        self::HOUSING => array('Inmuebles', 'Housing'),
+        self::AUTOMOBILES => array(
+            'label' => 'Rodados',
+            'class_extends' => array('ScAutomobilesExt')
+            ),
+        self::BASE => array(
+            'label' => 'Items',
+            'class_extends' => array('')
+            ),
+        self::HOUSING => array(
+            'label' => 'Inmuebles',
+            'class_extends' => array( 'ScGeoExt'  )
+            ),
         
     );
     private static $id_default = 1;
@@ -30,10 +39,12 @@ class ItemTypes {
     public static function getChoices() {
         $output = array();
         foreach (self::$types as $k => $tipo)
-            $output[$k] = $tipo[0];
+            $output[$k] = $tipo['label'];
         return $output;
     }
+    
+    public static function getClassExtends($id) {
+        return self::$types[$id]['class_extends'];
+    }
 
-}
-
-;
+};

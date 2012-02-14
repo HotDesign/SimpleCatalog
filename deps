@@ -92,3 +92,9 @@
 [AvalancheImagineBundle]
     git=http://github.com/avalanche123/AvalancheImagineBundle.git
     target=bundles/Avalanche/Bundle/ImagineBundle
+
+## Geographic
+
+[VichGeographicalBundle]
+    git=git://github.com/dustin10/VichGeographicalBundle.git
+    target=/bundles/Vich/GeographicalBundle

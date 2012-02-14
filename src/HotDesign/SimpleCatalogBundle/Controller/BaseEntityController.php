@@ -5,6 +5,7 @@ namespace HotDesign\SimpleCatalogBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use HotDesign\SimpleCatalogBundle\Entity\BaseEntity;
 use HotDesign\SimpleCatalogBundle\Form\BaseEntityType;
+use HotDesign\SimpleCatalogBundle\Entity\ItemTypes;
 
 /**
  * BaseEntity controller.
@@ -102,14 +103,34 @@ class BaseEntityController extends Controller {
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find BaseEntity entity.');
         }
-
+    
+        //Obtenemos las Pics.
+        $pics = $em->getRepository('SimpleCatalogBundle:Pic')->findBy( array('entity' => $entity->getId() ) );
+        
+        //Obtenemos el array de las clases que extiende
+        $class_extends = ItemTypes::getClassExtends($entity->getCategory()->getType());
+        
+        $extend = array();
+        
+        //Recuperamos toda la información de las clases a las cuales extiende.
+        foreach($class_extends as $class) {
+            $e = array();
+            $e['class'] = $class;
+            $e['object'] = $em->getRepository('SimpleCatalogBundle:' . $class )->findOneBy( array('base_entity' => $entity->getId() ) );
+            $extend[] = $e; 
+        }
+        
+        //End extends modifications
         $editForm = $this->createForm(new BaseEntityType(), $entity);
         $deleteForm = $this->createDeleteForm($id);
-
+        
+        //Aqui hay que ver como pasar un array con todos los forms a los q extiende...
         return $this->render('SimpleCatalogBundle:BaseEntity:edit.html.twig', array(
                     'entity' => $entity,
                     'edit_form' => $editForm->createView(),
                     'delete_form' => $deleteForm->createView(),
+                    'pics' => $pics,
+                    'extends' => $extend
                 ));
     }
 

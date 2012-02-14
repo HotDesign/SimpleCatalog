@@ -36,3 +36,7 @@ label.required {
     margin-top: 20px;
     
 }
+
+.sc_sidebar a {
+    width: 120px;
+}

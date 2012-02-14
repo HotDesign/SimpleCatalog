@@ -1,0 +1,16 @@
+<h1>ScGeoExt creation</h1>
+
+<form action="{{ path('scgeoext_create') }}" method="post" {{ form_enctype(form) }}>
+    {{ form_widget(form) }}
+    <p>
+        <button type="submit">Create</button>
+    </p>
+</form>
+
+<ul class="record_actions">
+    <li>
+        <a href="{{ path('scgeoext') }}">
+            Back to the list
+        </a>
+    </li>
+</ul>

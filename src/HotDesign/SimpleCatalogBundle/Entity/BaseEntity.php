@@ -152,6 +152,10 @@ class BaseEntity {
         $this->important_general = false;
     }
 
+    public function __toString() {
+        return $this->title;
+        
+    }
     public function getFormattedPrice() {
         if ($this->is_billable && isset($this->currency) && is_numeric($this->price)) {
             return Currencies::getCurrencySymbol($this->currency) . ' ' . $this->price;

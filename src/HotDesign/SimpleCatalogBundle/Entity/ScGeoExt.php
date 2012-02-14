@@ -13,8 +13,16 @@ use Doctrine\ORM\Mapping as ORM;
 class ScGeoExt
 {
     /**
-     * @var integer $base_entity
+     * @var integer $id
+     *
+     * @ORM\Column(name="id", type="integer")
      * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+    
+    /**
+     * @var integer $base_entity
      * @ORM\ManyToOne(targetEntity="HotDesign\SimpleCatalogBundle\Entity\BaseEntity")
      */
     private $base_entity;
@@ -89,5 +97,15 @@ class ScGeoExt
     public function getBaseEntity()
     {
         return $this->base_entity;
+    }
+
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
     }
 }

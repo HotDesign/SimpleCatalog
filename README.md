@@ -35,7 +35,7 @@ Los tipos se manejan desde una clase estática en src/HotDesign/Entity/ItemTypes
 
 Cuando agreguemos un nuevo Item dentro de ésta categoría, se crearán objetos de los tipos que extiende, por ejemplo en inmueble se creará la BaseEntity con los datos que ingresó el Usuario, un Geografico y un Housing con valores por defecto y en enabled=false (ambos relacionados a la base entity).
 
-El usuario ahora sí puede editar estos valores por defecto y poner enable=true para que sea visto en un futuro frontend.
+El usuario ahora sí puede editar estos valores por defecto por medio de un popup/lightbox al formulario de edición y poner enable=true para que sea visto en un futuro frontend.
 
 **TIPS**
 

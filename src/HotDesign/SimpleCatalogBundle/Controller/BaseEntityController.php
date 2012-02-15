@@ -74,9 +74,23 @@ class BaseEntityController extends Controller {
         $form = $this->createForm(new BaseEntityType(), $entity);
         $form->bindRequest($request);
 
+
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getEntityManager();
             $em->persist($entity);
+
+            //Vemos a que Tipos Extiende
+            $extends = ItemTypes::getClassExtends($entity->getCategory()->getType());
+            //Creamos un objeto por cada uno y le asignamos el parent, luego persistimos
+            foreach ($extends as $extend) {
+                $clase = 'HotDesign\SimpleCatalogBundle\Entity\\' . $extend;
+                
+                $ex = new $clase();
+                $ex->setBaseEntity($entity);
+                $em->persist($ex);
+            }
+
+
             $em->flush();
 
             $this->container->get('session')->setFlash('alert-success', 'Item agregado con éxito.');
@@ -103,27 +117,27 @@ class BaseEntityController extends Controller {
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find BaseEntity entity.');
         }
-    
+
         //Obtenemos las Pics.
-        $pics = $em->getRepository('SimpleCatalogBundle:Pic')->findBy( array('entity' => $entity->getId() ) );
-        
+        $pics = $em->getRepository('SimpleCatalogBundle:Pic')->findBy(array('entity' => $entity->getId()));
+
         //Obtenemos el array de las clases que extiende
         $class_extends = ItemTypes::getClassExtends($entity->getCategory()->getType());
-        
+
         $extend = array();
-        
+
         //Recuperamos toda la información de las clases a las cuales extiende.
-        foreach($class_extends as $class) {
+        foreach ($class_extends as $class) {
             $e = array();
             $e['class'] = $class;
-            $e['object'] = $em->getRepository('SimpleCatalogBundle:' . $class )->findOneBy( array('base_entity' => $entity->getId() ) );
-            $extend[] = $e; 
+            $e['object'] = $em->getRepository('SimpleCatalogBundle:' . $class)->findOneBy(array('base_entity' => $entity->getId()));
+            $extend[] = $e;
         }
-        
+
         //End extends modifications
         $editForm = $this->createForm(new BaseEntityType(), $entity);
         $deleteForm = $this->createDeleteForm($id);
-        
+
         //Aqui hay que ver como pasar un array con todos los forms a los q extiende...
         return $this->render('SimpleCatalogBundle:BaseEntity:edit.html.twig', array(
                     'entity' => $entity,

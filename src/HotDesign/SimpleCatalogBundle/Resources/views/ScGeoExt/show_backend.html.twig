@@ -1,8 +1,13 @@
 <legend>Coordenadas Geográficas</legend>
 {% if entity %}
+    {% if not entity.enabled %}
+    <div class="alert alert-warning">
+        Coordenadas Desactivadas. Edite para Activarlas.
+    </div>
+    {% endif %}
     <p>Latitud: {{ entity.lat}}</p>
     <p>Longitud: {{ entity.lng }}</p>
-    <input type="submit" class="btn btn-primary" value="Editar">
+    <a href="{{ path('scgeoext_edit', { 'id': entity.id }) }}" class="btn btn-small btn-primary" target="_blank">Editar</a>
 {% else %}
     <div class="alert alert-info">
         Aún no se han cargado coordenadas.

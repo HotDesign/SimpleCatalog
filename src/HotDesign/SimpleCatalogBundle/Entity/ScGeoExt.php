@@ -116,4 +116,24 @@ class ScGeoExt {
         return $this->id;
     }
 
+
+    /**
+     * Set enabled
+     *
+     * @param boolean $enabled
+     */
+    public function setEnabled($enabled)
+    {
+        $this->enabled = $enabled;
+    }
+
+    /**
+     * Get enabled
+     *
+     * @return boolean 
+     */
+    public function getEnabled()
+    {
+        return $this->enabled;
+    }
 }

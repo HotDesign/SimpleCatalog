@@ -12,7 +12,7 @@ class ScGeoExtType extends AbstractType
         $builder
             ->add('lat')
             ->add('lng')
-            ->add('base_entity')
+            ->add('enabled', null, array('label' => 'Visible ?', 'required' => false))
         ;
     }
 

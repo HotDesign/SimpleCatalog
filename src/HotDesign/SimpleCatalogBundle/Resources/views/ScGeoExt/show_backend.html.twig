@@ -7,7 +7,9 @@
     {% endif %}
     <p>Latitud: {{ entity.lat}}</p>
     <p>Longitud: {{ entity.lng }}</p>
-    <a href="{{ path('scgeoext_edit', { 'id': entity.id }) }}" class="btn btn-small btn-primary" target="_blank">Editar</a>
+    <div class="scactions">
+        <a href="{{ path('scgeoext_edit', { 'id': entity.id }) }}?iframe=true&width=800&height=400" rel="prettyPhoto" class="btn btn-small btn-primary" title="Editar coordenadas" target="_blank">Editar</a>
+    </div>
 {% else %}
     <div class="alert alert-info">
         Aún no se han cargado coordenadas.

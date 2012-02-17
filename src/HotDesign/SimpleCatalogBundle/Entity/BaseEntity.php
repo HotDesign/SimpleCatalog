@@ -180,7 +180,7 @@ class BaseEntity {
     
     public function get_default_pic() {
         if ($this->getPics()->first())
-            return $this->getPics()->first()->getPath();
+            return $this->getPics()->first();
         return false; 
     }
 

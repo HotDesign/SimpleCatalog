@@ -24,11 +24,11 @@
         </form>
     </div>
 
-    <div class="span4">
+    <div class="span4 gallery">
         <legend>Imágenes</legend>
         {% for pic in pics %}
-        <a href="{{ path('pic_edit', { 'id': pic.id }) }}"">
-            <img src="{{ ('catalog/images/' ~ pic.path) | apply_filter('my_thumb') }}" alt="" />
+        <a href="{{ asset('catalog/images/' ~ pic.path) }}" rel="prettyPhoto[galeria]" title="{{ pic.title }}" >
+            <img src="{{ ('catalog/images/' ~ pic.path) | apply_filter('my_thumb') }}" alt="{{ pic.title }}" />
         </a>
         {% else %}
         <div class="alert alert-info">

@@ -23,7 +23,9 @@
                 <td>{{ loop.index }}</td>
                 <td>
                     {% if entity.get_default_pic %}
-                        <img src="{{ ('catalog/images/' ~ entity.get_default_pic) | apply_filter('my_thumb') }}" alt="" />
+                         <a href="{{ asset('catalog/images/' ~ entity.get_default_pic.path) }}" rel="prettyPhoto" title="{{ entity.get_default_pic.title }}" >
+                            <img src="{{ ('catalog/images/' ~ entity.get_default_pic.path) | apply_filter('my_thumb') }}" alt="{{ entity.get_default_pic.title }}" />
+                         </a>
                     {% else %}
                         <img src="{{ 'bundles/simplecatalog/img/default.gif' | apply_filter('my_thumb') }}" alt="" />
                     {% endif %}                

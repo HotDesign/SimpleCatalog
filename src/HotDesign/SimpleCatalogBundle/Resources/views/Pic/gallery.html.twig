@@ -19,8 +19,8 @@
             <tr>
                 <td>{{ loop.index }}</td>
                 <td>
-                    <a href="{{ path('pic_edit', { 'id': entity.id }) }}"">
-                        <img src="{{ ('catalog/images/' ~ entity.path) | apply_filter('my_thumb') }}" alt="" />
+                    <a href="{{ asset('catalog/images/' ~ entity.path) }}" rel="prettyPhoto" title="{{ entity.title }}">
+                        <img src="{{ ('catalog/images/' ~ entity.path) | apply_filter('my_thumb') }}" alt="{{ entity.title }}" />
                     </a>
                 </td>
                 <td>{{ entity.title }}</td>

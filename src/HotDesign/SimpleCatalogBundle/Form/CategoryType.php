@@ -4,7 +4,7 @@ namespace HotDesign\SimpleCatalogBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilder;
-use HotDesign\SimpleCatalogBundle\Entity\ItemTypes;
+use HotDesign\SimpleCatalogBundle\Config\ItemTypes;
 use Doctrine\ORM\EntityRepository;
 
 class CategoryType extends AbstractType {

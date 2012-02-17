@@ -1,6 +1,6 @@
 <?php
 
-namespace HotDesign\SimpleCatalogBundle\Entity;
+namespace HotDesign\SimpleCatalogBundle\Config;
 
 /**
  * Clase estática que se encarga de hacer un manejo de los tipos de avisos y sus extensiones

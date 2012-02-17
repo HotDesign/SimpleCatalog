@@ -5,7 +5,10 @@ namespace HotDesign\SimpleCatalogBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use HotDesign\SimpleCatalogBundle\Entity\BaseEntity;
 use HotDesign\SimpleCatalogBundle\Form\BaseEntityType;
-use HotDesign\SimpleCatalogBundle\Entity\ItemTypes;
+
+//Configs
+use HotDesign\SimpleCatalogBundle\Config\Currencies;
+use HotDesign\SimpleCatalogBundle\Config\ItemTypes;
 
 /**
  * BaseEntity controller.
@@ -17,7 +20,7 @@ class BaseEntityController extends Controller {
      * Lists all BaseEntity entities.
      *
      */
-    public function indexAction() {
+    public function indexAction() {      
         $em = $this->getDoctrine()->getEntityManager();
 
         $entities = $em->getRepository('SimpleCatalogBundle:BaseEntity')->findAll();

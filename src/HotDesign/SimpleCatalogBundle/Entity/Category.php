@@ -5,6 +5,7 @@ namespace HotDesign\SimpleCatalogBundle\Entity;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ORM\Mapping as ORM;
 
+use HotDesign\SimpleCatalogBundle\Config\ItemTypes;
 /**
  * HotDesign\SimpleCatalogBundle\Entity\Category
  *

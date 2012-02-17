@@ -5,7 +5,7 @@ namespace HotDesign\SimpleCatalogBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilder;
 
-use HotDesign\SimpleCatalogBundle\Entity\Currencies;
+use HotDesign\SimpleCatalogBundle\Config\Currencies;
 
 class BaseEntityType extends AbstractType {
 

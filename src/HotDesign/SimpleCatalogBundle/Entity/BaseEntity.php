@@ -5,8 +5,9 @@ namespace HotDesign\SimpleCatalogBundle\Entity;
 use Symfony\Component\Validator\Constraints as Assert;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ORM\Mapping as ORM;
-use HotDesign\SimpleCatalogBundle\Entity\Currencies;
-use HotDesign\SimpleCatalogBundle\Entity\ItemTypes;
+
+use HotDesign\SimpleCatalogBundle\Config\Currencies;
+use HotDesign\SimpleCatalogBundle\Config\ItemTypes;
 
 /**
  * HotDesign\SimpleCatalogBundle\Entity\BaseEntity

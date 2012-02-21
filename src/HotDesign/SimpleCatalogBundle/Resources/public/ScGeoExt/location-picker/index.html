@@ -1,0 +1,50 @@
+<html>
+	<head>
+		<title>Google Map Longitude Latitude Picker</title>
+		<script src="maps.js"></script>
+		<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
+		<META name="description" content="Use this tool to identify longitude latitude information of a location in Google Maps"></META>
+		<META name="keywords" content="google maps,google map,google maps api v3,gmap,longitude,latitude,location,picker,point,coordinates"></META>
+	</head>
+	<body bgcolor="#FFFFEF" onload="if_gmap_init();"><center>
+	<form>
+		<table border=0 cellspacing=0 cellpadding=2>
+			<tbody>
+                                 <tr>
+                                        <td colspan=2 align=center>
+					          <font size=5><b>Google Map Longitude Latitude Picker</b></font><br>
+					          <i>(using google maps api v3)</i><br>
+                                         </td>
+                                 </tr>
+				<tr>
+				<td valign=top width=200>
+					<i>Use this tool to identify longitude latitude information of a location in Google Maps.  Feel free to download the source code using the link below.</i>
+					<br><br>
+					<font size=1>(specify coordinates and click "Jump to Location")</font>
+					<table border=0 bgcolor=#A0FFA0 width=100%>
+						<tr>
+							<td valign=top>Longitude:</td>
+							<td><input size=10 type=text value="120.994260" id="longval"><br>(e.g. 120.994260)</td>
+						</tr>
+						<tr>
+							<td valign=top>Latitude:</td>
+							<td><input size=10 type=text value="14.593999" id="latval"><br>(e.g. 14.593999)</td>
+						</tr>
+						<tr>
+							<td colspan=2 align=center>
+								<input type=button value="Jump to location" onclick="if_gmap_loadpicker();">
+							</td>
+						</tr>
+					</table>
+				</td>
+				<td id="maparea" style="background-color: #E0E0E0;">
+					<center>- click on the map below to change marker position</center>
+					<center>- click on the marker to view longitude/latitude information</center>
+					<div id="mapitems" style="width: 480px; height: 540px"></div>
+				</td>
+				</tr>
+			</tbody>
+		</table>
+	</form>
+	<center></body>
+</html>

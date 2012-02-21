@@ -28,12 +28,12 @@ class ScGeoExt {
     private $base_entity;
 
     /**
-     * @ORM\Column(type="decimal", scale="7", nullable=true)
+     * @ORM\Column(type="float", nullable=true)
      */
     protected $lat;
 
     /**
-     * @ORM\Column(type="decimal", scale="7", nullable=true)
+     * @ORM\Column(type="float", nullable=true)
      */
     protected $lng;
 

@@ -21,7 +21,7 @@ class ItemTypes {
             ),
         self::BASE => array(
             'label' => 'Items',
-            'class_extends' => array('')
+            'class_extends' => array('ScGeoExt' )
             ),
         self::HOUSING => array(
             'label' => 'Inmuebles',

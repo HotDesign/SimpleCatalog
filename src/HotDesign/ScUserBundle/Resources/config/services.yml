@@ -1,0 +1,7 @@
+parameters:
+#    sc_user.example.class: HotDesign\ScUserBundle\Example
+
+services:
+#    sc_user.example:
+#        class: %sc_user.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

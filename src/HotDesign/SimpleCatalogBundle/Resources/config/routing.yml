@@ -1,20 +1,20 @@
 AdminDashboard:
-    pattern: /admin
+    pattern: /
     defaults: { _controller: SimpleCatalogBundle:Default:index }
     
 AdminCategory:
     resource: "@SimpleCatalogBundle/Resources/config/routing/category.yml"
-    prefix:   /admin/category
+    prefix:   /category
     
     
 AdminPic:
     resource: "@SimpleCatalogBundle/Resources/config/routing/pic.yml"
-    prefix:   /admin/pic
+    prefix:   /pic
     
     
 AdminBaseEntity:
     resource: "@SimpleCatalogBundle/Resources/config/routing/baseentity.yml"
-    prefix:   /admin/baseentity
+    prefix:   /baseentity
     
     
 _imagine:
@@ -26,5 +26,5 @@ _imagine:
 
 AdminScGeoExt:
     resource: "@SimpleCatalogBundle/Resources/views/ScGeoExt/scgeoext.yml"
-    prefix:   /admin/scgeoext
+    prefix:   /scgeoext
     

@@ -16,16 +16,20 @@ class AppKernel extends Kernel {
             new Symfony\Bundle\AsseticBundle\AsseticBundle(),
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new JMS\SecurityExtraBundle\JMSSecurityExtraBundle(),
+            new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
             
             // SimpleCatalog Bundle
             
             new HotDesign\SimpleCatalogBundle\SimpleCatalogBundle(),
-            new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
+            new HotDesign\ScUserBundle\ScUserBundle(),
             
             //Fixtures
              new Symfony\Bundle\DoctrineFixturesBundle\DoctrineFixturesBundle(),
             //Avalanche
             new Avalanche\Bundle\ImagineBundle\AvalancheImagineBundle(),
+            
+            // FOSUser
+            new FOS\UserBundle\FOSUserBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

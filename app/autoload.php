@@ -21,6 +21,8 @@ $loader->registerNamespaces(array(
     //Avalanche para Thumbnails
     'Imagine' => __DIR__ . '/../vendor/imagine/lib',
     'Avalanche' => __DIR__ . '/../vendor/bundles',
+    //FOSUser
+    'FOS' => __DIR__.'/../vendor/bundles',
 ));
 $loader->registerPrefixes(array(
     'Twig_Extensions_' => __DIR__ . '/../vendor/twig-extensions/lib',

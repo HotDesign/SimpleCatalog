@@ -1,6 +1,10 @@
+ScUserBundle:
+    resource: "@ScUserBundle/Resources/config/routing.yml"
+    prefix:   /
+
 SimpleCatalogBundle:
     resource: "@SimpleCatalogBundle/Resources/config/routing.yml"
-    prefix:   /
+    prefix:   /admin
     
     
 _imagine:

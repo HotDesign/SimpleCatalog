@@ -4,7 +4,7 @@ imports:
 
 framework:
     #esi:             ~
-    translator:      { fallback: %locale% }
+    translator:      ~
     secret:          %secret%
     charset:         UTF-8
     router:          { resource: "%kernel.root_dir%/config/routing.yml" }
@@ -94,3 +94,9 @@ avalanche_imagine:
         my_thumb:
             type:    thumbnail
             options: { size: [120, 90], mode: outbound }
+            
+## FOSUserBundle
+fos_user:
+    db_driver: orm # other valid values are 'mongodb', 'couchdb' and 'propel'
+    firewall_name: main
+    user_class: HotDesign\ScUserBundle\Entity\User

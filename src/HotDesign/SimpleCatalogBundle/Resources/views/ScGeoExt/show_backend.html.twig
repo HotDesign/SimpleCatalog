@@ -7,6 +7,9 @@
     {% endif %}
     <p>Latitud: {{ entity.lat}}</p>
     <p>Longitud: {{ entity.lng }}</p>
+    
+    
+    <img src="http://maps.google.com/maps/api/staticmap?center={{ entity.lat}},{{ entity.lng}}&zoom=15&size=400x200&sensor=false&markers=size:mid|color:red|label:E|{{ entity.lat}},{{ entity.lng}}" alt="" />
     <div class="scactions">
         <a href="{{ path('scgeoext_edit', { 'id': entity.id }) }}?iframe=true&width=800&height=400" rel="prettyPhoto" class="btn btn-small btn-primary" title="Editar coordenadas" target="_blank">Editar</a>
     </div>

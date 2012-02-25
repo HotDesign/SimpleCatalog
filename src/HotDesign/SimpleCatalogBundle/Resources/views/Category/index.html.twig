@@ -2,7 +2,16 @@
 {% block title %} Lista de Categorías {% endblock %}
 
 {% block content %}
-<h2>{{ block('title') }}</h2>
+<div class="form-actionss well">
+    <h2>{{ block('title') }}</h2>
+    <div class="scright">
+       <a href="{{ path('category_new') }}" class="btn btn-small btn-primary"><i class="icon-plus icon-white"></i> Nueva Categoría</a>
+    </div>
+    <div style="clear: both"></div>
+</div>
+
+
+
 {% include 'SimpleCatalogBundle:Layouts:flashes_messages.html.twig'%}
 
 <table class="table table-striped ">
@@ -31,10 +40,4 @@
     {% endfor %}
         </tbody>
     </table>
-{% endblock %}
-
-{% block sidebar %}
-    <div class="sc_actions">
-        <a href="{{ path('category_new') }}" class="btn btn-small btn-primary"><i class="icon-plus icon-white"></i> Nueva Categoría</a>
-    </div>
 {% endblock %}

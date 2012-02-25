@@ -36,7 +36,9 @@ label.required {
     margin-top: 20px;
     
 }
-
-.sc_sidebar a {
-    width: 120px;
+.scright {
+    float: right;
+    font-size: 12px;
 }
+
+.well h2 { width: auto; float: left; }

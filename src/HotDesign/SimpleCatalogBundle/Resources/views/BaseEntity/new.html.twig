@@ -4,7 +4,13 @@
 {% block title %} Nuevo Item {% endblock %}
 
 {% block content %}
-<h2>{{ block('title') }}</h2>
+<div class="form-actionss well">
+    <h2>{{ block('title') }}</h2>
+    <div class="scright">
+         <a href="{{ path('baseentity') }}" class="btn btn-small"><i class="icon-repeat"></i> Volver al Listado</a>
+    </div>
+    <div style="clear: both"></div>
+</div>
 {% include 'SimpleCatalogBundle:Layouts:flashes_messages.html.twig'%}
 
 <form class="form-horizontal sc_form" action="{{ path('baseentity_create') }}" method="post" {{ form_enctype(form) }}>

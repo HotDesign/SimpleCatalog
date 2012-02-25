@@ -1,10 +1,17 @@
-{% extends 'SimpleCatalogBundle:Layouts:base.html.twig' %}
+{% extends 'SimpleCatalogBundle:Layouts:baseext.html.twig' %}
 {% form_theme form 'SimpleCatalogBundle:Form:fields.html.twig' %}
 
 {% block title %} Nueva Imágen {% endblock %}
 
 {% block content %}
-<h2>{{ block('title') }}</h2>
+<div class="form-actionss well">
+    <h2>{{ block('title') }}</h2>
+    <div class="scright">
+        <a href="{{ path('pic_gallery', { 'id_baseentity': baseentity.id }) }}" class="btn"><i class="icon-repeat"></i> Ir al Listado</a>
+    </div>
+    <div style="clear: both"></div>
+</div>
+
 {% include 'SimpleCatalogBundle:Layouts:flashes_messages.html.twig'%}
 
 <form class="form-horizontal sc_form" action="{{ path('pic_create', { 'id_baseentity': baseentity.id }) }}" method="post" {{ form_enctype(form) }}>

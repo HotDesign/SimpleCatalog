@@ -9,7 +9,7 @@ $("a[rel^='prettyPhoto']").prettyPhoto({
     social_tools: ' ' 
 });
 
-$(".scactions a[rel^='prettyPhoto']").prettyPhoto({
+$(".scactions a[rel^='prettyPhoto'], .scright a[rel^='prettyPhoto']").prettyPhoto({
     animation_speed:'fast',
     theme:'light_rounded',
     slideshow: false, 

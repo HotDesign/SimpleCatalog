@@ -1,0 +1,30 @@
+scgeoext:
+    pattern:  /
+    defaults: { _controller: "ScGeoExtBundle:ScGeoExt:index" }
+
+scgeoext_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "ScGeoExtBundle:ScGeoExt:show" }
+
+scgeoext_new:
+    pattern:  /new
+    defaults: { _controller: "ScGeoExtBundle:ScGeoExt:new" }
+
+scgeoext_create:
+    pattern:  /create
+    defaults: { _controller: "ScGeoExtBundle:ScGeoExt:create" }
+    requirements: { _method: post }
+
+scgeoext_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "ScGeoExtBundle:ScGeoExt:edit" }
+
+scgeoext_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "ScGeoExtBundle:ScGeoExt:update" }
+    requirements: { _method: post }
+
+scgeoext_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "ScGeoExtBundle:ScGeoExt:delete" }
+    requirements: { _method: post }

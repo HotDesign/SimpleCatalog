@@ -1,11 +1,11 @@
 <?php
 
-namespace HotDesign\SimpleCatalogBundle\Controller;
+namespace HotDesign\ScGeoExtBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
-use HotDesign\SimpleCatalogBundle\Entity\ScGeoExt;
-use HotDesign\SimpleCatalogBundle\Form\ScGeoExtType;
+use HotDesign\ScGeoExtBundle\Entity\ScGeoExt;
+use HotDesign\ScGeoExtBundle\Form\ScGeoExtType;
 
 /**
  * ScGeoExt controller.
@@ -21,9 +21,9 @@ class ScGeoExtController extends Controller
     {
         $em = $this->getDoctrine()->getEntityManager();
 
-        $entities = $em->getRepository('SimpleCatalogBundle:ScGeoExt')->findAll();
+        $entities = $em->getRepository('ScGeoExtBundle:ScGeoExt')->findAll();
 
-        return $this->render('SimpleCatalogBundle:ScGeoExt:index.html.twig', array(
+        return $this->render('ScGeoExtBundle:ScGeoExt:index.html.twig', array(
             'entities' => $entities
         ));
     }
@@ -36,7 +36,7 @@ class ScGeoExtController extends Controller
     {
         $em = $this->getDoctrine()->getEntityManager();
 
-        $entity = $em->getRepository('SimpleCatalogBundle:ScGeoExt')->find($id);
+        $entity = $em->getRepository('ScGeoExtBundle:ScGeoExt')->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find ScGeoExt entity.');
@@ -44,7 +44,7 @@ class ScGeoExtController extends Controller
 
         $deleteForm = $this->createDeleteForm($id);
 
-        return $this->render('SimpleCatalogBundle:ScGeoExt:show.html.twig', array(
+        return $this->render('ScGeoExtBundle:ScGeoExt:show.html.twig', array(
             'entity'      => $entity,
             'delete_form' => $deleteForm->createView(),
 
@@ -60,7 +60,7 @@ class ScGeoExtController extends Controller
         $entity = new ScGeoExt();
         $form   = $this->createForm(new ScGeoExtType(), $entity);
 
-        return $this->render('SimpleCatalogBundle:ScGeoExt:new.html.twig', array(
+        return $this->render('ScGeoExtBundle:ScGeoExt:new.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView()
         ));
@@ -86,7 +86,7 @@ class ScGeoExtController extends Controller
             
         }
 
-        return $this->render('SimpleCatalogBundle:ScGeoExt:new.html.twig', array(
+        return $this->render('ScGeoExtBundle:ScGeoExt:new.html.twig', array(
             'entity' => $entity,
             'form'   => $form->createView()
         ));
@@ -100,7 +100,7 @@ class ScGeoExtController extends Controller
     {
         $em = $this->getDoctrine()->getEntityManager();
 
-        $entity = $em->getRepository('SimpleCatalogBundle:ScGeoExt')->find($id);
+        $entity = $em->getRepository('ScGeoExtBundle:ScGeoExt')->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find ScGeoExt entity.');
@@ -109,7 +109,7 @@ class ScGeoExtController extends Controller
         $editForm = $this->createForm(new ScGeoExtType(), $entity);
         $deleteForm = $this->createDeleteForm($id);
 
-        return $this->render('SimpleCatalogBundle:ScGeoExt:edit.html.twig', array(
+        return $this->render('ScGeoExtBundle:ScGeoExt:edit.html.twig', array(
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
@@ -124,7 +124,7 @@ class ScGeoExtController extends Controller
     {
         $em = $this->getDoctrine()->getEntityManager();
 
-        $entity = $em->getRepository('SimpleCatalogBundle:ScGeoExt')->find($id);
+        $entity = $em->getRepository('ScGeoExtBundle:ScGeoExt')->find($id);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find ScGeoExt entity.');
@@ -144,7 +144,7 @@ class ScGeoExtController extends Controller
             return $this->redirect($this->generateUrl('scgeoext_edit', array('id' => $id)));
         }
 
-        return $this->render('SimpleCatalogBundle:ScGeoExt:edit.html.twig', array(
+        return $this->render('ScGeoExtBundle:ScGeoExt:edit.html.twig', array(
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
@@ -164,7 +164,7 @@ class ScGeoExtController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getEntityManager();
-            $entity = $em->getRepository('SimpleCatalogBundle:ScGeoExt')->find($id);
+            $entity = $em->getRepository('ScGeoExtBundle:ScGeoExt')->find($id);
 
             if (!$entity) {
                 throw $this->createNotFoundException('Unable to find ScGeoExt entity.');

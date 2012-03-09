@@ -50,7 +50,7 @@
                 </div>
         {% endfor %}
         {% for ext in extends %}
-            {% include 'SimpleCatalogBundle:' ~ ext.class ~ ':show_backend.html.twig' with {'entity': ext.object } %}
+            {% include ext.bundle_name ~ ':' ~ ext.class ~ ':show_backend.html.twig' with {'entity': ext.object } %}
         {% endfor %}
             </div>
         </div>

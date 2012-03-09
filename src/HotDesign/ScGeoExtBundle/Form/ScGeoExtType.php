@@ -1,6 +1,6 @@
 <?php
 
-namespace HotDesign\SimpleCatalogBundle\Form;
+namespace HotDesign\ScGeoExtBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilder;

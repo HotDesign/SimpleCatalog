@@ -5,7 +5,6 @@ namespace HotDesign\SimpleCatalogBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use HotDesign\SimpleCatalogBundle\Entity\BaseEntity;
 use HotDesign\SimpleCatalogBundle\Form\BaseEntityType;
-
 //Configs
 use HotDesign\SimpleCatalogBundle\Config\Currencies;
 use HotDesign\SimpleCatalogBundle\Config\ItemTypes;
@@ -20,7 +19,7 @@ class BaseEntityController extends Controller {
      * Lists all BaseEntity entities.
      *
      */
-    public function indexAction() {      
+    public function indexAction() {
         $em = $this->getDoctrine()->getEntityManager();
 
         $entities = $em->getRepository('SimpleCatalogBundle:BaseEntity')->findAll();
@@ -86,13 +85,10 @@ class BaseEntityController extends Controller {
             $extends = ItemTypes::getClassExtends($entity->getCategory()->getType());
             //Creamos un objeto por cada uno y le asignamos el parent, luego persistimos
             foreach ($extends as $extend) {
-                $clase = 'HotDesign\SimpleCatalogBundle\Entity\\' . $extend;
-                
-                $ex = new $clase();
+                $ex = new $extend['entity']();
                 $ex->setBaseEntity($entity);
                 $em->persist($ex);
             }
-
 
             $em->flush();
 
@@ -127,14 +123,18 @@ class BaseEntityController extends Controller {
         //Obtenemos el array de las clases que extiende
         $class_extends = ItemTypes::getClassExtends($entity->getCategory()->getType());
 
-        $extend = array();
+        $extends = array();
 
         //Recuperamos toda la información de las clases a las cuales extiende.
-        foreach ($class_extends as $class) {
+        foreach ($class_extends as $extend) {
             $e = array();
-            $e['class'] = $class;
-            $e['object'] = $em->getRepository('SimpleCatalogBundle:' . $class)->findOneBy(array('base_entity' => $entity->getId()));
-            $extend[] = $e;
+            $e['class'] = $extend['class'];
+            $e['bundle_name'] = $extend['bundle_name'];
+            $e['object'] = $em->getRepository(
+                            $extend['bundle_name'] . ':' . $extend['class'])
+                    ->findOneBy(array('base_entity' => $entity->getId())
+            );
+            $extends[] = $e;
         }
 
         //End extends modifications
@@ -147,7 +147,7 @@ class BaseEntityController extends Controller {
                     'edit_form' => $editForm->createView(),
                     'delete_form' => $deleteForm->createView(),
                     'pics' => $pics,
-                    'extends' => $extend
+                    'extends' => $extends
                 ));
     }
 

@@ -21,6 +21,7 @@ class AppKernel extends Kernel {
             // SimpleCatalog Bundle
             
             new HotDesign\SimpleCatalogBundle\SimpleCatalogBundle(),
+            new HotDesign\ScGeoExtBundle\ScGeoExtBundle(),
             new HotDesign\ScUserBundle\ScUserBundle(),
             
             //Fixtures

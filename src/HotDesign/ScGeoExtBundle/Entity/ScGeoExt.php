@@ -1,11 +1,11 @@
 <?php
 
-namespace HotDesign\SimpleCatalogBundle\Entity;
+namespace HotDesign\ScGeoExtBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * HotDesign\SimpleCatalogBundle\Entity\ScGeoExt
+ * HotDesign\ScGeoExtBundle\Entity\ScGeoExt
  *
  * @ORM\Table(name="scgeoext")
  * @ORM\Entity

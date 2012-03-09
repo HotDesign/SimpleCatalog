@@ -20,11 +20,3 @@ AdminBaseEntity:
 _imagine:
     resource: .
     type:     imagine
-    
-    
-# Extensions
-
-AdminScGeoExt:
-    resource: "@SimpleCatalogBundle/Resources/views/ScGeoExt/scgeoext.yml"
-    prefix:   /scgeoext
-    

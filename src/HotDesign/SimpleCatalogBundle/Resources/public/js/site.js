@@ -14,6 +14,7 @@ $(".scactions a[rel^='prettyPhoto'], .scright a[rel^='prettyPhoto']").prettyPhot
     theme:'light_rounded',
     slideshow: false, 
     autoplay_slideshow: false,
+    modal: true,
     social_tools: ' ',    
     callback: function(){
           location.reload();

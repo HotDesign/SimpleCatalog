@@ -22,16 +22,14 @@ algunos Editores como Kate y Gedit
 nbproject
 .idea
 
-
-# Archivos terminados en pelito que son los temporales de algunos Editores
-como Kate y Gedit
-*~
-
 # Base de datos Sqlite
 /app/db/*
 
 # Imagenes subidas y cache de imágenes
 /web/catalog/images/*
 /web/catalog/cache/*
+
+#Ignoramos el archivo generado por el updater
+updater.sh
 
 

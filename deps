@@ -72,7 +72,7 @@
     target=/bundles/Stof/DoctrineExtensionsBundle
 
 [TinymceBundle]
-    git=git://github.com/stfalcon/TinymceBundle.git
+    git=http://github.com/stfalcon/TinymceBundle.git
     target=/bundles/Stfalcon/Bundle/TinymceBundle
 
 ##FIXTURES##
@@ -96,11 +96,11 @@
 ## Geographic
 
 [VichGeographicalBundle]
-    git=git://github.com/dustin10/VichGeographicalBundle.git
+    git=http://github.com/dustin10/VichGeographicalBundle.git
     target=/bundles/Vich/GeographicalBundle
 
 ## FosUserBundle
 
 [FOSUserBundle]
-    git=git://github.com/FriendsOfSymfony/FOSUserBundle.git
+    git=http://github.com/FriendsOfSymfony/FOSUserBundle.git
     target=bundles/FOS/UserBundle

@@ -16,12 +16,21 @@ framework:
         default_locale: %locale%
         auto_start:     true
 
+
+# Parametros de la aplicacion - Definicion de Variables
+#
+# Dentro del controlador se obtiene con $this->container->getParameter()
+#
+parameters:
+    theme_layout: "HotDesignScThemeBundle:Theme:layout.html.twig"
+  
 # Twig Configuration
 twig:
     debug:            %kernel.debug%
     strict_variables: %kernel.debug%
     globals:
         nombre_empresa: %nombre_empresa%
+        theme_layout_html: %theme_layout%
 
 # Assetic Configuration
 assetic:

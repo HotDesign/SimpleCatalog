@@ -1,3 +1,7 @@
+HotDesignScThemeBundle:
+    resource: "@HotDesignScThemeBundle/Resources/config/routing.yml"
+    prefix:   /
+
 ScUserBundle:
     resource: "@ScUserBundle/Resources/config/routing.yml"
     prefix:   /

@@ -1,0 +1,29 @@
+# HOME
+homepage:
+    pattern:  /
+    defaults: { _controller: HotDesignScThemeBundle:Theme:index, name: home }
+
+static_page:
+    pattern:  /pagina/{name}
+    defaults: { _controller: HotDesignScThemeBundle:Theme:index }
+
+# CATEGORY
+category_listing:
+    #TODO: Luego se vera como ponerlo
+    pattern: /category/{id}/{slug}
+    defaults: { _controller: HotDesignScThemeBundle:Category:index }
+
+#PRODUCT    
+product_profile:
+    #TODO: Luego se vera como ponerlo
+    pattern: /item/{id}/{slug}
+    defaults: { _controller: HotDesignScThemeBundle:Product:index }
+
+#CONTACT
+product_contact:
+    pattern: /contacto/producto/{id}
+    defaults: { _controller: HotDesignScThemeBundle:Contact:product }    
+    
+contact:
+    pattern: /contacto/
+    defaults: { _controller: HotDesignScThemeBundle:Contact:index }

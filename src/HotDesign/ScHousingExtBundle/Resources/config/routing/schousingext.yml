@@ -1,0 +1,30 @@
+schousingext:
+    pattern:  /
+    defaults: { _controller: "ScHousingExtBundle:ScHousingExt:index" }
+
+schousingext_show:
+    pattern:  /{id}/show
+    defaults: { _controller: "ScHousingExtBundle:ScHousingExt:show" }
+
+schousingext_new:
+    pattern:  /new
+    defaults: { _controller: "ScHousingExtBundle:ScHousingExt:new" }
+
+schousingext_create:
+    pattern:  /create
+    defaults: { _controller: "ScHousingExtBundle:ScHousingExt:create" }
+    requirements: { _method: post }
+
+schousingext_edit:
+    pattern:  /{id}/edit
+    defaults: { _controller: "ScHousingExtBundle:ScHousingExt:edit" }
+
+schousingext_update:
+    pattern:  /{id}/update
+    defaults: { _controller: "ScHousingExtBundle:ScHousingExt:update" }
+    requirements: { _method: post }
+
+schousingext_delete:
+    pattern:  /{id}/delete
+    defaults: { _controller: "ScHousingExtBundle:ScHousingExt:delete" }
+    requirements: { _method: post }

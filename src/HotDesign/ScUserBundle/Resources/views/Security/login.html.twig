@@ -1,0 +1,54 @@
+{% extends 'SimpleCatalogBundle:Layouts:base.html.twig' %}
+{% block title %}Ingrese{% endblock %}
+
+{% block content %}
+    {% if error %}
+    <div class="alert-message error fade in" data-alert="alert">
+        <a class="close" href="#">×</a>
+        <p>{{ error }}</p>
+    </div>
+    {% endif %}
+
+<div class="loginForm">
+    <form action="{{ path('fos_user_security_check') }}" method="post">
+
+        <fieldset>
+            <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+
+            <div class="clearfix">
+                <label for="username">{{ 'security.login.username'|trans({}, 'FOSUserBundle') }}</label>
+                <div class="input">
+                    <input type="text" class="xlarge" id="username" name="_username" value="{{ last_username }}" />
+                </div>
+            </div><!-- /clearfix -->
+
+            <div class="clearfix">
+                <label for="password">{{ 'security.login.password'|trans({}, 'FOSUserBundle') }}</label>
+                <div class="input">
+                    <div class="input-append ">
+                        <input class="xlarge rememberMeInput" type="password" id="password" name="_password" />
+
+                        <label class="add-on active timpsyRememberMe"><input type="checkbox" name="_remember_me" id="remember_me" value="on" checked="checked" /></label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="actions">
+                <input type="submit" class="btn primary" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans({}, 'FOSUserBundle') }}" />
+            </div>
+        </fieldset>
+
+
+    </form>
+
+</div>
+
+
+<script type="text/javascript">
+    jQuery(document).ready(function($) {
+        $('.timpsyRememberMe').twipsy({fallback: 'Recordar Contraseña', placement: 'right'});
+        $('#username').focus();
+    });
+</script>
+
+{% endblock %}

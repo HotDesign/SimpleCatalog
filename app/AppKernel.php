@@ -32,6 +32,8 @@ class AppKernel extends Kernel {
             // FOSUser
             new FOS\UserBundle\FOSUserBundle(),
             new HotDesign\ScThemeBundle\HotDesignScThemeBundle(),
+            new HotDesign\ScHousingExtBundle\ScHousingExtBundle(),
+
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

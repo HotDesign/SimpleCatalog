@@ -3,7 +3,6 @@
 namespace HotDesign\ScGeoExtBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-
 use HotDesign\ScGeoExtBundle\Entity\ScGeoExt;
 use HotDesign\ScGeoExtBundle\Form\ScGeoExtType;
 
@@ -11,29 +10,27 @@ use HotDesign\ScGeoExtBundle\Form\ScGeoExtType;
  * ScGeoExt controller.
  *
  */
-class ScGeoExtController extends Controller
-{
+class ScGeoExtController extends Controller {
+
     /**
      * Lists all ScGeoExt entities.
      *
      */
-    public function indexAction()
-    {
+    public function indexAction() {
         $em = $this->getDoctrine()->getEntityManager();
 
         $entities = $em->getRepository('ScGeoExtBundle:ScGeoExt')->findAll();
 
         return $this->render('ScGeoExtBundle:ScGeoExt:index.html.twig', array(
-            'entities' => $entities
-        ));
+                    'entities' => $entities
+                ));
     }
 
     /**
      * Finds and displays a ScGeoExt entity.
      *
      */
-    public function showAction($id)
-    {
+    public function showAction($id) {
         $em = $this->getDoctrine()->getEntityManager();
 
         $entity = $em->getRepository('ScGeoExtBundle:ScGeoExt')->find($id);
@@ -45,36 +42,33 @@ class ScGeoExtController extends Controller
         $deleteForm = $this->createDeleteForm($id);
 
         return $this->render('ScGeoExtBundle:ScGeoExt:show.html.twig', array(
-            'entity'      => $entity,
-            'delete_form' => $deleteForm->createView(),
-
-        ));
+                    'entity' => $entity,
+                    'delete_form' => $deleteForm->createView(),
+                ));
     }
 
     /**
      * Displays a form to create a new ScGeoExt entity.
      *
      */
-    public function newAction()
-    {
+    public function newAction() {
         $entity = new ScGeoExt();
-        $form   = $this->createForm(new ScGeoExtType(), $entity);
+        $form = $this->createForm(new ScGeoExtType(), $entity);
 
         return $this->render('ScGeoExtBundle:ScGeoExt:new.html.twig', array(
-            'entity' => $entity,
-            'form'   => $form->createView()
-        ));
+                    'entity' => $entity,
+                    'form' => $form->createView()
+                ));
     }
 
     /**
      * Creates a new ScGeoExt entity.
      *
      */
-    public function createAction()
-    {
-        $entity  = new ScGeoExt();
+    public function createAction() {
+        $entity = new ScGeoExt();
         $request = $this->getRequest();
-        $form    = $this->createForm(new ScGeoExtType(), $entity);
+        $form = $this->createForm(new ScGeoExtType(), $entity);
         $form->bindRequest($request);
 
         if ($form->isValid()) {
@@ -83,21 +77,19 @@ class ScGeoExtController extends Controller
             $em->flush();
 
             return $this->redirect($this->generateUrl('scgeoext_show', array('id' => $entity->getId())));
-            
         }
 
         return $this->render('ScGeoExtBundle:ScGeoExt:new.html.twig', array(
-            'entity' => $entity,
-            'form'   => $form->createView()
-        ));
+                    'entity' => $entity,
+                    'form' => $form->createView()
+                ));
     }
 
     /**
      * Displays a form to edit an existing ScGeoExt entity.
      *
      */
-    public function editAction($id)
-    {
+    public function editAction($id) {
         $em = $this->getDoctrine()->getEntityManager();
 
         $entity = $em->getRepository('ScGeoExtBundle:ScGeoExt')->find($id);
@@ -110,18 +102,17 @@ class ScGeoExtController extends Controller
         $deleteForm = $this->createDeleteForm($id);
 
         return $this->render('ScGeoExtBundle:ScGeoExt:edit.html.twig', array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
-        ));
+                    'entity' => $entity,
+                    'edit_form' => $editForm->createView(),
+                    'delete_form' => $deleteForm->createView(),
+                ));
     }
 
     /**
      * Edits an existing ScGeoExt entity.
      *
      */
-    public function updateAction($id)
-    {
+    public function updateAction($id) {
         $em = $this->getDoctrine()->getEntityManager();
 
         $entity = $em->getRepository('ScGeoExtBundle:ScGeoExt')->find($id);
@@ -130,7 +121,7 @@ class ScGeoExtController extends Controller
             throw $this->createNotFoundException('Unable to find ScGeoExt entity.');
         }
 
-        $editForm   = $this->createForm(new ScGeoExtType(), $entity);
+        $editForm = $this->createForm(new ScGeoExtType(), $entity);
         $deleteForm = $this->createDeleteForm($id);
 
         $request = $this->getRequest();
@@ -141,22 +132,22 @@ class ScGeoExtController extends Controller
             $em->persist($entity);
             $em->flush();
 
+            $this->container->get('session')->setFlash('alert-success', 'Cambios aplicados con éxito.');
             return $this->redirect($this->generateUrl('scgeoext_edit', array('id' => $id)));
         }
 
         return $this->render('ScGeoExtBundle:ScGeoExt:edit.html.twig', array(
-            'entity'      => $entity,
-            'edit_form'   => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
-        ));
+                    'entity' => $entity,
+                    'edit_form' => $editForm->createView(),
+                    'delete_form' => $deleteForm->createView(),
+                ));
     }
 
     /**
      * Deletes a ScGeoExt entity.
      *
      */
-    public function deleteAction($id)
-    {
+    public function deleteAction($id) {
         $form = $this->createDeleteForm($id);
         $request = $this->getRequest();
 
@@ -177,11 +168,11 @@ class ScGeoExtController extends Controller
         return $this->redirect($this->generateUrl('scgeoext'));
     }
 
-    private function createDeleteForm($id)
-    {
+    private function createDeleteForm($id) {
         return $this->createFormBuilder(array('id' => $id))
-            ->add('id', 'hidden')
-            ->getForm()
+                        ->add('id', 'hidden')
+                        ->getForm()
         ;
     }
+
 }

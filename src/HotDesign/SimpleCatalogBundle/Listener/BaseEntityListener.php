@@ -4,13 +4,13 @@ namespace HotDesign\SimpleCatalogBundle\Listener;
 
 use Doctrine\ORM\Event\LifecycleEventArgs;
 use HotDesign\SimpleCatalogBundle\Entity\BaseEntity;
-use HotDesign\SimpleCatalogBundle\Entity\Currencies;
+use HotDesign\SimpleCatalogBundle\Config\Currencies;
 
 class BaseEntityListener {
 
     public function postPersist(LifecycleEventArgs $args) {
         $entity = $args->getEntity();
-        $entityManager = $args->getEntityManager();
+        //$entityManager = $args->getEntityManager();
 
         if ($entity instanceof BaseEntity) {
             if ($entity->getIsBillable() && $entity->getPrice() && $entity->getCurrency()) {

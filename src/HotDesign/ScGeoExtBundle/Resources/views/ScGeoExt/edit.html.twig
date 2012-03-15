@@ -1,11 +1,11 @@
 {% extends 'SimpleCatalogBundle:Layouts:baseext.html.twig' %}
 {% form_theme edit_form 'SimpleCatalogBundle:Form:fields.html.twig' %}
-{% block title %} Lista de Imágenes{% endblock %}
+{% block title %}Posición Geográfica{% endblock %}
 
 {% block content %}
 
 <legend> Editar Posición</legend>
-
+{% include 'SimpleCatalogBundle:Layouts:flashes_messages.html.twig'%}
 <form class="form-horizontal sc_form" action="{{ path('scgeoext_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
        
     <div class="control-group ">

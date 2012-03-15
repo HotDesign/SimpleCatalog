@@ -1,0 +1,61 @@
+<h1>ScHousingExt list</h1>
+
+<table class="records_list">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Enabled</th>
+            <th>Public_address</th>
+            <th>Private_address</th>
+            <th>Housing_type</th>
+            <th>Nrooms</th>
+            <th>Nbath</th>
+            <th>Ngarages</th>
+            <th>Hotwater</th>
+            <th>Naturalgas</th>
+            <th>Furnished</th>
+            <th>Terrain</th>
+            <th>Coated_surface</th>
+            <th>Youtubelink</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for entity in entities %}
+        <tr>
+            <td><a href="{{ path('schousingext_show', { 'id': entity.id }) }}">{{ entity.id }}</a></td>
+            <td>{{ entity.enabled }}</td>
+            <td>{{ entity.publicaddress }}</td>
+            <td>{{ entity.privateaddress }}</td>
+            <td>{{ entity.housingtype }}</td>
+            <td>{{ entity.nrooms }}</td>
+            <td>{{ entity.nbath }}</td>
+            <td>{{ entity.ngarages }}</td>
+            <td>{{ entity.hotwater }}</td>
+            <td>{{ entity.naturalgas }}</td>
+            <td>{{ entity.furnished }}</td>
+            <td>{{ entity.terrain }}</td>
+            <td>{{ entity.coatedsurface }}</td>
+            <td>{{ entity.youtubelink }}</td>
+            <td>
+                <ul>
+                    <li>
+                        <a href="{{ path('schousingext_show', { 'id': entity.id }) }}">show</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('schousingext_edit', { 'id': entity.id }) }}">edit</a>
+                    </li>
+                </ul>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+<ul>
+    <li>
+        <a href="{{ path('schousingext_new') }}">
+            Create a new entry
+        </a>
+    </li>
+</ul>

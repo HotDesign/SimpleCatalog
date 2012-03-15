@@ -1,0 +1,7 @@
+parameters:
+#    sc_housing_ext.example.class: HotDesign\ScHousingExtBundle\Example
+
+services:
+#    sc_housing_ext.example:
+#        class: %sc_housing_ext.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

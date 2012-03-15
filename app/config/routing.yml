@@ -16,4 +16,8 @@ _imagine:
 AdminScGeoExt:
     resource: "@ScGeoExtBundle/Resources/routing/scgeoext.yml"
     prefix:   /admin/scgeoext
+
     
+ScHousingExt:
+    resource: "@ScHousingExtBundle/Resources/config/routing/schousingext.yml"
+    prefix:   /admin/schousingext

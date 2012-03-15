@@ -19,6 +19,11 @@ class ItemTypes {
             'entity' => 'HotDesign\ScGeoExtBundle\Entity\ScGeoExt',
             'class'   => 'ScGeoExt',
         ),
+        'ScHousingExt' => array(
+            'bundle_name' => 'ScHousingExtBundle',
+            'entity' => 'HotDesign\ScHousingExtBundle\Entity\ScHousingExt',
+            'class'   => 'ScHousingExt',
+        ),
     );
     //Array ( NOMBRE , CLASE EXTENDS )
     private static $types = array(
@@ -32,7 +37,7 @@ class ItemTypes {
         ),
         self::HOUSING => array(
             'label' => 'Inmuebles',
-            'class_extends' => array('ScGeoExt')
+            'class_extends' => array('ScGeoExt', 'ScHousingExt')
         ),
     );
     private static $id_default = 1;

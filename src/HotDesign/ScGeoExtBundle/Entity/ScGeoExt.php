@@ -4,6 +4,8 @@ namespace HotDesign\ScGeoExtBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
+use HotDesign\SimpleCatalogBundle\Config\MyConfig;
+
 /**
  * HotDesign\ScGeoExtBundle\Entity\ScGeoExt
  *
@@ -45,8 +47,8 @@ class ScGeoExt {
     private $enabled;
 
     public function __construct() {
-        $this->lat = 0;
-        $this->lng = 0;
+        $this->lat = MyConfig::$default_lat;
+        $this->lng = MyConfig::$default_lng;
         $this->enabled = false;
     }
 

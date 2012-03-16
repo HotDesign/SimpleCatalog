@@ -17,7 +17,7 @@
 
 <div class="row">
 
-    <div class="span5">
+    <div class="span6">
         <legend>Información General</legend>
         <form class="form-horizontal sc_form" action="{{ path('baseentity_update', { 'id': entity.id }) }}" method="post" {{ form_enctype(edit_form) }}>
             {{ form_widget(edit_form) }}
@@ -32,12 +32,12 @@
                 </form>
             </div>
 
-            <div class="span4 gallery">
+            <div class="span6 gallery">
                 <legend>Imágenes
                     <div class="scright">
-                        <a href="{{ path('pic_gallery', { 'id_baseentity': entity.id }) }}?iframe=true&width=800&height=400" rel="prettyPhoto"title="Listado de Imágenes">Ver Todas</a>
+                        <a  class="btn btn-mini" href="{{ path('pic_gallery', { 'id_baseentity': entity.id }) }}?iframe=true&width=800&height=400" rel="prettyPhoto"title="Listado de Imágenes">Ver Todas</a>
                         &middot;
-                        <a href="{{ path('pic_new', { 'id_baseentity': entity.id } ) }}?iframe=true&width=800&height=400" rel="prettyPhoto" title="Nueva Imágen" target="_blank">Agregar</a>
+                        <a class="btn btn-mini" href="{{ path('pic_new', { 'id_baseentity': entity.id } ) }}?iframe=true&width=800&height=400" rel="prettyPhoto" title="Nueva Imágen" target="_blank">Agregar</a>
                     </div>
                 </legend>
         {% for pic in pics %}

@@ -27,6 +27,15 @@ class HousingType {
         '5' => array(
             'label' => 'A confirmar',
         ),
+        '6' => array(
+            'label' => 'Proyecto',
+        ),
+        '7' => array(
+            'label' => 'En construcción',
+        ),
+        '8' => array(
+            'label' => 'Finalizada',
+        ),
     );
     private static $id_default = 5;
 
@@ -43,7 +52,6 @@ class HousingType {
         }
         return false;
     }
-
 
     public static function getDefaultHousingType() {
         return self::$types[self::id_default];

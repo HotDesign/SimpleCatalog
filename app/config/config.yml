@@ -109,3 +109,12 @@ fos_user:
     db_driver: orm # other valid values are 'mongodb', 'couchdb' and 'propel'
     firewall_name: main
     user_class: HotDesign\ScUserBundle\Entity\User
+    
+#SwiftMailer
+swiftmailer:
+    transport:  mail
+    #encryption: ssl
+    #auth_mode:  login
+    #host:       smtp.gmail.com
+    #username:   your_username
+    #password:   your_password

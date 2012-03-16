@@ -17,7 +17,6 @@ class AppKernel extends Kernel {
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new JMS\SecurityExtraBundle\JMSSecurityExtraBundle(),
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
-            
             // SimpleCatalog Bundle
             
             new HotDesign\SimpleCatalogBundle\SimpleCatalogBundle(),

@@ -50,6 +50,6 @@ WARINING: Under development stage.
 Developers/Collaborators
 ---------------
 
-* **marian0** - Mariano Peyregne - Idea. Responsable. Administrator.
-* **germanaz0** - German Bortoli - Collaborator
-* **fern17** - Fernando Nellmeldin - Collaborator
+* **marian0** - Mariano Peyregne - Idea. Responsable. Administrator, Chamuyero.
+* **germanaz0** - German Bortoli - Collaborator, Gran Pija Larga
+* **fern17** - Fernando Nellmeldin - Collaborator, Capo total del Zelda

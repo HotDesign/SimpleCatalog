@@ -34,6 +34,10 @@ class AppKernel extends Kernel {
             new HotDesign\ScThemeBundle\HotDesignScThemeBundle(),
             new HotDesign\ScHousingExtBundle\ScHousingExtBundle(),
 
+            //KnpMenu
+            new Knp\Bundle\MenuBundle\KnpMenuBundle(),
+
+
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

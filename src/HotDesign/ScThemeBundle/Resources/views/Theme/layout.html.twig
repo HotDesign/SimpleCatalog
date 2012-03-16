@@ -41,11 +41,9 @@
           </a>
           <a class="brand" href="#">Project name</a>
           <div class="nav-collapse">
-            <ul class="nav">
-              <li class="active"><a href="{{ path('homepage') }}">Home</a></li>
-              <li><a href="{{ path('static_page', {name: 'about'}) }}">About</a></li>
-              <li><a href="#contact">Contact</a></li>
-            </ul>
+              
+            {{ knp_menu_render('HotDesignScThemeBundle:Builder:mainMenu', {currentClass: 'active' }) }}
+                 
           </div><!--/.nav-collapse -->
         </div>
       </div>

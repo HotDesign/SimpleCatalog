@@ -10,6 +10,6 @@ class ContactController extends Controller
     
     public function indexAction()
     {
-        return $this->render('HotDesignScThemeBundle:Theme:index.html.twig');
+        return $this->render('HotDesignScThemeBundle:Contact:index.html.twig');
     }
 }

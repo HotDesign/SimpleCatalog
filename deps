@@ -104,3 +104,12 @@
 [FOSUserBundle]
     git=http://github.com/FriendsOfSymfony/FOSUserBundle.git
     target=bundles/FOS/UserBundle
+
+#KnpMenu
+
+[KnpMenu]
+    git=https://github.com/KnpLabs/KnpMenu.git
+
+[KnpMenuBundle]
+    git=https://github.com/KnpLabs/KnpMenuBundle.git
+    target=bundles/Knp/Bundle/MenuBundle    

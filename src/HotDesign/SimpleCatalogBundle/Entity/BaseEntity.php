@@ -179,9 +179,15 @@ class BaseEntity {
     }
     
     public function get_default_pic() {
+        $pics = $this->getPics();
+        foreach ($pics as $pic) {
+            if ($pic->getIsDefault()) {
+                return $pic;
+            }
+        }
         if ($this->getPics()->first())
             return $this->getPics()->first();
-        return false; 
+        return false;
     }
 
     /**

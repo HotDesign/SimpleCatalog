@@ -45,11 +45,22 @@ class Pic {
     private $path;
 
     /**
+     * @var boolean $is_default
+     *
+     * @ORM\Column(name="is_default", type="boolean")
+     */
+    private $is_default;
+
+    /**
      * @var integer $entity
      *
      * @ORM\ManyToOne(targetEntity="HotDesign\SimpleCatalogBundle\Entity\BaseEntity", inversedBy="pics")
      */
     private $entity;
+
+    public function __construct() {
+        $this->is_default = false;
+    }
 
     //" is a convenience method that returns the absolute path to the file"
     public function getAbsolutePath() {
@@ -201,4 +212,24 @@ class Pic {
         return $this->path;
     }
 
+
+    /**
+     * Set is_default
+     *
+     * @param boolean $isDefault
+     */
+    public function setIsDefault($isDefault)
+    {
+        $this->is_default = $isDefault;
+    }
+
+    /**
+     * Get is_default
+     *
+     * @return boolean 
+     */
+    public function getIsDefault()
+    {
+        return $this->is_default;
+    }
 }

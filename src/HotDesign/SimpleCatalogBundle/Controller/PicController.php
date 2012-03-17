@@ -29,7 +29,8 @@ class PicController extends Controller {
     public function galleryAction($id_baseentity) {
         $em = $this->getDoctrine()->getEntityManager();
 
-        $entities = $em->getRepository('SimpleCatalogBundle:Pic')->findBy( array('entity' => $id_baseentity) );
+        $entities = $em->getRepository('SimpleCatalogBundle:Pic')
+        ->findBy( array('entity' => $id_baseentity) );
         
         $baseentity = $this->getBaseEntity($id_baseentity);
 
@@ -53,6 +54,30 @@ class PicController extends Controller {
                 ));
     }
 
+    //Esta función, toma el id de una pic 
+    //Setea como is_default = true para ella
+    // y        is_default = false para todas las demas.
+    public function setdefaultpicAction($pic_id) {
+        $em = $this->getDoctrine()->getEntityManager();
+
+        $pic_default = $em->getRepository('SimpleCatalogBundle:Pic')
+                    ->findOneBy( array('id' => $pic_id) );
+
+        $pics = $em->getRepository('SimpleCatalogBundle:Pic')
+                    ->findBy( array( 'entity' => $pic_default->getEntity()->getId() ) );
+
+        foreach ($pics as $pic) {
+            if ( $pic->getId() == $pic_id )
+                $pic->setIsDefault(true);
+            else
+                $pic->setIsDefault(false);
+            $em->persist($pic);
+        }
+        
+        $em->flush();
+        $this->container->get('session')->setFlash('alert-success', 'La imágen ha sido definida como principal.');
+        return $this->redirect($this->generateUrl('pic_gallery', array('id_baseentity' => $pic_default->getEntity()->getId()) ));
+    }
     /**
      * Finds and displays a Pic entity.
      *

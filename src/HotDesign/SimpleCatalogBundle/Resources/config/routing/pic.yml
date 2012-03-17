@@ -24,3 +24,8 @@ pic_delete:
 pic_gallery:
     pattern:  /{id_baseentity}/pic_gallery
     defaults: { _controller: "SimpleCatalogBundle:Pic:gallery" }
+
+
+pic_setdefaultpic:
+    pattern:  /{pic_id}/set_default
+    defaults: { _controller: "SimpleCatalogBundle:Pic:setdefaultpic" }

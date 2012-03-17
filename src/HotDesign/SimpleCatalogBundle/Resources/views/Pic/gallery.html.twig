@@ -31,13 +31,16 @@
                         <img src="{{ ('catalog/images/' ~ entity.path) | apply_filter('my_thumb') }}" alt="{{ entity.title }}" />
                     </a>
                 </td>
-                <td>{{ entity.title }}</td>
                 <td>
-                    <ul>
-                        <li>
-                            <a href="{{ path('pic_edit', { 'id': entity.id }) }}">Editar</a>
-                        </li>
-                    </ul>
+                {% if entity.getIsDefault %}
+                    <i class="icon-star"></i>
+                {% endif %}    
+                {{ entity.title }}</td>
+                <td>
+                    <a class="btn btn-mini" href="{{ path('pic_edit', { 'id': entity.id }) }}">Editar</a>
+                    {% if not entity.getIsDefault %}
+                        <a class="btn btn-mini" href="{{ path('pic_setdefaultpic', { 'pic_id': entity.id }) }}">Hacer Principal<i class="icon-star"></i></a>
+                    {% endif %}
                 </td>
             </tr>
     {% endfor %}

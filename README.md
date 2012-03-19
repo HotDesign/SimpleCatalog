@@ -14,8 +14,8 @@ soon...
 * **git clone ....**
 * **copy app/config/parameters.ini.disct into app/config/parameters.ini edit with your values**
 * **mkdir app/cache app/logs app/db**
-* **sudo setfacl -R -m u:www-data:rwx -m u:usuario_consola:rwx app/cache app/logs**
-* **sudo setfacl -dR -m u:www-data:rwx -m u:usuario_consola:rwx app/cache app/logs**
+* **sudo setfacl -R -m u:www-data:rwx -m u:`whoami`:rwx app/cache app/logs**
+* **sudo setfacl -dR -m u:www-data:rwx -m u:`whoami`:rwx app/cache app/logs**
 * **php bin/vendors install**
 * **php app/console doctrine:database:create**
 * **php app/console doctrine:schema:update --force**

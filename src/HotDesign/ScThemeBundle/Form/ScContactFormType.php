@@ -14,7 +14,7 @@ class ScContactFormType extends AbstractType {
    
     public function buildForm(FormBuilder $builder, array $options) { 
         $builder->add('name', 'text');
-        $builder->add('email', 'text');
+        $builder->add('email', 'email');
         $builder->add('description', 'textarea');
     }
     

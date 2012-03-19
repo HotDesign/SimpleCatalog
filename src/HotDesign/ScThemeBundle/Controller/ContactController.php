@@ -12,6 +12,8 @@ namespace HotDesign\ScThemeBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
+use HotDesign\ScThemeBundle\Form\ScContactFormType;
+
 /**
  * ContactController is the controller that will handle the contact forms
  * and them actions
@@ -32,7 +34,41 @@ class ContactController extends Controller {
      * 
      */
     public function indexAction() {
-        return $this->render('HotDesignScThemeBundle:Contact:index.html.twig');
+        
+        $form   = $this->createForm(new ScContactFormType(), array());
+        return $this->render('HotDesignScThemeBundle:Contact:index.html.twig', array('form' => $form->createView()));
+        
+    }
+    
+    
+    /**
+     * Submit action for the main page contact form.
+     * 
+     * @return Response A Response instance  
+     */
+    public function submitContactAction() {
+        $form   = $this->createForm(new ScContactFormType(), array());
+        $request = $this->getRequest();
+        $form->bindRequest($request);
+
+        if ($form->isValid()) { 
+        //Todo, get all the contact info and put it to the message body.    
+            $contact_form = $request->get('contact_form');
+            
+//            $message = \Swift_Message::newInstance()
+//                ->setSubject('Hello Email')
+//                ->setFrom('alguien@sitio.com')
+//                ->setTo('destino@gmail.com')
+////        ->setBody($this->renderView('HelloBundle:Hello:email.txt.twig', array('name' => $name)))
+//                ->setBody('Hola')
+//        ;
+//        $this->get('mailer')->send($message);
+        
+//        return $this->redirect($this->generateUrl('schousingext_show', array('id' => $entity->getId())));
+  
+        } 
+        
+         return $this->render('HotDesignScThemeBundle:Contact:index.html.twig', array('form' => $form->createView()));
     }
 
 

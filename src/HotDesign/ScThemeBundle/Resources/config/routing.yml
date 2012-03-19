@@ -27,3 +27,7 @@ product_contact:
 contact:
     pattern: /contacto/
     defaults: { _controller: HotDesignScThemeBundle:Contact:index }
+    
+contact_submit:
+    pattern: /contacto/enviar/
+    defaults: { _controller: HotDesignScThemeBundle:Contact:submitContact }

@@ -34,7 +34,7 @@ label.required {
 
 .sc_form {
     margin-top: 20px;
-    
+
 }
 .scright {
     float: right;
@@ -42,3 +42,22 @@ label.required {
 }
 
 .well h2 { width: auto; float: left; }
+
+.default_img {
+    border: 1px dotted #93A1A1;
+}
+
+.pic_picture {
+    float: left;
+    padding: 10px;
+    height: auto;
+    margin: 5px 0;
+    background: none;
+
+}
+#pic_default {
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    background: url(../img/pic_default.png) no-repeat;
+}

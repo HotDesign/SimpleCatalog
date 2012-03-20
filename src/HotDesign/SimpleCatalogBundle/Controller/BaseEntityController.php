@@ -16,6 +16,34 @@ use HotDesign\SimpleCatalogBundle\Config\ItemTypes;
 class BaseEntityController extends Controller {
 
     /**
+     * Updates the relation between a BaseEntity and the Classes wich extends.
+     *
+     */
+    private function UpdateBaseEntityLinks(\HotDesign\SimpleCatalogBundle\Entity\BaseEntity $entity) {
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find BaseEntity entity.');
+        }
+        $em = $this->getDoctrine()->getEntityManager();
+
+        //Buscamos las Extensiones a Cargar según la categoría
+        $extends = ItemTypes::getClassExtends($entity->getCategory()->getType());
+
+        foreach ($extends as $extend) {
+            //Existe ya una instancia creada?
+            $ext_entity = $em->getRepository($extend['bundle_name'] . ':' . $extend['class'])
+                    ->findOneBy(array('base_entity' => $entity->getId()));
+
+            if (!$ext_entity) {
+                $ex = new $extend['entity']();
+                $ex->setBaseEntity($entity);
+                $em->persist($ex);
+            }
+        }
+
+        $em->flush();
+    }
+
+    /**
      * Lists all BaseEntity entities.
      *
      */
@@ -28,29 +56,6 @@ class BaseEntityController extends Controller {
                     'entities' => $entities
                 ));
     }
-
-    /**
-     * Finds and displays a BaseEntity entity.
-     *
-     */
-//    public function showAction($id)
-//    {
-//        $em = $this->getDoctrine()->getEntityManager();
-//
-//        $entity = $em->getRepository('SimpleCatalogBundle:BaseEntity')->find($id);
-//
-//        if (!$entity) {
-//            throw $this->createNotFoundException('Unable to find BaseEntity entity.');
-//        }
-//
-//        $deleteForm = $this->createDeleteForm($id);
-//
-//        return $this->render('SimpleCatalogBundle:BaseEntity:show.html.twig', array(
-//            'entity'      => $entity,
-//            'delete_form' => $deleteForm->createView(),
-//
-//        ));
-//    }
 
     /**
      * Displays a form to create a new BaseEntity entity.
@@ -80,16 +85,7 @@ class BaseEntityController extends Controller {
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getEntityManager();
             $em->persist($entity);
-
-            //Vemos a que Tipos Extiende
-            $extends = ItemTypes::getClassExtends($entity->getCategory()->getType());
-            //Creamos un objeto por cada uno y le asignamos el parent, luego persistimos
-            foreach ($extends as $extend) {
-                $ex = new $extend['entity']();
-                $ex->setBaseEntity($entity);
-                $em->persist($ex);
-            }
-
+            $this->UpdateBaseEntityLinks($entity);
             $em->flush();
 
             $this->container->get('session')->setFlash('alert-success', 'Item agregado con éxito.');
@@ -116,6 +112,9 @@ class BaseEntityController extends Controller {
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find BaseEntity entity.');
         }
+        
+        //Updating links to Extension if any changes the category type for example.
+        $this->UpdateBaseEntityLinks($entity);
 
         //Obtenemos las Pics.
         $pics = $em->getRepository('SimpleCatalogBundle:Pic')->findBy(array('entity' => $entity->getId()));

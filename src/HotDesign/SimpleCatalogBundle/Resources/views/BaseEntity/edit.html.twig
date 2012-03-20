@@ -41,9 +41,12 @@
                     </div>
                 </legend>
         {% for pic in pics %}
-                <a href="{{ asset('catalog/images/' ~ pic.path) }}" rel="prettyPhoto[galeria]" title="{{ pic.title }}" >
-                    <img src="{{ ('catalog/images/' ~ pic.path) | apply_filter('my_thumb') }}" alt="{{ pic.title }}" />
-                </a>
+                <div class="pic_picture">                    
+                    <a href="{{ asset('catalog/images/' ~ pic.path) }}" rel="prettyPhoto[galeria]" title="{{ pic.title }}" >
+                        {% if pic.getIsDefault %}<div id="pic_default" title="Esta imágen es la principal de la Galería"></div>{% endif %}
+                        <img src="{{ ('catalog/images/' ~ pic.path) | apply_filter('my_thumb') }}" alt="{{ pic.title }}" />
+                    </a>
+                </div>
         {% else %}
                 <div class="alert alert-info">
                     Aún no se han cargado imágenes.

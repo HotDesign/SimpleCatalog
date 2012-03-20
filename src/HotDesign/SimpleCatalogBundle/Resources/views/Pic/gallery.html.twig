@@ -27,15 +27,15 @@
             <tr>
                 <td>{{ loop.index }}</td>
                 <td>
-                    <a href="{{ asset('catalog/images/' ~ entity.path) }}" rel="prettyPhoto" title="{{ entity.title }}">
+                <div class="pic_picture">   
+                     <a href="{{ asset('catalog/images/' ~ entity.path) }}" rel="prettyPhoto" title="{{ entity.title }}">
+                        {% if entity.getIsDefault %}<div id="pic_default" title="Esta imágen es la principal de la Galería"></div>{% endif %}
                         <img src="{{ ('catalog/images/' ~ entity.path) | apply_filter('my_thumb') }}" alt="{{ entity.title }}" />
                     </a>
+                </div>
+                   
                 </td>
-                <td>
-                {% if entity.getIsDefault %}
-                    <i class="icon-star"></i>
-                {% endif %}    
-                {{ entity.title }}</td>
+                <td>{{ entity.title }}</td>
                 <td>
                     <a class="btn btn-mini" href="{{ path('pic_edit', { 'id': entity.id }) }}">Editar</a>
                     {% if not entity.getIsDefault %}

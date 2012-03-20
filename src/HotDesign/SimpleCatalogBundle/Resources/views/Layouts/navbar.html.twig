@@ -7,33 +7,39 @@
                 <span class="icon-bar"></span>
             </a>
             <a class="brand" href="#">{{ nombre_empresa }}</a>
-            
+
             <div class="nav-collapse">
                 <ul class="nav">
                     {% if is_granted('ROLE_ADMIN') %}
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Categorías <b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="{{ path('category') }}">Ver Categorías</a></li>
-                            <li><a href="{{ path('category_new') }}">Nueva Categoría</a></li>
-                        </ul>
-                    </li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Items <b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="{{ path('baseentity') }}">Ver Items</a></li>
-                            <li><a href="{{ path('baseentity_new') }}">Nuevo Item</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="#contact">Cambiar Clave</a></li>
-                    <li><a href="{{ path('fos_user_security_logout') }}">Salir</a></li>
-                    <form class="navbar-search pull-left" action="">
-                        <input type="text" class="search-query span2" placeholder="Buscar...">
-                    </form>
-                </ul>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Categorías <b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="{{ path('category') }}">Ver Categorías</a></li>
+                                <li><a href="{{ path('category_new') }}">Nueva Categoría</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Items <b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="{{ path('baseentity') }}">Ver Items</a></li>
+                                <li><a href="{{ path('baseentity_new') }}">Nuevo Item</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Administración <b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">Cambiar Clave</a></li>
+                                <li><a href="#">Configuración</a></li>
+                                <li><a href="{{ path('fos_user_security_logout') }}">Cerrar Sesión</a></li>
+                            </ul>
+                        </li>
+                        <form class="navbar-search pull-left" action="">
+                            <input type="text" class="search-query span2" placeholder="Buscar...">
+                        </form>
+                    </ul>
                 {% endif %}
-                <a class="navbar-text pull-right" href="#">SimpleCatalog <small>by HotDesign</small></a>
-            </div><!--/.nav-collapse -->
+                    <a class="navbar-text pull-right" href="#">SimpleCatalog <small>by HotDesign</small></a>
+                </div><!--/.nav-collapse -->
+            </div>
         </div>
     </div>
-</div>

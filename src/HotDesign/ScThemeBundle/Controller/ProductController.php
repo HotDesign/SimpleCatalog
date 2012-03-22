@@ -32,7 +32,11 @@ class ProductController extends Controller
      * 
      */
     
-    public function indexAction()
+    public function indexAction($slug) {
+        return $this->render('HotDesignScThemeBundle:Product:index.html.twig' );
+    }
+    
+    public function profileAction()
     {
         return $this->render('HotDesignScThemeBundle:Default:index.html.twig');
     }

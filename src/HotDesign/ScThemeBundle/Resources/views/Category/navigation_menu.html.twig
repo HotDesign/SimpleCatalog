@@ -1,0 +1,12 @@
+<div class="span2">
+    <div class="well sidebar-nav">
+        <ul class="nav nav-list">
+    {% for entity in entities %}
+    
+        <li><a href="{{ path('products_listing', {'slug': entity.slug }) }}">{{ entity.title }}</a></li>
+
+    
+    {% endfor %}
+        </ul>
+</div>
+</div>

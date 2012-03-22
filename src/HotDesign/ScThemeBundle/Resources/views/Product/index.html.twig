@@ -1,1 +1,13 @@
-TODO
+{% extends theme_layout_html %}
+
+{% block navigation %}
+    {% render 'HotDesignScThemeBundle:Category:renderTemplateCategories' with {'level': 1} %}
+{% endblock %}
+
+{% block content %}
+<div class="span10">
+    
+LOREM IPSUM
+
+</div>
+{% endblock %}

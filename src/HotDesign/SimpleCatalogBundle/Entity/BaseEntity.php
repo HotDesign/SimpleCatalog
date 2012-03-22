@@ -141,6 +141,13 @@ class BaseEntity {
      * @ORM\Column(name="children_entity_id", type="integer", nullable=true)
      */
     private $children_entity_id;
+    
+    
+    /**
+     * @Gedmo\Slug(fields={"title"})
+     * @ORM\Column(length=128, unique=true)
+     */
+    private $slug;    
 
     public function __construct() {
         $this->is_billable = true;
@@ -501,5 +508,14 @@ class BaseEntity {
     public function setCategory(\HotDesign\SimpleCatalogBundle\Entity\Category $category)
     {
         $this->category = $category;
+    }
+    
+    /**
+     * Get slug
+     *
+     * @return string 
+     */
+    public function getSlug() {
+        return $this->slug;
     }
 }

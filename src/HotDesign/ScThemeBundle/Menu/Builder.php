@@ -1,4 +1,5 @@
 <?php
+
 /**
  * This file is part of the SimpleCatalog Frontend package.
  *
@@ -22,9 +23,8 @@ use Symfony\Component\DependencyInjection\ContainerAware;
  * @version   0.1
  * 
  */
-
 class Builder extends ContainerAware {
-    
+
     /**
      * The main menu of the site, for example will render Home, About and Contact, etc
      * 
@@ -32,25 +32,28 @@ class Builder extends ContainerAware {
      * @param array $options
      * @return FactoryInterface 
      */
-    
     public function mainMenu(FactoryInterface $factory, array $options) {
         $menu = $factory->createItem('root');
         $menu->setCurrentUri($this->container->get('request')->getRequestUri());
         $menu->setCurrent(TRUE);
-        
+
         $menu->addChild('Inicio', array('route' => 'homepage'));
-        
+
+        $menu->addChild('Productos', array('route' => 'products_homepage'));
+
         $menu->addChild('Acerca', array(
-          'route' => 'static_page',
-          'routeParameters' => array('name' => 'about'),
+            'route' => 'static_page',
+            'routeParameters' => array('name' => 'about'),
         ));
-        
+
+
         $menu->addChild('Donde estamos', array(
-          'route' => 'contact',
+            'route' => 'contact',
         ));
-      
+
         $menu->setChildrenAttribute('class', 'nav');
-       
+
         return $menu;
     }
+
 }

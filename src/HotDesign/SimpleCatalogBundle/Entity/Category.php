@@ -4,8 +4,8 @@ namespace HotDesign\SimpleCatalogBundle\Entity;
 
 use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ORM\Mapping as ORM;
-
 use HotDesign\SimpleCatalogBundle\Config\ItemTypes;
+
 /**
  * HotDesign\SimpleCatalogBundle\Entity\Category
  *
@@ -66,22 +66,6 @@ class Category {
      * @ORM\Column(name="allowed_pics", type="integer")
      */
     private $allowed_pics;
-
-    public function __toString() {
-        return $this->title;
-    }
-
-    public function __construct() {
-
-        $this->base_entities = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->allowed_pics = 1;
-        $this->type = ItemTypes::getIdDefault();
-    }
-
-    public function getIndent($symbol = '_') {
-        return str_repeat($symbol, $this->getLvl());
-    }
-
     //TREE DOCTRINE EXTENSION
     /**
      * @Gedmo\TreeLeft
@@ -112,6 +96,27 @@ class Category {
      * @ORM\OneToMany(targetEntity="Category", mappedBy="parent")
      */
     private $children;
+
+    /**
+     * @Gedmo\Slug(fields={"title"})
+     * @ORM\Column(length=128, unique=true)
+     */
+    private $slug;
+
+    public function __toString() {
+        return $this->title;
+    }
+
+    public function __construct() {
+
+        $this->base_entities = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->allowed_pics = 1;
+        $this->type = ItemTypes::getIdDefault();
+    }
+
+    public function getIndent($symbol = '_') {
+        return str_repeat($symbol, $this->getLvl());
+    }
 
     public function setParent(Category $parent) {
         $this->parent = $parent;
@@ -208,7 +213,7 @@ class Category {
     public function getTags() {
         return $this->tags;
     }
-    
+
     /**
      * Set type
      *
@@ -351,6 +356,15 @@ class Category {
      */
     public function getChildren() {
         return $this->children;
+    }
+
+    /**
+     * Get slug
+     *
+     * @return string 
+     */
+    public function getSlug() {
+        return $this->slug;
     }
 
 }

@@ -4,30 +4,38 @@ homepage:
     defaults: { _controller: HotDesignScThemeBundle:Theme:index, name: home }
 
 static_page:
-    pattern:  /pagina/{name}
+    pattern:  /page/{name}
     defaults: { _controller: HotDesignScThemeBundle:Theme:index }
 
-# CATEGORY
-category_listing:
-    #TODO: Luego se vera como ponerlo
-    pattern: /category/{id}/{slug}
-    defaults: { _controller: HotDesignScThemeBundle:Category:index }
+# PRODUCTS
 
-#PRODUCT    
+products_homepage:
+    pattern: /products/
+    defaults: { _controller: HotDesignScThemeBundle:Product:index, slug: '' }
+  
+products_listing:
+    #TODO: Luego se vera como ponerlo
+    pattern: /products/{slug}
+    defaults: { _controller: HotDesignScThemeBundle:Product:index }
+
 product_profile:
     #TODO: Luego se vera como ponerlo
-    pattern: /item/{id}/{slug}
-    defaults: { _controller: HotDesignScThemeBundle:Product:index }
+    pattern: /product/{slug}
+    defaults: { _controller: HotDesignScThemeBundle:Product:profile }
 
 #CONTACT
 product_contact:
-    pattern: /contacto/producto/{id}
-    defaults: { _controller: HotDesignScThemeBundle:Contact:product }    
+    pattern: /contact/producto/{id}
+    defaults: { _controller: HotDesignScThemeBundle:Contact:product }
+    requirements:
+        id:  \d+
     
 contact:
-    pattern: /contacto/
+    pattern: /contact/
     defaults: { _controller: HotDesignScThemeBundle:Contact:index }
     
 contact_submit:
-    pattern: /contacto/enviar/
+    pattern: /contact/send/
     defaults: { _controller: HotDesignScThemeBundle:Contact:submitContact }
+    requirements:
+        _method:  POST

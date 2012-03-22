@@ -42,8 +42,18 @@
                 <td>{{ entity.get_important_string_detail }}</td>
                 <td>{% if entity.updatedat %}{{ entity.updatedat|date('d-m-Y H:i:s') }}{% endif%}</td>
                 <td>
-                    <a href="{{ path('baseentity_edit', { 'id': entity.id }) }}" class="btn btn-mini">Ver / Editar</a>
-                    <a href="{{ path('pic_gallery', { 'id_baseentity': entity.id }) }}" class="btn btn-info btn-mini showPopup">Imagenes</a>
+                    
+                    <div class="btn-group ">
+                        <button class="btn btn-mini">Opciones</button>
+                        <button class="btn dropdown-toggle btn-mini" data-toggle="dropdown">
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <a href="{{ path('baseentity_edit', { 'id': entity.id }) }}" >Ver / Editar</a>
+                            <a href="{{ path('pic_gallery', { 'id_baseentity': entity.id }) }}" class="showPopup">Imagenes</a>
+                        </ul>
+                    </div>
+                   
                 </td>
             </tr>
     {% endfor %}

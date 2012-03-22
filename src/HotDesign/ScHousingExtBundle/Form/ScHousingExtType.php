@@ -11,7 +11,7 @@ class ScHousingExtType extends AbstractType {
 
     public function buildForm(FormBuilder $builder, array $options) {
         $builder
-                ->add('enabled', null, array('label' => 'Habilitado?'))
+                ->add('enabled', null, array('label' => 'Habilitado?', 'required' => false))
                 ->add('public_address', null, array('label' => 'Dirección Pública'))
                 ->add('private_address', null, array('label' => 'Dirección Privada'))
                 ->add('housing_type', 'choice', array(

@@ -10,9 +10,9 @@ class ScGeoExtType extends AbstractType
     public function buildForm(FormBuilder $builder, array $options)
     {
         $builder
+            ->add('enabled', null, array('label' => 'Visible ?', 'required' => false))
             ->add('lat', 'hidden')
             ->add('lng', 'hidden')
-            ->add('enabled', null, array('label' => 'Visible ?', 'required' => false))
         ;
     }
 

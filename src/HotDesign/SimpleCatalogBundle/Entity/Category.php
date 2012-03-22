@@ -82,6 +82,13 @@ class Category {
         return str_repeat($symbol, $this->getLvl());
     }
 
+    public function getStringType() {
+        $type = ItemTypes::getType($this->type);
+       
+        if ($type['label'])
+            return $type['label'];
+        return 'Undefined';
+    }
     //TREE DOCTRINE EXTENSION
     /**
      * @Gedmo\TreeLeft

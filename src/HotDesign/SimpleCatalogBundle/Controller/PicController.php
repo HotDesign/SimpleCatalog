@@ -78,26 +78,6 @@ class PicController extends Controller {
         $this->container->get('session')->setFlash('alert-success', 'La imágen ha sido definida como principal.');
         return $this->redirect($this->generateUrl('pic_gallery', array('id_baseentity' => $pic_default->getEntity()->getId()) ));
     }
-    /**
-     * Finds and displays a Pic entity.
-     *
-     */
-//    public function showAction($id) {
-//        $em = $this->getDoctrine()->getEntityManager();
-//
-//        $entity = $em->getRepository('SimpleCatalogBundle:Pic')->find($id);
-//
-//        if (!$entity) {
-//            throw $this->createNotFoundException('Unable to find Pic entity.');
-//        }
-//
-//        $deleteForm = $this->createDeleteForm($id);
-//
-//        return $this->render('SimpleCatalogBundle:Pic:show.html.twig', array(
-//                    'entity' => $entity,
-//                    'delete_form' => $deleteForm->createView(),
-//                ));
-//    }
 
     /**
      * Displays a form to create a new Pic entity.
@@ -134,9 +114,17 @@ class PicController extends Controller {
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getEntityManager();
-            //Hacemos el proceso de Upload
+            //Upload process
             $entity->upload();
-
+            
+            //If this is the first image of the item
+            //We make it as the default one.
+            $any_pic = $em->getRepository('SimpleCatalogBundle:Pic')
+                    ->findByEntity($id_baseentity);
+            
+            if (!$any_pic)
+                $entity->setIsDefault (true);
+            
             $em->persist($entity);
             $em->flush();
 

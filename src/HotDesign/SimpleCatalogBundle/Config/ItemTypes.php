@@ -70,7 +70,10 @@ class ItemTypes {
         }
         return $extensiones;
     }
-
-}
-
-;
+    
+    public static function getType($id) {
+        if (isset(self::$types[$id]))
+            return self::$types[$id];
+        return false;
+    }
+};

@@ -35,9 +35,9 @@
             <div class="span6 gallery">
                 <legend>Imágenes
                     <div class="scright">
-                        <a  class="btn btn-mini" href="{{ path('pic_gallery', { 'id_baseentity': entity.id }) }}?iframe=true&width=800&height=400" rel="prettyPhoto"title="Listado de Imágenes">Ver Todas</a>
+                        <a  class="btn btn-mini showPopup" href="{{ path('pic_gallery', { 'id_baseentity': entity.id }) }}" title="Listado de Imágenes">Ver Todas</a>
                         &middot;
-                        <a class="btn btn-mini" href="{{ path('pic_new', { 'id_baseentity': entity.id } ) }}?iframe=true&width=800&height=400" rel="prettyPhoto" title="Nueva Imágen" target="_blank">Agregar</a>
+                        <a class="btn btn-mini showPopup" href="{{ path('pic_new', { 'id_baseentity': entity.id } ) }}" title="Nueva Imágen" target="_blank">Agregar</a>
                     </div>
                 </legend>
         {% for pic in pics %}
@@ -67,9 +67,5 @@
             }
         }
             </script> 
-
-{% endblock %}
-
-{% block sidebar %}
 
 {% endblock %}

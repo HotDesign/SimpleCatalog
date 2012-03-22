@@ -19,6 +19,7 @@
         <tr>
             <th class="sc_index_table">#</th>
             <th>Nombre</th>
+            <th>Contiene</th>
             <th>Descripción</th>
             <th class="sc_actions_table">Acciones</th>
         </tr>
@@ -28,13 +29,10 @@
             <tr>
                 <td>{{ loop.index }}</td>
                 <td><a href="{{ path('category_edit', { 'id': entity.id }) }}">{{ entity.getIndent }}{{ entity.title }}</a></td>
+                <td>{{ entity.getStringType }}</td>
                 <td>{{ entity.description | striptags |truncate(100) }}</td>
                 <td>
-                    <ul>
-                        <li>
-                            <a href="{{ path('category_edit', { 'id': entity.id }) }}">Editar</a>
-                        </li>
-                    </ul>
+                    <a href="{{ path('category_edit', { 'id': entity.id }) }}" class="btn btn-mini">Ver / Editar</a>
                 </td>
             </tr>
     {% endfor %}

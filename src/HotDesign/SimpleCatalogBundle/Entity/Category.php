@@ -66,6 +66,7 @@ class Category {
      * @ORM\Column(name="allowed_pics", type="integer")
      */
     private $allowed_pics;
+
     //TREE DOCTRINE EXTENSION
     /**
      * @Gedmo\TreeLeft
@@ -126,6 +127,17 @@ class Category {
         return $this->parent;
     }
 
+    public function getStringType() {
+        $type = ItemTypes::getType($this->type);
+       
+        if (!empty($type['label'])) {
+            return $type['label'];
+        }
+        
+        return 'Undefined';
+    }
+    
+    
     //Fin Tree extension ....... `
     /**
      * INICIO DE METODOS AUTOGENERADOS  

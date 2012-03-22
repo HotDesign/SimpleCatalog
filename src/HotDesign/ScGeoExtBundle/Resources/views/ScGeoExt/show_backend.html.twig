@@ -1,6 +1,6 @@
 <legend>Coordenadas Geográficas  
     <div class="scright">
-        <a class="btn btn-mini" href="{{ path('scgeoext_edit', { 'id': entity.id }) }}?iframe=true&width=800&height=400" rel="prettyPhoto" title="Editar coordenadas" target="_blank">Editar</a>
+        <a class="btn btn-mini showPopup" href="{{ path('scgeoext_edit', { 'id': entity.id }) }}" title="Editar coordenadas">Editar</a>
     </div>
 </legend>
 {% if entity %}
@@ -9,10 +9,9 @@
         Coordenadas Desactivadas. Edite para Activarlas.
     </div>
     {% endif %}
-    <img src="http://maps.google.com/maps/api/staticmap?center={{ entity.lat}},{{ entity.lng}}&zoom=15&size=480x200&sensor=false&markers=size:big|color:blue|label:G|{{ entity.lat}},{{ entity.lng}}" alt="" />
-    <div class="scactions">
-       
-    </div>
+<a href="{{ path('scgeoext_edit', { 'id': entity.id }) }}" title="Editar coordenadas" class="showPopup">
+        <img src="http://maps.google.com/maps/api/staticmap?center={{ entity.lat}},{{ entity.lng}}&zoom=15&size=480x200&sensor=false&markers=size:big|color:blue|label:G|{{ entity.lat}},{{ entity.lng}}" alt="" />
+    </a>
 {% else %}
     <div class="alert alert-info">
         Aún no se han cargado coordenadas o estan desactivadas.

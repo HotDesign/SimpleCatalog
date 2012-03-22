@@ -29,27 +29,31 @@
             <tr>
                 <td>{{ loop.index }}</td>
                 <td>
+                    <a href="{{ path('baseentity_edit', { 'id': entity.id }) }}" title="Ver / Editar">
                     {% if entity.get_default_pic %}
-                         <a href="{{ asset('catalog/images/' ~ entity.get_default_pic.path) }}" rel="prettyPhoto" title="{{ entity.get_default_pic.title }}" >
                             <img src="{{ ('catalog/images/' ~ entity.get_default_pic.path) | apply_filter('my_thumb') }}" alt="{{ entity.get_default_pic.title }}" />
-                         </a>
                     {% else %}
                         <img src="{{ 'bundles/simplecatalog/img/default.gif' | apply_filter('my_thumb') }}" alt="" />
-                    {% endif %}                
+                    {% endif %}    
+                    </a>
                 </td>
                 <td>{% if not entity.enabled %}<a href="#" rel="tooltip" data-original-title="Item Deshabilitado"><span class="label label-warning">!</span></a> {% endif%} <strong> {{ entity.title | truncate(30) }} </strong>- <i>{{ entity.category }}</i></td>
                 <td>{{ entity.getFormattedPrice }}</td>
                 <td>{{ entity.get_important_string_detail }}</td>
                 <td>{% if entity.updatedat %}{{ entity.updatedat|date('d-m-Y H:i:s') }}{% endif%}</td>
                 <td>
-                    <ul>
-                        <li>
-                            <a href="{{ path('baseentity_edit', { 'id': entity.id }) }}">Editar</a>
-                        </li>
-                        <li>
-                            <a href="{{ path('pic_gallery', { 'id_baseentity': entity.id }) }}">Imagenes</a>
-                        </li>
-                    </ul>
+                    
+                    <div class="btn-group ">
+                        <button class="btn btn-mini">Opciones</button>
+                        <button class="btn dropdown-toggle btn-mini" data-toggle="dropdown">
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu">
+                            <a href="{{ path('baseentity_edit', { 'id': entity.id }) }}" >Ver / Editar</a>
+                            <a href="{{ path('pic_gallery', { 'id_baseentity': entity.id }) }}" class="showPopup">Imagenes</a>
+                        </ul>
+                    </div>
+                   
                 </td>
             </tr>
     {% endfor %}

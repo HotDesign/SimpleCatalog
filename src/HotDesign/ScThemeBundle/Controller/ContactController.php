@@ -64,15 +64,20 @@ class ContactController extends Controller {
                 $formulario[] = $tmp;
             }
 
+            $mail_body = $this->renderView('HotDesignScThemeBundle:Contact/MailTemplates:ContactMail.html.twig', array('fields' => $formulario )) ;
             $message = \Swift_Message::newInstance()
                 ->setSubject('Nuevo Mensaje')
-                ->setFrom('info@your-site.com')
-                ->setTo('marianosantafe@gmail.com')
-                ->setBody($this->renderView('HotDesignScThemeBundle:Contact/MailTemplates:ContactMail.html.twig', array('fields' => $formulario )) );
+                ->setFrom($this->container->getParameter('main_contact_email_from'))
+                ->setTo($this->container->getParameter('main_contact_email'))
+                ->setBody($mail_body, 'text/html');
                  
             $this->get('mailer')->send($message);
             $this->container->get('session')->setFlash('alert-success', 'Su mensaje ha sido enviado con éxito, muchas gracias.');
+
+            return $this->forward('HotDesignScThemeBundle:Contact:index');
         }
+
+        $this->container->get('session')->setFlash('alert-error', 'Hubo un error al procesar su formulario, intente nuevamente más tarde.');
         return $this->render('HotDesignScThemeBundle:Contact:index.html.twig', array('form' => $form->createView()));
     }
 

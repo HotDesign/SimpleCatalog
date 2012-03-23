@@ -24,6 +24,8 @@
 
 ;Configuraciones de la Aplicacion
     
-    nombre_empresa  = MiEmpresa
-    upload_path     = productos ; /web/uploads/...
+    nombre_empresa     = MiEmpresa
+    upload_path        = productos ; /web/uploads/...
+    main_contact_email = "info@site.com"
+    main_contact_email_from = "info_from@site.com"
     

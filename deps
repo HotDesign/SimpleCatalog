@@ -62,7 +62,6 @@
     target=/bundles/Symfony/Bundle/AsseticBundle
     version=v1.0.1
 
-## CUSTOM BUNDLES ##
 
 [gedmo-doctrine-extensions]
     git=http://github.com/l3pp4rd/DoctrineExtensions.git
@@ -75,7 +74,6 @@
     git=http://github.com/stfalcon/TinymceBundle.git
     target=/bundles/Stfalcon/Bundle/TinymceBundle
 
-##FIXTURES##
 [doctrine-fixtures]
     git=http://github.com/doctrine/data-fixtures.git
 
@@ -83,7 +81,6 @@
     git=http://github.com/symfony/DoctrineFixturesBundle.git
     target=/bundles/Symfony/Bundle/DoctrineFixturesBundle
 
-##Imagine Avalanche
 
 [Imagine]
     git=http://github.com/avalanche123/Imagine.git
@@ -93,19 +90,9 @@
     git=http://github.com/avalanche123/AvalancheImagineBundle.git
     target=bundles/Avalanche/Bundle/ImagineBundle
 
-## Geographic
-
-[VichGeographicalBundle]
-    git=http://github.com/dustin10/VichGeographicalBundle.git
-    target=/bundles/Vich/GeographicalBundle
-
-## FosUserBundle
-
 [FOSUserBundle]
     git=http://github.com/FriendsOfSymfony/FOSUserBundle.git
     target=bundles/FOS/UserBundle
-
-#KnpMenu
 
 [KnpMenu]
     git=https://github.com/KnpLabs/KnpMenu.git
@@ -113,3 +100,11 @@
 [KnpMenuBundle]
     git=https://github.com/KnpLabs/KnpMenuBundle.git
     target=bundles/Knp/Bundle/MenuBundle    
+
+[PagerFanta]
+    git=http://github.com/whiteoctober/Pagerfanta.git
+
+[WhiteOctoberPagerfantaBundle]
+    git=http://github.com/whiteoctober/WhiteOctoberPagerfantaBundle.git
+    target=bundles/WhiteOctober/PagerfantaBundle
+    version=origin/symfony2.0

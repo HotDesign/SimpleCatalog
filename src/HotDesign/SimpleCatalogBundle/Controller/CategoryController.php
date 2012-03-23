@@ -100,6 +100,12 @@ class CategoryController extends Controller {
         }
 
         $editForm = $this->createForm(new CategoryType(), $entity);
+        
+        //If is the parent entity, hide the parent feature.
+        if ($entity->getId() == 1) {
+            $editForm->remove ('parent');
+        }
+        
         $deleteForm = $this->createDeleteForm($id);
 
         return $this->render('SimpleCatalogBundle:Category:edit.html.twig', array(

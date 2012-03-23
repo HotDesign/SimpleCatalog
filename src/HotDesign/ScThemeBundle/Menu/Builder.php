@@ -53,6 +53,17 @@ class Builder extends ContainerAware {
 
         $menu->setChildrenAttribute('class', 'nav');
 
+        
+        //Retrieve if we are listing products from categories
+        $path_info = $this->container->get('request')->getRequestUri();
+        $products_path = $this->container->get('router')->generate('products_homepage');
+
+        //If the URLs match, then set the product navbar item as selected
+        if (strstr($path_info, $products_path)) {
+            $menu->setCurrentUri($products_path);
+            $menu->setCurrent(TRUE);
+        }
+
         return $menu;
     }
 

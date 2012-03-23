@@ -40,6 +40,7 @@ class CategoryController extends Controller {
 
 //        $entities = $em->getRepository('SimpleCatalogBundle:Category')->findBy(array('lvl' => $current_level), array('title' => 'ASC', 'lft' => 'ASC'));
         $parent_items = array();
+        
         $parent = $category->getParent();
         
         while($parent && $parent->getLvl() > 0) {

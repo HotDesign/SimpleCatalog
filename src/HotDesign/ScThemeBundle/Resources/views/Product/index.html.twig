@@ -8,8 +8,12 @@
 
 
 <div class="span10">
-    {% if category_level > 1 %}
+    {% if category and category_level >= 1 %}
           {% render 'HotDesignScThemeBundle:Category:renderCategoryBreadcumb' with {'category': category} %}
+        {% else %}
+        <ul class="breadcrumb">
+         <li class="active">Todas</li>
+         </ul>
     {% endif %}
     LOREM IPSUM
 </div>

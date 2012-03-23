@@ -1,14 +1,15 @@
 <ul class="breadcrumb">
-     <li>
-            <a href="{{ path('products_homepage')}}">Todos</a> 
-            <span class="divider">/</span>
-        </li>
-        {% for item in parent_items %}
+    <li>
+        <a href="{{ path('products_homepage')}}">Todas</a> 
+        <span class="divider">/</span>
+    </li>
+    
+    {% for item in parent_items %}
         <li>
             <a href="{{ path('products_listing', {'slug': item.slug }) }}">{{ item.title }}</a> 
             <span class="divider">/</span>
         </li>
-        {% endfor %}
+    {% endfor %}
 
-        <li class="active">{{ current_category.title }}</li>
+    <li class="active">{{ current_category.title }}</li>
 </ul>

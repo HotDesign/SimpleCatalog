@@ -1,11 +1,10 @@
 <div class="span2">
     <div class="well sidebar-nav">
         <ul class="nav nav-list">
-    {% for entity in entities %}
-    
-        <li><a href="{{ path('products_listing', {'slug': entity.slug }) }}">{{ entity.title }}</a></li>
-
-    
+    {% for entity in entities %}    
+        <li class="{% if category is not null%}{%if category.id == entity.id%}active{% endif %}{%endif%}">
+            <a href="{{ path('products_listing', {'slug': entity.slug }) }}">{{ entity.title }}</a>
+        </li>
     {% endfor %}
         </ul>
 </div>

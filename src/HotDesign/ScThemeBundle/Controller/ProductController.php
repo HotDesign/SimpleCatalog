@@ -33,7 +33,24 @@ class ProductController extends Controller
      */
     
     public function indexAction($slug) {
-        return $this->render('HotDesignScThemeBundle:Product:index.html.twig' );
+        $level = 1;
+        
+        $em = $this->getDoctrine()->getEntityManager();
+        $category_repo = $em->getRepository('SimpleCatalogBundle:Category');
+        $category = $category_repo->findOneBySlug($slug);
+        
+        if ($category) {
+            $level = $category->getLvl();
+            
+            $has_children = $category->getChildren()->count();
+            
+            if ($has_children > 0) {
+                $level = $level + 1;
+            }
+            
+        }
+        
+        return $this->render('HotDesignScThemeBundle:Product:index.html.twig', array('category_level' => $level, 'category' => $category) );
     }
     
     public function profileAction()

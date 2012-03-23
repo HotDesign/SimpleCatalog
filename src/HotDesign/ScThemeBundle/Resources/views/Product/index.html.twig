@@ -1,13 +1,16 @@
 {% extends theme_layout_html %}
 
 {% block navigation %}
-    {% render 'HotDesignScThemeBundle:Category:renderTemplateCategories' with {'level': 1} %}
+    {% render 'HotDesignScThemeBundle:Category:renderTemplateCategories' with {'current_level': category_level, 'category': category} %}
 {% endblock %}
 
 {% block content %}
-<div class="span10">
-    
-LOREM IPSUM
 
+
+<div class="span10">
+    {% if category_level > 1 %}
+          {% render 'HotDesignScThemeBundle:Category:renderCategoryBreadcumb' with {'category': category} %}
+    {% endif %}
+    LOREM IPSUM
 </div>
 {% endblock %}

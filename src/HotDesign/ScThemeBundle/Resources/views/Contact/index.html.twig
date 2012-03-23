@@ -9,7 +9,7 @@
     </p>
     
     
-    
+    {% include 'SimpleCatalogBundle:Layouts:flashes_messages.html.twig'%}
     <form class="form-horizontal" action={{ path('contact_submit') }} method="post" {{ form_enctype(form) }}>
         <fieldset>
           <legend>Contactanos</legend>

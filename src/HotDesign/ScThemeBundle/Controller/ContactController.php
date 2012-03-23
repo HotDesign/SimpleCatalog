@@ -1,4 +1,5 @@
 <?php
+
 /**
  * This file is part of the SimpleCatalog Frontend package.
  *
@@ -11,7 +12,6 @@
 namespace HotDesign\ScThemeBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-
 use HotDesign\ScThemeBundle\Form\ScContactFormType;
 
 /**
@@ -24,7 +24,6 @@ use HotDesign\ScThemeBundle\Form\ScContactFormType;
  * @version   0.1
  * 
  */
-
 class ContactController extends Controller {
 
     /**
@@ -34,43 +33,48 @@ class ContactController extends Controller {
      * 
      */
     public function indexAction() {
-        
-        $form   = $this->createForm(new ScContactFormType(), array());
+
+        $form = $this->createForm(new ScContactFormType(), array());
         return $this->render('HotDesignScThemeBundle:Contact:index.html.twig', array('form' => $form->createView()));
-        
     }
-    
-    
+
     /**
      * Submit action for the main page contact form.
      * 
      * @return Response A Response instance  
      */
     public function submitContactAction() {
-        $form   = $this->createForm(new ScContactFormType(), array());
+        $form = $this->createForm(new ScContactFormType(), array());
         $request = $this->getRequest();
         $form->bindRequest($request);
 
-        if ($form->isValid()) { 
-        //Todo, get all the contact info and put it to the message body.    
+        if ($form->isValid()) {
+            //Todo, get all the contact info and put it to the message body.    
             $contact_form = $request->get('contact_form');
-            
-//            $message = \Swift_Message::newInstance()
-//                ->setSubject('Hello Email')
-//                ->setFrom('alguien@sitio.com')
-//                ->setTo('destino@gmail.com')
-////        ->setBody($this->renderView('HelloBundle:Hello:email.txt.twig', array('name' => $name)))
-//                ->setBody('Hola')
-//        ;
-//        $this->get('mailer')->send($message);
-        
-//        return $this->redirect($this->generateUrl('schousingext_show', array('id' => $entity->getId())));
-  
-        } 
-        
-         return $this->render('HotDesignScThemeBundle:Contact:index.html.twig', array('form' => $form->createView()));
-    }
 
+            $formulario = array();
+
+            foreach ($contact_form as $k => $field) {
+                if ($k == '_token')
+                    continue;
+                $tmp = array();
+
+                $tmp['label'] = $form->get($k)->getAttribute('label');
+                $tmp['content'] = $field;
+                $formulario[] = $tmp;
+            }
+
+            $message = \Swift_Message::newInstance()
+                ->setSubject('Nuevo Mensaje')
+                ->setFrom('info@your-site.com')
+                ->setTo('marianosantafe@gmail.com')
+                ->setBody($this->renderView('HotDesignScThemeBundle:Contact/MailTemplates:ContactMail.html.twig', array('fields' => $formulario )) );
+                 
+            $this->get('mailer')->send($message);
+            $this->container->get('session')->setFlash('alert-success', 'Su mensaje ha sido enviado con éxito, muchas gracias.');
+        }
+        return $this->render('HotDesignScThemeBundle:Contact:index.html.twig', array('form' => $form->createView()));
+    }
 
     /**
      * This is obsolete for now, TODO something here

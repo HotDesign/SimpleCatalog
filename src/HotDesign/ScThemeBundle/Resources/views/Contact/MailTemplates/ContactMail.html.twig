@@ -1,0 +1,9 @@
+<h1>Mensaje en su Web</h1>
+
+
+<h2>Datos del Envío</h2>
+<ul>
+{% for field in fields %}
+     <li><b>{{ field.label }}</b>: {{ field.content }}</li>   
+{% endfor %}   
+</ul>

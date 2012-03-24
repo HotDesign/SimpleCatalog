@@ -30,7 +30,15 @@ class CategoryController extends Controller {
     public function renderTemplateCategoriesAction($current_level, $category = NULL) {
         $em = $this->getDoctrine()->getEntityManager();
 
-        $entities = $em->getRepository('SimpleCatalogBundle:Category')->findBy(array('lvl' => $current_level), array('title' => 'ASC', 'lft' => 'ASC'));
+        $wheres = array(
+            'lvl' => $current_level,
+        );
+        
+        if ($category) {
+            $wheres['root'] = $category->getRoot();
+        }
+        
+        $entities = $em->getRepository('SimpleCatalogBundle:Category')->findBy($wheres, array('title' => 'ASC', 'lft' => 'ASC'));
 
         return $this->render('HotDesignScThemeBundle:Category:navigation_menu.html.twig', array('entities' => $entities, 'category' => $category));
     }
@@ -43,7 +51,7 @@ class CategoryController extends Controller {
         
         $parent = $category->getParent();
         
-        while($parent && $parent->getLvl() > 0) {
+        while($parent && $parent->getLvl() >= 0) {
             $parent_items[] = $parent;
             $parent = $parent->getParent();
         }

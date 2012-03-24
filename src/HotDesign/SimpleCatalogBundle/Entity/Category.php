@@ -86,6 +86,13 @@ class Category {
      */
     private $lvl;
 
+    
+    /**
+     * @Gedmo\TreeRoot
+     * @ORM\Column(name="root", type="integer", nullable=true)
+     */
+    private $root;    
+    
     /**
      * @Gedmo\TreeParent
      * @ORM\ManyToOne(targetEntity="Category", inversedBy="children")
@@ -135,6 +142,10 @@ class Category {
         }
         
         return 'Undefined';
+    }
+    
+    public function getRoot() {
+        return $this->root;
     }
     
     

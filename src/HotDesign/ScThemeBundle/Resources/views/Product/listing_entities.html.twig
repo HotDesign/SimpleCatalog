@@ -1,10 +1,23 @@
 {% extends 'HotDesignScThemeBundle:Product:index.html.twig' %}
 
+{% set category_slug = '' %}
+{% if category is not empty %}
+    {% set category_slug =  category.slug %}
+{% endif %}
+
 {% block product_content %}
+<div class="itemListingWrapper">
+
+<div class="itemListingContainer">
 {% for entity in entities %}
-<div class="row show-grid">
     
-    {% set entity_url = path('product_profile', {'slug': entity.slug }) %}
+<div class="row show-grid itemListingItem">
+    
+{% if category is empty %}
+    {% set category_slug =  entity.category.slug %}
+{% endif %}
+        
+    {% set entity_url = path('product_profile', {'category_slug': category_slug ,'slug': entity.slug }) %}
     
     <div class="span2">
             <a href="{{ entity_url }}" class="thumbnail">
@@ -25,19 +38,23 @@
                 {{ entity.description | striptags |truncate(240) }}
             </p>
             {% endif %}
+            
+            <blockquote>{{ entity.category.title }}</blockquote>
         </div>
         
     </div>
            
 </div>
 {% endfor%}
-
+</div>
+            
 {% if num_pages > 1 %}
-<div class="row">
+<div class="row itemListingPaginator">
     <div class="span8">
         {{ pagerfanta(paginator, 'twitter_bootstrap_translated', {'proximity': 2}) }}
     </div>
 </div>
 {% endif %}
-
+        
+</div>
 {% endblock %}

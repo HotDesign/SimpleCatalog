@@ -14,18 +14,16 @@ products_homepage:
     defaults: { _controller: HotDesignScThemeBundle:Product:index, slug: '' }
   
 products_listing:
-    #TODO: Luego se vera como ponerlo
-    pattern: /products/{slug}
+    pattern: /products/{slug}/
     defaults: { _controller: HotDesignScThemeBundle:Product:index }
 
 product_profile:
-    #TODO: Luego se vera como ponerlo
-    pattern: /product/{slug}
+    pattern: /products/{category_slug}/{slug}.html
     defaults: { _controller: HotDesignScThemeBundle:Product:profile }
 
 #CONTACT
 product_contact:
-    pattern: /contact/producto/{id}
+    pattern: /contact/producto/{id}/
     defaults: { _controller: HotDesignScThemeBundle:Contact:product }
     requirements:
         id:  \d+

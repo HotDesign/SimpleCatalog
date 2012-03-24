@@ -1,0 +1,43 @@
+{% extends 'HotDesignScThemeBundle:Product:index.html.twig' %}
+
+{% block product_content %}
+{% for entity in entities %}
+<div class="row show-grid">
+    
+    {% set entity_url = path('product_profile', {'slug': entity.slug }) %}
+    
+    <div class="span2">
+            <a href="{{ entity_url }}" class="thumbnail">
+                <img src="http://placehold.it/160x120" alt="">
+            </a>
+    </div>    
+    <div class="span8">
+
+        <div class="caption">
+
+            <h3>
+                <a href="{{ entity_url }}"> {{entity.title}}</a>
+                <small>$100.000.000</small>
+            </h3>
+
+            {% if entity.description is not empty %}
+            <p>
+                {{ entity.description | striptags |truncate(240) }}
+            </p>
+            {% endif %}
+        </div>
+        
+    </div>
+           
+</div>
+{% endfor%}
+
+{% if num_pages > 1 %}
+<div class="row">
+    <div class="span8">
+        {{ pagerfanta(paginator, 'twitter_bootstrap_translated', {'proximity': 2}) }}
+    </div>
+</div>
+{% endif %}
+
+{% endblock %}

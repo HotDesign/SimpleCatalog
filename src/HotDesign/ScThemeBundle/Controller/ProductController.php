@@ -55,7 +55,7 @@ class ProductController extends Controller
         $current_page = $this->getRequest()->get('page', 1);
 
         $repo = $this->getDoctrine()->getEntityManager()->getRepository('SimpleCatalogBundle:BaseEntity');
-        $query = $repo->createQueryBuilder('p')->orderBy('p.updated_at', 'DESC');
+        $query = $repo->createQueryBuilder('p')->orderBy('p.created_at', 'DESC');
         
         $adapter = new DoctrineORMAdapter($query);
         $pagerfanta = new Pagerfanta($adapter);
@@ -67,7 +67,7 @@ class ProductController extends Controller
         $entities = $pagerfanta->getCurrentPageResults();
         $num_pages = $pagerfanta->getNbPages();
         
-        return $this->render('HotDesignScThemeBundle:Product:index.html.twig', array(
+        return $this->render('HotDesignScThemeBundle:Product:listing_entities.html.twig', array(
                     'category_level' => $level,
                     'category' => $category,
                      'entities' => $entities,
@@ -79,6 +79,11 @@ class ProductController extends Controller
     
     public function profileAction()
     {
-        return $this->render('HotDesignScThemeBundle:Default:index.html.twig');
+        
+        $to_render = array(
+            'category_level' => 1,
+            'category' => NULL,
+        );
+        return $this->render('HotDesignScThemeBundle:Product:entity_profile.html.twig', $to_render);
     }
 }

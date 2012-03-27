@@ -1,6 +1,6 @@
 AdminDashboard:
     pattern: /
-    defaults: { _controller: SimpleCatalogBundle:Default:index }
+    defaults: { _controller: SimpleCatalogBundle:BaseEntity:index }
     
 AdminCategory:
     resource: "@SimpleCatalogBundle/Resources/config/routing/category.yml"

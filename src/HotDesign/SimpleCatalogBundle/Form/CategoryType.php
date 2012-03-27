@@ -15,7 +15,7 @@ class CategoryType extends AbstractType {
         $builder
                 ->add('title', NULL, array('label' => 'Título'))
                 ->add('description', NULL, array('label' => 'Descripción'))
-                ->add('tags', 'textarea', array('label' => 'Etiquetas'))
+                ->add('tags', 'textarea', array('label' => 'Etiquetas', 'required' => false ))
                 ->add('type', 'choice', array(
                     'label' => 'Tipo de Item',
                     'choices' => ItemTypes::getChoices(),

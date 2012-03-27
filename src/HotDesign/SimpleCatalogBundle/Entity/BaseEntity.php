@@ -144,6 +144,13 @@ class BaseEntity {
     
     
     /**
+     * @var $publisher
+     *
+     * @ORM\ManyToOne(targetEntity="HotDesign\ScUserBundle\Entity\User", inversedBy="items")
+     */
+    private $publisher;
+    
+    /**
      * @Gedmo\Slug(fields={"title"})
      * @ORM\Column(length=128, unique=true)
      */
@@ -517,5 +524,35 @@ class BaseEntity {
      */
     public function getSlug() {
         return $this->slug;
+    }
+
+    /**
+     * Set slug
+     *
+     * @param string $slug
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+    }
+
+    /**
+     * Set publisher
+     *
+     * @param HotDesign\ScUserBundle\Entity\User $publisher
+     */
+    public function setPublisher(\HotDesign\ScUserBundle\Entity\User $publisher)
+    {
+        $this->publisher = $publisher;
+    }
+
+    /**
+     * Get publisher
+     *
+     * @return HotDesign\ScUserBundle\Entity\User 
+     */
+    public function getPublisher()
+    {
+        return $this->publisher;
     }
 }

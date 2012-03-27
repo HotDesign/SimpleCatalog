@@ -76,6 +76,12 @@ class BaseEntityController extends Controller {
      *
      */
     public function createAction() {
+        //Obtaining the current user FosUserBundle 
+        $user = $this->get('security.context')->getToken()->getUser();
+        if(! $user instanceof \HotDesign\ScUserBundle\Entity\User)
+        {
+            throw $this->createNotFoundException('User not valid.');
+        }
         $entity = new BaseEntity();
         $request = $this->getRequest();
         $form = $this->createForm(new BaseEntityType(), $entity);
@@ -84,6 +90,7 @@ class BaseEntityController extends Controller {
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getEntityManager();
+            $entity->setPublisher($user);
             $em->persist($entity);
             $this->UpdateBaseEntityLinks($entity);
             $em->flush();

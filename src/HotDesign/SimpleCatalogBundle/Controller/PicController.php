@@ -132,10 +132,11 @@ class PicController extends Controller {
 
             return $this->redirect($this->generateUrl('pic_edit', array('id' => $entity->getId())));
         } else {
-            $this->container->get('session')->setFlash('alert-success', 'No se pudo agregar la imágen.');
+            $this->container->get('session')->setFlash('alert-error', 'No se pudo agregar la imágen.');
         }
         return $this->render('SimpleCatalogBundle:Pic:new.html.twig', array(
                     'entity' => $entity,
+                    'baseentity' => $baseentity,
                     'form' => $form->createView()
                 ));
     }

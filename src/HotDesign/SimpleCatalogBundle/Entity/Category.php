@@ -6,6 +6,8 @@ use Gedmo\Mapping\Annotation as Gedmo;
 use Doctrine\ORM\Mapping as ORM;
 use HotDesign\SimpleCatalogBundle\Config\ItemTypes;
 
+use Symfony\Component\Validator\Constraints as Assert;
+
 /**
  * HotDesign\SimpleCatalogBundle\Entity\Category
  *
@@ -29,6 +31,7 @@ class Category {
      * @var string $title
      *
      * @ORM\Column(name="title", type="string", length=100)
+     * @Assert\NotBlank(message="El título no puede estar en blanco.")
      */
     private $title;
 

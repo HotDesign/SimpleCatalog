@@ -16,6 +16,8 @@ use Pagerfanta\Pagerfanta,
     Pagerfanta\Adapter\DoctrineORMAdapter,
     Pagerfanta\Exception\NotValidCurrentPageException;
 
+use HotDesign\SimpleCatalogBundle\Config\ItemTypes;
+
 /**
  * ProductController is the main frontend controller to retrieve and display 
  * items profiles
@@ -103,10 +105,41 @@ class ProductController extends Controller {
 
         $category_level = $current_category->getLvl();
 
+        //Look entities wich extends
+
+
+        /* ATENCION: COPIADO DESDE BaseEntityController.php refactorizar en algun futuro */
+        /* ATENCION: COPIADO DESDE BaseEntityController.php refactorizar en algun futuro */
+         //Obtenemos las Pics.
+        $pics = $em->getRepository('SimpleCatalogBundle:Pic')->findBy(array('entity' => $entity->getId()));
+
+        //Obtenemos el array de las clases que extiende
+        $class_extends = ItemTypes::getClassExtends($entity->getCategory()->getType());
+
+        $extends = array();
+
+        //Recuperamos toda la información de las clases a las cuales extiende.
+        foreach ($class_extends as $extend) {
+            $e = array();
+            $e['class'] = $extend['class'];
+            $e['bundle_name'] = $extend['bundle_name'];
+            $e['object'] = $em->getRepository(
+                            $extend['bundle_name'] . ':' . $extend['class'])
+                    ->findOneBy(array('base_entity' => $entity->getId())
+            );
+            $extends[] = $e;
+        }
+        /* ATENCION: COPIADO DESDE BaseEntityController.php refactorizar en algun futuro */
+        /* ATENCION: COPIADO DESDE BaseEntityController.php refactorizar en algun futuro */
+        /* ATENCION: COPIADO DESDE BaseEntityController.php refactorizar en algun futuro */
+
+
         $to_render = array(
             'category_level' => $category_level,
             'category' => $current_category,
             'entity' => $entity,
+            'pics' => $pics,
+            'extends' => $extends
         );
 
         return $this->render('HotDesignScThemeBundle:Product:entity_profile.html.twig', $to_render);

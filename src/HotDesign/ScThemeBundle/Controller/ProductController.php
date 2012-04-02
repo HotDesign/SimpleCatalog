@@ -48,44 +48,13 @@ class ProductController extends Controller {
 
         if ($slug) {
             $category = $category_repo->findOneBySlug($slug);
-
+            
             if ($category) {
-                $level = $category->getLvl();
-
-                $has_children = $category->getChildren()->count();
-
-                if ($has_children > 0) {
-                    $level = $level + 1;
-                }
-
-                /**
-                 *Get the related categories, this will be in a repository 
-                 */
-//                $query->where('p.category = :category_id')->setParameter('category_id', $category->getID());
-                $categories = array();
-                $categories[$category->getID()] = $category->getID();
-                //TODO: MERGE AN ARRAY WITH CHILDRENS
-                $category_filter_query = $em
-                        ->createQueryBuilder()
-                        ->select('node')
-                        ->from('HotDesign\SimpleCatalogBundle\Entity\Category', 'node')
-                        ->orderBy('node.root, node.lft', 'ASC')
-                        ->where('node.root = ' . $category->getRoot() . ' AND node.lvl > ' . $category->getLvl())
-                        ->getQuery();
-                $tree = $category_filter_query->getArrayResult();
-
-                if (is_array($tree)) {
-                    foreach ($tree as $children_category) {
-                        $children_id = $children_category['id'];
-                        $categories[$children_id] = $children_id;
-                    }
-                }
-
-
-                $query->add('where', $query->expr()->in('p.category', $categories));
+               $query->where("p.category = '{$category->getID()}'");
             } else {
                 throw $this->createNotFoundException('Unable to find Category entity.');
             }
+            
         }
 
         /**

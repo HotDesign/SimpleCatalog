@@ -31,7 +31,7 @@
 
             <h3>
                 <a href="{{ entity_url }}"> {{entity.title}}</a>
-                <small>$100.000.000</small>
+                <small>{{ entity.formattedPrice }}</small>
             </h3>
 
             {% if entity.description is not empty %}

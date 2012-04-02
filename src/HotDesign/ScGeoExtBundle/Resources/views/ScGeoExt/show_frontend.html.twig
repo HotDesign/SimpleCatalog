@@ -1,0 +1,6 @@
+{% if entity and entity.enabled %}
+    <legend>Coordenadas Geográficas</legend>
+    <a href="#">
+        <img src="http://maps.google.com/maps/api/staticmap?center={{ entity.lat}},{{ entity.lng}}&zoom=15&size=480x200&sensor=false&markers=size:big|color:blue|label:G|{{ entity.lat}},{{ entity.lng}}" alt="" />
+    </a>
+{% endif %}

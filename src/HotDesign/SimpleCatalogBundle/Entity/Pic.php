@@ -26,14 +26,15 @@ class Pic {
     /**
      * @var string $title
      *
-     * @ORM\Column(name="title", type="string", length=50)
+     * @ORM\Column(name="title", type="string", length=100)
+     * @Assert\NotBlank(message="El título no puede estar en blanco.")
      */
     private $title;
 
     /**
      * @var string $file
      *
-     * @Assert\File(maxSize="6000000")
+     * @Assert\Image(maxSize="6000000", mimeTypesMessage="El tipo de archivo no es una imágen.")
      */
     private $file;
 

@@ -13,12 +13,12 @@ class LoadUserData implements FixtureInterface {
 
 
         //Primero cargamos Categorias
-        $c = new Category();
+        // $c = new Category();
 
-        $c->setTitle('Categorías Base');
-        $c->setDescription('Categoría Padre de Todas');
+        // $c->setTitle('Categorías Base');
+        // $c->setDescription('Categoría Padre de Todas');
 
-        $manager->persist($c);
+        // $manager->persist($c);
 
 
 

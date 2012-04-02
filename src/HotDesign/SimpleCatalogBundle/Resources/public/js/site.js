@@ -16,7 +16,7 @@ $(function() {
         var horizontalPadding = 15;
         var verticalPadding = 15;
         $('<iframe id="site" src="' + this.href + '" />').dialog({
-            title: ($this.attr('title')) ? $this.attr('title') : 'Gestor Inmobiliario',
+            title: ($this.attr('title')) ? $this.attr('title') : 'SimpleCatalog',
             autoOpen: true,
             width: 800,
             height: 400,

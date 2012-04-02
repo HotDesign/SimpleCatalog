@@ -21,7 +21,8 @@
     
     <div class="span2">
             <a href="{{ entity_url }}" class="thumbnail">
-                <img src="http://placehold.it/160x120" alt="">
+                 <img src="{{ ('catalog/images/' ~  entity.get_default_pic.getPath) | apply_filter('my_thumb') }}" alt="{{ entity.get_default_pic.getTitle }}" />
+               
             </a>
     </div>    
     <div class="span8">

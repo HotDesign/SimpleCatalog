@@ -201,7 +201,11 @@ class BaseEntity {
         }
         if ($this->getPics()->first())
             return $this->getPics()->first();
-        return false;
+
+        $pic_default = new Pic();
+        $pic_default->setTitle('Imágen por defecto');
+        $pic_default->setPath('default_item.jpeg');
+        return $pic_default;
     }
 
     /**

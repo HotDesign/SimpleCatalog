@@ -17,6 +17,7 @@ use Pagerfanta\Pagerfanta,
     Pagerfanta\Exception\NotValidCurrentPageException;
 
 use HotDesign\SimpleCatalogBundle\Config\ItemTypes;
+use HotDesign\SimpleCatalogBundle\Config\MyConfig;
 
 /**
  * ProductController is the main frontend controller to retrieve and display 
@@ -62,7 +63,7 @@ class ProductController extends Controller {
         /**
          * @todo: make $max_items_per_page configurable
          */
-        $max_items_per_page = 10; //Default items per page 
+        $max_items_per_page = MyConfig::$items_per_pages; //Default items per page 
         $current_page = $this->getRequest()->get('page', 1);
 
         //Build an adapter for pagerfanta, so he can paginate
@@ -127,12 +128,11 @@ class ProductController extends Controller {
                             $extend['bundle_name'] . ':' . $extend['class'])
                     ->findOneBy(array('base_entity' => $entity->getId())
             );
-            $extends[] = $e;
+            $extends[$e['class']] = $e;
         }
         /* ATENCION: COPIADO DESDE BaseEntityController.php refactorizar en algun futuro */
         /* ATENCION: COPIADO DESDE BaseEntityController.php refactorizar en algun futuro */
         /* ATENCION: COPIADO DESDE BaseEntityController.php refactorizar en algun futuro */
-
 
         $to_render = array(
             'category_level' => $category_level,

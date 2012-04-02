@@ -31,7 +31,7 @@ class Category {
      * @var string $title
      *
      * @ORM\Column(name="title", type="string", length=100)
-     * @Assert\NotBlank()
+     * @Assert\NotBlank(message="El título no puede estar en blanco.")
      */
     private $title;
 

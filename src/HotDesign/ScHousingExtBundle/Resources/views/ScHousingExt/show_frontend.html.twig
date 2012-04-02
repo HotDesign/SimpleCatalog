@@ -1,0 +1,57 @@
+{% if entity and entity.enabled %}
+<legend>Datos de Inmueble</legend>
+
+<table class="table table-striped table-bordered table-condensed">
+     <tbody>
+        <tr>
+            <th>Dirección Pública</th>
+            <td>{{ entity.publicaddress }}</td>
+        </tr>
+        <tr>
+            <th>Dirección Privada</th>
+            <td>{{ entity.privateaddress }}</td>
+        </tr>
+        <tr>
+            <th>Tipo Operación</th>
+            <td>{{ entity.getTypeText }}</td>
+        </tr>
+        <tr>
+            <th>Habitaciones</th>
+            <td>{{ entity.nrooms }}</td>
+        </tr>
+        <tr>
+            <th>Baños</th>
+            <td>{{ entity.nbath }}</td>
+        </tr>
+        <tr>
+            <th>Cocheras</th>
+            <td>{{ entity.ngarages }}</td>
+        </tr>
+        <tr>
+            <th>Agua Caliente</th>
+            <td>{{ entity.hotwater }}</td>
+        </tr>
+        <tr>
+            <th>Gas Natural</th>
+            <td>{{ entity.naturalgas }}</td>
+        </tr>
+        <tr>
+            <th>Amoblado</th>
+            <td>{{ entity.furnished }}</td>
+        </tr>
+        <tr>
+            <th>Med. Terreno</th>
+            <td>{{ entity.terrain }}</td>
+        </tr>
+        <tr>
+            <th>Sup. Cubierta</th>
+            <td>{{ entity.coatedsurface }}</td>
+        </tr>
+        <tr>
+            <th>Video</th>
+            <td>{{ entity.youtubelink }}</td>
+        </tr>
+    </tbody>
+
+</table>
+{% endif %}

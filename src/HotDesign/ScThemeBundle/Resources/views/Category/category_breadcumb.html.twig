@@ -1,3 +1,5 @@
+{% set display_link = false %}
+
 <ul class="breadcrumb">
     <li>
         <a href="{{ path('products_homepage')}}">Todos</a> 
@@ -11,5 +13,11 @@
         </li>
     {% endfor %}
 
-    <li class="active"> <a href="{{ path('products_listing', {'slug': current_category.slug }) }}">{{ current_category.title }}</a></li>
+    <li class="active">
+        {% if display_link %}
+            <a href="{{ path('products_listing', {'slug': current_category.slug }) }}">{{ current_category.title }}</a>
+        {% else %}
+            {{ current_category.title }}
+        {% endif %}
+    </li>
 </ul>

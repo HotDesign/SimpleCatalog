@@ -11,5 +11,5 @@
         </li>
     {% endfor %}
 
-    <li class="active">{{ current_category.title }}</li>
+    <li class="active"> <a href="{{ path('products_listing', {'slug': current_category.slug }) }}">{{ current_category.title }}</a></li>
 </ul>

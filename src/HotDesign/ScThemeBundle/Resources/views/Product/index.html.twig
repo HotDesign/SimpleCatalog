@@ -8,7 +8,7 @@
 
 
 <div class="span10">
-    {% if category and category_level >= 1 %}
+    {% if category and category_level >= 0 %}
           {% render 'HotDesignScThemeBundle:Category:renderCategoryBreadcumb' with {'category': category} %}
         {% else %}
         <ul class="breadcrumb">

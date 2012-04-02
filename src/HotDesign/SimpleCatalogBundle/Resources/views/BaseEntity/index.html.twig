@@ -30,11 +30,7 @@
                 <td>{{ loop.index }}</td>
                 <td>
                     <a href="{{ path('baseentity_edit', { 'id': entity.id }) }}" title="Ver / Editar">
-                    {% if entity.get_default_pic %}
-                            <img src="{{ ('catalog/images/' ~ entity.get_default_pic.path) | apply_filter('my_thumb') }}" alt="{{ entity.get_default_pic.title }}" />
-                    {% else %}
-                        <img src="{{ 'bundles/simplecatalog/img/default.gif' | apply_filter('my_thumb') }}" alt="" />
-                    {% endif %}    
+                        <img src="{{ ('catalog/images/' ~ entity.get_default_pic.path) | apply_filter('my_thumb') }}" alt="{{ entity.get_default_pic.title }}" />
                     </a>
                 </td>
                 <td>{% if not entity.enabled %}<a href="#" rel="tooltip" data-original-title="Item Deshabilitado"><span class="label label-warning">!</span></a> {% endif%} <strong> {{ entity.title | truncate(30) }} </strong>- <i>{{ entity.category }}</i></td>

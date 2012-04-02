@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
 use HotDesign\SimpleCatalogBundle\Config\Currencies;
 use HotDesign\SimpleCatalogBundle\Config\ItemTypes;
 
+
 /**
  * HotDesign\SimpleCatalogBundle\Entity\BaseEntity
  *
@@ -30,14 +31,24 @@ class BaseEntity {
      * @var string $title
      *
      * @ORM\Column(name="title", type="string", length=255)
+     * 
+     * @Assert\NotBlank(message="El titulo no debe estar vacio.")
+     * @Assert\MinLength(limit=3, message="El titulo no debe tener menos de 3 caracteres.")
+     * @Assert\MaxLength(limit=255, message="El titulo no debe superar los 255 caracteres.")
      */
+     
     private $title;
 
     /**
      * @var text $description
      *
      * @ORM\Column(name="description", type="text")
+     * 
+     *
+     * @Assert\NotBlank(message="La descripción no debe estar vacia.")
+     * @Assert\MinLength(limit=3, message="La descripción no debe tener menos de 3 caracteres.")
      */
+    
     private $description;
 
     /**
@@ -58,6 +69,10 @@ class BaseEntity {
      * @var float $price
      *
      * @ORM\Column(name="price", type="float", nullable=true)
+     * 
+     * @Assert\Min(limit = "0", message = "El precio no debe ser menor a 0")
+     * 
+     * @Assert\Type(type="float", message="El precio no es válido.")
      */
     private $price;
 

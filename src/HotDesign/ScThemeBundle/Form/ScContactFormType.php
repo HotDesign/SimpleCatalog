@@ -34,10 +34,10 @@ class ScContactFormType extends AbstractType {
                 )),
                 'email' => array(
                     new NotBlank(array(
-                        'message' => 'contact_form.email.blank'
+                        'message' => 'El campo de email no debe estar vacio.'
                     )),
                     new Email(array(
-                        'message' => 'contact_form.email.invalid'
+                        'message' => 'El email debe tener un formato valido, ejemplo nombre@email.com'
                     ))
                 ),
                 

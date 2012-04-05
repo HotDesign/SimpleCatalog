@@ -30,7 +30,7 @@ class ScContactFormType extends AbstractType {
         return array(
             'validation_constraint' => new Collection(array(
                 'name'  => new NotBlank(array(
-                    'message' => 'contact_form.name.blank'
+                    'message' => 'El campo nombre no debe estar vacío.'
                 )),
                 'email' => array(
                     new NotBlank(array(
@@ -44,7 +44,7 @@ class ScContactFormType extends AbstractType {
                 'subject' => array(),
                 
                 'description' => new NotBlank(array(
-                    'message' => 'contact_form.description.blank'
+                    'message' => 'Debe escribir un mensaje para continuar.'
                 )),
             ))
         );

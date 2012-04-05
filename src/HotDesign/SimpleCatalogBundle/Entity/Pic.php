@@ -3,7 +3,14 @@
 namespace HotDesign\SimpleCatalogBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+
+//Validators
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Mapping\ClassMetadata;
+use Symfony\Component\Validator\Constraints\Image;
+
+//MyConfig
+use HotDesign\SimpleCatalogBundle\Config\MyConfig;
 
 /**
  * HotDesign\SimpleCatalogBundle\Entity\Pic
@@ -33,8 +40,7 @@ class Pic {
 
     /**
      * @var string $file
-     *
-     * @Assert\Image(maxSize="6000000", mimeTypesMessage="El tipo de archivo no es una imágen.")
+     * Validated in $this->loadValidatorMetadata()
      */
     private $file;
 
@@ -126,6 +132,18 @@ class Pic {
         }
     }
 
+    /*
+    * Load a custom validator for Image field (file)
+    */
+    public static function loadValidatorMetadata(ClassMetadata $metadata)
+    {
+        //* @Assert\Image(maxSize="6000000", mimeTypesMessage="El tipo de archivo no es una imágen.")
+        $image = new Image();
+        $image->maxSize = MyConfig::$image_max_size_bytes;
+        $image->mimeTypesMessage = 'La imágen seleccionada no es de un tipo válido.';
+
+        $metadata->addPropertyConstraint('file', $image );
+    }
     /**
      * INICIO DE METODOS AUTOGENERADOS  
      * INICIO DE METODOS AUTOGENERADOS  

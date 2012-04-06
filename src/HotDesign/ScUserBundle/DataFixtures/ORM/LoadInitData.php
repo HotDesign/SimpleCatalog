@@ -1,13 +1,24 @@
 <?php
 
-namespace HotDesign\SimpleCatalogBundle\DataFixtures\ORM;
+namespace HotDesign\ScUserBundle\DataFixtures\ORM;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use HotDesign\SimpleCatalogBundle\Entity\Category;
 use HotDesign\ScUserBundle\Entity\User;
+use Doctrine\Common\DataFixtures\AbstractFixture;
+use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 
-class LoadUserData implements FixtureInterface {
+class LoadUserData extends AbstractFixture implements OrderedFixtureInterface
+{
+    /**
+     * {@inheritDoc}
+     */
+    public function getOrder()
+    {
+        return 1;
+    }
+
 
     public function load(ObjectManager $manager) {
 

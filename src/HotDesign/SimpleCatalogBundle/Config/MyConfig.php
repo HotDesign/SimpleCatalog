@@ -7,7 +7,7 @@ namespace HotDesign\SimpleCatalogBundle\Config;
  * 
  */
 class MyConfig {
-	public static $default_lat = -31.632301;
+    public static $default_lat = -31.632301;
     public static $default_lng = -60.716157;    
   
     public static $items_per_pages = 10;

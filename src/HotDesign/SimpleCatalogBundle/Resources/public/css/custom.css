@@ -61,3 +61,7 @@ label.required {
     position: absolute;
     background: url(../img/pic_default.png) no-repeat;
 }
+
+.backendItemsListing .pagination {
+    float: right;
+}

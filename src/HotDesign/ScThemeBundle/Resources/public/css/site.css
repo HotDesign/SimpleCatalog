@@ -4,7 +4,7 @@ body {
 }
 
 .itemListingWrapper .itemListingContainer {
-    min-height: 500px;
+    min-height: 200px;
 }
 
 .categoriesNavigation.active.link {

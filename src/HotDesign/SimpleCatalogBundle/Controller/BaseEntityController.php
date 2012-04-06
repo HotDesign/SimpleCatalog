@@ -9,6 +9,12 @@ use HotDesign\SimpleCatalogBundle\Form\BaseEntityType;
 use HotDesign\SimpleCatalogBundle\Config\Currencies;
 use HotDesign\SimpleCatalogBundle\Config\ItemTypes;
 
+use HotDesign\SimpleCatalogBundle\Config\MyConfig;
+
+use Pagerfanta\Pagerfanta,
+    Pagerfanta\Adapter\DoctrineORMAdapter,
+    Pagerfanta\Exception\NotValidCurrentPageException;
+
 /**
  * BaseEntity controller.
  *
@@ -50,10 +56,28 @@ class BaseEntityController extends Controller {
     public function indexAction() {
         $em = $this->getDoctrine()->getEntityManager();
 
-        $entities = $em->getRepository('SimpleCatalogBundle:BaseEntity')->findAll();
+        
+    $max_items_per_page = MyConfig::$items_per_page_backend;
+    $current_page = $this->getRequest()->get('page', 1);
+
+    $repo = $this->getDoctrine()->getEntityManager()->getRepository('SimpleCatalogBundle:BaseEntity');
+    $query = $repo->createQueryBuilder('p')->orderBy('p.created_at', 'DESC');
+
+    $adapter = new DoctrineORMAdapter($query);
+    $pagerfanta = new Pagerfanta($adapter);
+
+    $pagerfanta->setMaxPerPage($max_items_per_page);
+    $pagerfanta->setCurrentPage($current_page);
+
+
+    $entities = $pagerfanta->getCurrentPageResults();
+    $num_pages = $pagerfanta->getNbPages();
+        
 
         return $this->render('SimpleCatalogBundle:BaseEntity:index.html.twig', array(
-                    'entities' => $entities
+                    'entities' => $entities,
+                    'pagination' => $pagerfanta,
+                    'num_pages' => $num_pages,
                 ));
     }
 

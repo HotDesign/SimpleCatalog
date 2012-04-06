@@ -13,5 +13,9 @@ class MyConfig {
     public static $items_per_pages = 10;
     public static $image_max_size_bytes  = 10485760;  //bytes
 
-    public static $max_image_per_item = 5;  
+    public static $max_image_per_item = 5;
+    
+    
+    
+    public static $items_per_page_backend = 10;
 }

@@ -1,7 +1,11 @@
+{% set paginator_render = pagerfanta(pagination, 'twitter_bootstrap_translated', {'proximity': 2}) %}
+
 {% extends 'SimpleCatalogBundle:Layouts:base.html.twig' %}
 {% block title %} Lista de Items {% endblock %}
 
 {% block content %}
+
+<div class="backendItemsListing">
 <div class="form-actionss well">
     <h2>{{ block('title') }}</h2>
     <div class="scright">
@@ -9,13 +13,12 @@
     </div>
     <div style="clear: both"></div>
 </div>
-
 {% include 'SimpleCatalogBundle:Layouts:flashes_messages.html.twig'%}
+{{ paginator_render | raw }}
 
 <table class="table table-striped ">
     <thead>
         <tr>
-            <th class="sc_index_table">#</th>
             <th>Imágen</th>
             <th>Título / Categoría</th>
             <th>Precio</th>
@@ -27,7 +30,7 @@
     <tbody>
     {% for entity in entities %}
             <tr>
-                <td>{{ loop.index }}</td>
+              
                 <td>
                     <a href="{{ path('baseentity_edit', { 'id': entity.id }) }}" title="Ver / Editar">
                         <img src="{{ ('catalog/images/' ~ entity.get_default_pic.path) | apply_filter('my_thumb') }}" alt="{{ entity.get_default_pic.title }}" />
@@ -40,13 +43,14 @@
                 <td>
                     
                     <div class="btn-group ">
-                        <button class="btn btn-mini">Opciones</button>
+                       
+                        <a href="{{ path('baseentity_edit', { 'id': entity.id }) }}" class="btn btn-mini">Editar</a>
                         <button class="btn dropdown-toggle btn-mini" data-toggle="dropdown">
                             <span class="caret"></span>
                         </button>
-                        <ul class="dropdown-menu">
-                            <a href="{{ path('baseentity_edit', { 'id': entity.id }) }}" >Ver / Editar</a>
+                        <ul class="dropdown-menu"> 
                             <a href="{{ path('pic_gallery', { 'id_baseentity': entity.id }) }}" class="showPopup">Imagenes</a>
+                            <a href="{{ path('product_profile', {'category_slug': entity.category.slug ,'slug': entity.slug, 'backend': true }) }}" target="_blank">Visualizar</a>
                         </ul>
                     </div>
                    
@@ -55,4 +59,8 @@
     {% endfor %}
         </tbody>
     </table>
+
+{{ paginator_render | raw }}
+        
+</div>
 {% endblock %}

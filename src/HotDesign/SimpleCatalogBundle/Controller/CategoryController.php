@@ -19,11 +19,36 @@ class CategoryController extends Controller {
     public function indexAction() {
         $em = $this->getDoctrine()->getEntityManager();
 
-        $entities = $em->getRepository('SimpleCatalogBundle:Category')->findBy(array(), array('lft' => 'asc'));
+$repo = $em->getRepository('SimpleCatalogBundle:Category');
 
+$self = $this;
+$options = array(
+    'decorate' => true,
+    'rootOpen' => '<ul>',
+    'rootClose' => '</ul>',
+    'childOpen' => '<li>',
+    'childClose' => '</li>',
+    'nodeDecorator' => function($node) use ($self) {
+        $url =  $self->get('router')->generate('category_edit', array('id' => $node['id']));
+        
+        $html = '';
+        $html .= '<p>';
+        $html .= '<a href="'.$url.'">'.$node['title'].'</a>';
+        $html .= '<blockquote>' .substr($node['description'], 0, 140). '</blockquote>';
+        $html .= '</p>';
+        
+        return $html;
+    }
+);
+$htmlTree = $repo->childrenHierarchy(
+    null, /* starting from root nodes */
+    false, /* load all children, not only direct */
+    $options
+);
 
+        
         return $this->render('SimpleCatalogBundle:Category:index.html.twig', array(
-                    'entities' => $entities
+                    'html_tree' => $htmlTree
                 ));
     }
 

@@ -1,0 +1,41 @@
+{% extends 'SimpleCatalogBundle:Layouts:base.html.twig' %}
+{% block title %} Lista de Categorías {% endblock %}
+
+{% block content %}
+<div class="form-actionss well">
+    <h2>{{ block('title') }}</h2>
+    <div class="scright">
+       <a href="{{ path('category_new') }}" class="btn btn-small btn-primary"><i class="icon-plus icon-white"></i> Nueva Categoría</a>
+    </div>
+    <div style="clear: both"></div>
+</div>
+
+
+
+{% include 'SimpleCatalogBundle:Layouts:flashes_messages.html.twig'%}
+
+<table class="table table-striped ">
+    <thead>
+        <tr>
+            <th class="sc_index_table">#</th>
+            <th>Nombre</th>
+            <th>Contiene</th>
+            <th>Descripción</th>
+            <th class="sc_actions_table">Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for entity in entities %}
+            <tr>
+                <td>{{ loop.index }}</td>
+                <td><a href="{{ path('category_edit', { 'id': entity.id }) }}">{{ entity.getIndent }}{{ entity.title }}</a></td>
+                <td>{{ entity.getStringType }}</td>
+                <td>{{ entity.description | striptags |truncate(100) }}</td>
+                <td>
+                    <a href="{{ path('category_edit', { 'id': entity.id }) }}" class="btn btn-mini">Ver / Editar</a>
+                </td>
+            </tr>
+    {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

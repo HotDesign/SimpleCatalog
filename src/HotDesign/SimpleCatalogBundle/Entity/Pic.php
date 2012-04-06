@@ -86,7 +86,7 @@ class Pic {
 
     protected function getUploadDir() {
         // get rid of the __DIR__ so it doesn't screw when displaying uploaded doc/image in the view.
-        return 'catalog/images/';
+        return MyConfig::$image_upload_path;
     }
 
     public function upload() {
@@ -228,7 +228,7 @@ class Pic {
      * @return string 
      */
     public function getPath() {
-        return $this->path;
+        return MyConfig::$image_upload_path . $this->path;
     }
 
 

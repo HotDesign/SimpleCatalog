@@ -28,9 +28,9 @@
                 <td>{{ loop.index }}</td>
                 <td>
                 <div class="pic_picture">   
-                     <a href="{{ asset('catalog/images/' ~ entity.path) }}" rel="prettyPhoto" title="{{ entity.title }}">
+                     <a href="{{ asset(entity.getPath) }}" rel="prettyPhoto" title="{{ entity.title }}">
                         {% if entity.getIsDefault %}<div id="pic_default" title="Esta imágen es la principal de la Galería"></div>{% endif %}
-                        <img src="{{ ('catalog/images/' ~ entity.path) | apply_filter('my_thumb') }}" alt="{{ entity.title }}" />
+                        <img src="{{ (entity.getPath) | apply_filter('my_thumb') }}" alt="{{ entity.title }}" />
                     </a>
                 </div>
                    

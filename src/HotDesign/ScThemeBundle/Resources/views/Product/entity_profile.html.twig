@@ -6,8 +6,8 @@
         {% if pics %}
       	  <legend>Imágenes</legend>
       	  {% for pic in pics %}
-      		 <a href="{{ asset('catalog/images/' ~ pic.path) }}" rel="prettyPhoto[galeria]" title="{{ pic.title }}" >
-            		<img src="{{ ('catalog/images/' ~ pic.path) | apply_filter('my_thumb') }}" alt="{{ pic.title }}" />
+      		 <a href="{{ asset(pic.getPath) }}" rel="prettyPhoto[galeria]" title="{{ pic.title }}" >
+            		<img src="{{ (pic.getPath) | apply_filter('my_thumb') }}" alt="{{ pic.title }}" />
                	</a>
              {% endfor %}
        {% endif %}

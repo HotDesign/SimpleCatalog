@@ -2,6 +2,8 @@
 
 namespace HotDesign\SimpleCatalogBundle\Validator;
 
+use HotDesign\SimpleCatalogBundle\Config\MyConfig;
+
 use Symfony\Component\Validator\Constraint;
 
 /**
@@ -9,7 +11,7 @@ use Symfony\Component\Validator\Constraint;
  */
 class ImageAttachmentLimitConstraint extends Constraint
 {
-    public $message = 'No es posible cargar más de 10 imágenes';
+    public $message = 'Usted ha superado el límite de imágenes por Item asignado.';
 
     public function validatedBy()
     {

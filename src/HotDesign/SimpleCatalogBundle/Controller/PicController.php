@@ -5,6 +5,8 @@ namespace HotDesign\SimpleCatalogBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use HotDesign\SimpleCatalogBundle\Entity\Pic;
 use HotDesign\SimpleCatalogBundle\Form\PicType;
+use HotDesign\SimpleCatalogBundle\Validator\ImageAttachmentLimitConstraint;
+use HotDesign\SimpleCatalogBundle\Validator\ImageAttachmentLimitConstraintValidator;
 
 /**
  * Pic controller.
@@ -113,24 +115,34 @@ class PicController extends Controller {
         $form->bindRequest($request);
 
         if ($form->isValid()) {
+
             $em = $this->getDoctrine()->getEntityManager();
-            //Upload process
-            $entity->upload();
-            
+
+            $validator = $this->get('validator_image_limit_number');
+
             //If this is the first image of the item
             //We make it as the default one.
             $any_pic = $em->getRepository('SimpleCatalogBundle:Pic')
-                    ->findByEntity($id_baseentity);
-            
-            if (!$any_pic)
-                $entity->setIsDefault (true);
-            
-            $em->persist($entity);
-            $em->flush();
+                ->findByEntity($id_baseentity);
 
-            $this->container->get('session')->setFlash('alert-success', 'Imágen agregada con éxito.');
+            $imageNumber = count($any_pic);
 
-            return $this->redirect($this->generateUrl('pic_edit', array('id' => $entity->getId())));
+            if (!$validator->isValid($imageNumber, new ImageAttachmentLimitConstraint())) {
+                $this->container->get('session')->setFlash('alert-error', 'No mas de 10 imagenes.');
+            } else {
+                //Upload process
+                $entity->upload();
+
+                if (!$any_pic)
+                    $entity->setIsDefault (true);
+
+                $em->persist($entity);
+                $em->flush();
+
+                $this->container->get('session')->setFlash('alert-success', 'Imágen agregada con éxito.');
+
+                return $this->redirect($this->generateUrl('pic_edit', array('id' => $entity->getId())));
+            }
         } else {
             $this->container->get('session')->setFlash('alert-error', 'No se pudo agregar la imágen.');
         }

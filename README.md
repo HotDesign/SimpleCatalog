@@ -50,7 +50,7 @@ WARINING: Under development stage.
 Developers/Collaborators
 ---------------
 
-* **marian0** - Mariano Peyregne - Idea. Responsable. Administrator.
-* **germanaz0** - German Bortoli - Collaborator.
+* **marian0** - Mariano Peyregne - Project Manager.
+* **germanaz0** - German Bortoli - Project Manager.
 * **fern17** - Fernando Nellmeldin - Collaborator.
 * **cordoval** - Luis Cordova - Collaborator.

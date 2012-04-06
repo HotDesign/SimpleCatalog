@@ -11,7 +11,7 @@ class ImageAttachmentLimitConstraintValidator extends ConstraintValidator
 {
     public function isValid($value, Constraint $constraint)
     {
-        if ($value > MyConfig::$max_image_per_item) {
+        if ($value >= MyConfig::$max_image_per_item) {
             $this->setMessage($constraint->message);
             return false;
         }

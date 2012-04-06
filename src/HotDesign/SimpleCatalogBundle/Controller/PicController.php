@@ -127,8 +127,10 @@ class PicController extends Controller {
 
             $imageNumber = count($any_pic);
 
-            if (!$validator->isValid($imageNumber, new ImageAttachmentLimitConstraint())) {
-                $this->container->get('session')->setFlash('alert-error', 'Usted superó el límite de imágenes asignado por Item.');
+            $imgconstraint = new ImageAttachmentLimitConstraint();
+
+            if (!$validator->isValid($imageNumber, $imgconstraint)) {
+                $this->container->get('session')->setFlash('alert-error', $imgconstraint->message);
             } else {
                 //Upload process
                 $entity->upload();

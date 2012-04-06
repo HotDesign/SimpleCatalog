@@ -10,7 +10,6 @@
 
 <div class="itemListingContainer">
 {% for entity in entities %}
-    
 <div class="row show-grid itemListingItem">
     
 {% if category is empty %}
@@ -21,7 +20,8 @@
     
     <div class="span2">
             <a href="{{ entity_url }}" class="thumbnail">
-                 <img src="{{ asset(entity.get_default_pic.getPath) | apply_filter('my_thumb') }}" alt="{{ entity.get_default_pic.getTitle }}" />
+
+                 <img src="{{ entity.get_default_pic.getPath | apply_filter('my_thumb') }}" alt="{{ entity.get_default_pic.getTitle }}" />
                
             </a>
     </div>    

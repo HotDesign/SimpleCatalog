@@ -24,7 +24,7 @@ $repo = $em->getRepository('SimpleCatalogBundle:Category');
 $self = $this;
 $options = array(
     'decorate' => true,
-    'rootOpen' => '<ul>',
+    'rootOpen' => '<ul class="nestedCategories">',
     'rootClose' => '</ul>',
     'childOpen' => '<li>',
     'childClose' => '</li>',

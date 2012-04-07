@@ -86,6 +86,12 @@ class ProductController extends Controller {
             case 'xml':
             case 'json':
                 if ($entities) {
+                    // view this in future
+                    /**
+                     *$serializer = new Serializer(array(new GetSetMethodNormalizer()), array('json' => new 
+JsonEncoder()));
+$json = $serializer->serialize($entity, 'json'); 
+                     */
                     foreach ($entities as $entity) {
                         $tmp_category = $entity->getCategory();
 

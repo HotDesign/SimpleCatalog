@@ -92,10 +92,10 @@ class ProductController extends Controller {
                         $tmp_entity = array(
                             'title' => $entity->getTitle(),
                             'id' => $entity->getid(),
-                            'url' => $this->get('router')->generate('product_profile', array('slug' => $entity->getSlug(), 'category_slug' => $tmp_category->getSlug())),
+                            'url' => $this->get('router')->generate('product_profile', array('slug' => $entity->getSlug(), 'category_slug' => $tmp_category->getSlug()), TRUE),
                             'description' => $entity->getDescription(),
                             'category' => $tmp_category->getTitle(),
-                            'category_url' => $this->get('router')->generate('products_listing', array('slug' => $tmp_category->getSlug())),
+                            'category_url' => $this->get('router')->generate('products_listing', array('slug' => $tmp_category->getSlug()), TRUE),
                             'created_at' => $entity->getCreatedAt(),
                             'updated_at' => $entity->getUpdatedAt(),
                         );
@@ -103,13 +103,16 @@ class ProductController extends Controller {
                         $tmp_entity['pics'] = array();
 
                         $tmp_pictures = $entity->getPics();
-                        if ($tmp_pictures) {
+                        if (count($tmp_pictures) > 0) {
                             $default_pic = $entity->get_default_pic();
-                            $tmp_entity['pics'][0] = $default_pic->getWebPath();
+                             
+                            $request = $this->get('request');
+                            $web_url = $request->getScheme() . '://' . $request->getHttpHost() . $request->getBasePath().'/';
+                            $tmp_entity['pics'][0] = $web_url.$default_pic->getWebPath();
 
                             foreach ($tmp_pictures as $pic) {
                                 if ($pic->getId() != $default_pic->getId()) {
-                                    $tmp_entity['pics'][$pic->getId()] = $pic->getWebPath();
+                                    $tmp_entity['pics'][$pic->getId()] = $web_url.$pic->getWebPath();
                                 }
                             }
                         }
@@ -117,6 +120,7 @@ class ProductController extends Controller {
                         $output_tmp_entities[$entity->getId()] = $tmp_entity;
                     }
                 }
+                
                 $entities = $output_tmp_entities;
                 break;
         }
@@ -130,6 +134,7 @@ class ProductController extends Controller {
         );
 
         if ($_format == 'json') {
+            unset($to_render['paginator']);
             $to_render['to_render'] = $to_render;
         }
         return $this->render("HotDesignScThemeBundle:Product:listing_entities.{$_format}.twig", $to_render);

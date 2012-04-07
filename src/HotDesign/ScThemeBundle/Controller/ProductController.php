@@ -124,12 +124,14 @@ class ProductController extends Controller {
         $to_render = array(
             'category_level' => $level,
             'category' => $category,
-            'entities' => $entities,
             'paginator' => $pagerfanta,
             'num_pages' => $num_pages,
+            'entities' => $entities,
         );
 
-
+        if ($_format == 'json') {
+            $to_render['to_render'] = $to_render;
+        }
         return $this->render("HotDesignScThemeBundle:Product:listing_entities.{$_format}.twig", $to_render);
     }
 

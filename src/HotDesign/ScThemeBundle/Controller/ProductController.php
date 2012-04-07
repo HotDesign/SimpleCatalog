@@ -15,7 +15,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Pagerfanta\Pagerfanta,
     Pagerfanta\Adapter\DoctrineORMAdapter,
     Pagerfanta\Exception\NotValidCurrentPageException;
-
 use HotDesign\SimpleCatalogBundle\Config\ItemTypes;
 use HotDesign\SimpleCatalogBundle\Config\MyConfig;
 
@@ -38,7 +37,7 @@ class ProductController extends Controller {
      * @return Response A Response instance 
      * 
      */
-    public function indexAction($slug = NULL) {
+    public function indexAction($slug = NULL, $_format = 'html') {
         $level = 0; //default category level
 
         $em = $this->getDoctrine()->getEntityManager();
@@ -51,21 +50,24 @@ class ProductController extends Controller {
 
         if ($slug) {
             $category = $category_repo->findOneBySlug($slug);
-            
+
             if ($category) {
-               $query->where("p.category = '{$category->getID()}'");
+                $query->where("p.category = '{$category->getID()}'");
             } else {
                 throw $this->createNotFoundException('Unable to find Category entity.');
             }
-            
         }
 
         /**
          * @todo: make $max_items_per_page configurable
          */
-        $max_items_per_page = MyConfig::$items_per_pages; //Default items per page 
-        $current_page = $this->getRequest()->get('page', 1);
+        $current_page = (int) $this->getRequest()->get('page', 1);
 
+        if ($current_page == 0) {
+            $max_items_per_page = 9999999;
+        } else {
+            $max_items_per_page = MyConfig::$items_per_pages; //Default items per page 
+        }
         //Build an adapter for pagerfanta, so he can paginate
         $adapter = new DoctrineORMAdapter($query);
         $pagerfanta = new Pagerfanta($adapter);
@@ -78,6 +80,47 @@ class ProductController extends Controller {
         $entities = $pagerfanta->getCurrentPageResults();
         $num_pages = $pagerfanta->getNbPages(); //get the pages result, this is used in the template to hide/show the paginator
 
+
+        $output_tmp_entities = array();
+        switch ($_format) {
+            case 'xml':
+            case 'json':
+                if ($entities) {
+                    foreach ($entities as $entity) {
+                        $tmp_category = $entity->getCategory();
+
+                        $tmp_entity = array(
+                            'title' => $entity->getTitle(),
+                            'id' => $entity->getid(),
+                            'url' => $this->get('router')->generate('product_profile', array('slug' => $entity->getSlug(), 'category_slug' => $tmp_category->getSlug())),
+                            'description' => $entity->getDescription(),
+                            'category' => $tmp_category->getTitle(),
+                            'category_url' => $this->get('router')->generate('products_listing', array('slug' => $tmp_category->getSlug())),
+                            'created_at' => $entity->getCreatedAt(),
+                            'updated_at' => $entity->getUpdatedAt(),
+                        );
+
+                        $tmp_entity['pics'] = array();
+
+                        $tmp_pictures = $entity->getPics();
+                        if ($tmp_pictures) {
+                            $default_pic = $entity->get_default_pic();
+                            $tmp_entity['pics'][0] = $default_pic->getWebPath();
+
+                            foreach ($tmp_pictures as $pic) {
+                                if ($pic->getId() != $default_pic->getId()) {
+                                    $tmp_entity['pics'][$pic->getId()] = $pic->getWebPath();
+                                }
+                            }
+                        }
+
+                        $output_tmp_entities[$entity->getId()] = $tmp_entity;
+                    }
+                }
+                $entities = $output_tmp_entities;
+                break;
+        }
+
         $to_render = array(
             'category_level' => $level,
             'category' => $category,
@@ -86,7 +129,8 @@ class ProductController extends Controller {
             'num_pages' => $num_pages,
         );
 
-        return $this->render('HotDesignScThemeBundle:Product:listing_entities.html.twig', $to_render);
+
+        return $this->render("HotDesignScThemeBundle:Product:listing_entities.{$_format}.twig", $to_render);
     }
 
     public function profileAction($category_slug, $slug) {
@@ -111,7 +155,7 @@ class ProductController extends Controller {
 
         /* ATENCION: COPIADO DESDE BaseEntityController.php refactorizar en algun futuro */
         /* ATENCION: COPIADO DESDE BaseEntityController.php refactorizar en algun futuro */
-         //Obtenemos las Pics.
+        //Obtenemos las Pics.
         $pics = $em->getRepository('SimpleCatalogBundle:Pic')->findBy(array('entity' => $entity->getId()));
 
         //Obtenemos el array de las clases que extiende

@@ -10,12 +10,16 @@ static_page:
 # PRODUCTS
 
 products_homepage:
-    pattern: /products/
-    defaults: { _controller: HotDesignScThemeBundle:Product:index, slug: '' }
-  
+    pattern: /products.{_format}
+    defaults: { _controller: HotDesignScThemeBundle:Product:index, _format: html, slug: '' }
+    requirements:
+        _format:  html|xml|json
+        
 products_listing:
-    pattern: /products/{slug}/
-    defaults: { _controller: HotDesignScThemeBundle:Product:index }
+    pattern: /products/{slug}.{_format}
+    defaults: { _controller: HotDesignScThemeBundle:Product:index, _format: html }
+    requirements:
+        _format:  html|xml|json
 
 product_profile:
     pattern: /products/{category_slug}/{slug}.html

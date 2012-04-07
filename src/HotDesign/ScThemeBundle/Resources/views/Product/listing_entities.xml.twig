@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0">
+<channel>
+<title>{% block title %}Simple Classifield{% endblock %} - {{ nombre_empresa }}</title>
+<link>{{ path('homepage') }}</link>
+<language>es</language>
+<category><![CDATA[Productos]]></category> {#TODO: MAKE IT VARIABLE BY CAT#}
+<lastBuildDate>{{ "now"|date("r") }}</lastBuildDate> {#TODO MAKE THIS REAL#}
+<pubDate>{{ "now"|date("m/d/Y") }}</pubDate> {#TODO MAKE THIS REAL#}
+<webMaster>info@dominio.com</webMaster> {#TODO ADD SOMETHING HERE#}
+<copyright>Copyright HotDesign</copyright>
+<ttl>10</ttl>
+<image>
+<title>{% block title2 %}Simple Classifield{% endblock %}</title>
+<url>http://ellitoral.com/image/ellitoral_com.gif</url>
+<link>http://ellitoral.com/index.php</link>
+</image>
+
+{% for entity in entities %}
+    <item>
+        <title><![CDATA[{{ entity.title }}]]></title>
+        <pubDate>{{ entity.created_at | date("r") }}</pubDate>
+        <link> {{ entity.url }} </link>
+        <guid isPermaLink="true">{{ entity.url }}</guid>
+        <category>{{entity.category}}</category>
+        <description><![CDATA[<p>{{entity.description}}</p>]]></description>
+    </item>
+{% endfor %}
+</channel>
+</rss>

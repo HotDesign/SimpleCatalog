@@ -76,7 +76,7 @@ class Pic {
 
     //is a convenience method that returns the web path, which can be used in a template to link to the uploaded file.
     public function getWebPath() {
-        return null === $this->path ? null : $this->getUploadDir() . '/' . $this->path;
+        return null === $this->path ? null : $this->getUploadDir() . $this->path;
     }
 
     protected function getUploadRootDir() {

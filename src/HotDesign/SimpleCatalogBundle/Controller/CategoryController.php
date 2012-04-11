@@ -140,7 +140,7 @@ $htmlTree = $repo->childrenHierarchy(
 
         $editForm->bindRequest($request);
 
-        if ($editForm->isValid()) {
+        if ($editForm->isValid() ) {
             $em->persist($entity);
             $em->flush();
 
@@ -167,21 +167,21 @@ $htmlTree = $repo->childrenHierarchy(
 
         $form->bindRequest($request);
 
-        if ($form->isValid()) {
-            $em = $this->getDoctrine()->getEntityManager();
-            $entity = $em->getRepository('SimpleCatalogBundle:Category')->find($id);
+        $em = $this->getDoctrine()->getEntityManager();
+        $entity = $em->getRepository('SimpleCatalogBundle:Category')->find($id);
 
-            if (!$entity) {
-                throw $this->createNotFoundException('Unable to find Category entity.');
-            }
+        if (!$entity) {
+            throw $this->createNotFoundException('Unable to find Category entity.');
+        }
 
+        if ($form->isValid() && $this->isDeletable($entity)) {
             $em->remove($entity);
             $em->flush();
             $this->container->get('session')->setFlash('alert-success', 'La categoría se ha eliminado con éxito.');
-        } else {
-            $this->container->get('session')->setFlash('alert-error', 'No se pudo eliminar la categoría.');
+            return $this->redirect($this->generateUrl('category'));
         }
-        return $this->redirect($this->generateUrl('category'));
+        return $this->redirect($this->generateUrl('category_edit', array('id' => $id ) ));
+
     }
 
     private function createDeleteForm($id) {
@@ -189,6 +189,15 @@ $htmlTree = $repo->childrenHierarchy(
                         ->add('id', 'hidden')
                         ->getForm()
         ;
+    }
+
+    public function isDeletable(Category $categoria) {
+        $nproductos = count($categoria->getBaseEntities());
+        if ($nproductos == 0) {
+            return true;
+        } 
+        $this->container->get('session')->setFlash('alert-error', 'La categoría no pudo ser eliminada debido a que contiene Items asignados. Mueva o elimine estos Items para poder eliminarla. ');
+        return false;        
     }
 
 }

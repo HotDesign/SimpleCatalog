@@ -139,7 +139,7 @@ class BaseEntity {
     /**
      * @var string $pics
      *
-     * @ORM\OneToMany(targetEntity="HotDesign\SimpleCatalogBundle\Entity\Pic", mappedBy="entity")
+     * @ORM\OneToMany(targetEntity="HotDesign\SimpleCatalogBundle\Entity\Pic", mappedBy="entity", cascade={"remove"}))
      */
     private $pics;
 

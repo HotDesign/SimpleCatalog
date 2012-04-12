@@ -1,1 +1,18 @@
-{# empty Twig template #}
+<div class="productContactForm">
+
+    <form class="form-horizontal" action={{ path('contact_submit') }} method="post" {{ form_enctype(form) }}>
+        <fieldset>
+          <legend>Contactate</legend>
+          {% include 'SimpleCatalogBundle:Layouts:flashes_messages.html.twig'%}
+          <div class="control-group">
+            {{ form_widget(form) }}
+          </div>
+                  
+          
+          <div class="form-actions">
+            <button type="reset" class="btn">Cancelar</button>
+            <button type="submit" class="btn btn-primary">Enviar</button>
+          </div>
+        </fieldset>
+      </form>
+      </div>

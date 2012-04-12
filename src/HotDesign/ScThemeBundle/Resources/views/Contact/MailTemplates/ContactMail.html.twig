@@ -7,3 +7,10 @@
      <li><b>{{ field.label }}</b>: {{ field.content }}</li>   
 {% endfor %}   
 </ul>
+
+{% if entity %}
+ Para visualizar el item que se está consultando haga click
+ <a href="{{ url('product_profile', {'category_slug': entity.category.slug ,'slug': entity.slug }) }}"> Aquí </a>
+
+ (si no puede visualizar el enlace copie y pegue la siguiente dirección: {{ url('product_profile', {'category_slug': entity.category.slug ,'slug': entity.slug }) }} )
+{% endif %}

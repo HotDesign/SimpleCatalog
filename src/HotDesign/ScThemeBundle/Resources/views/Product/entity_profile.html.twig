@@ -20,4 +20,7 @@
 	    {% for ext in extends %}
                   {% include ext.bundle_name ~ ':' ~ ext.class ~ ':show_frontend.html.twig' with {'entity': ext.object } %}
           {% endfor %}
+
+
+          {% render 'HotDesignScThemeBundle:Contact:renderProductContactForm' with {'id': entity.id } %}
 {% endblock %}

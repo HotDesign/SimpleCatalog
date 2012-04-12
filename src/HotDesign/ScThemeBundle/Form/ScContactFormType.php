@@ -13,12 +13,24 @@ use Symfony\Component\Validator\Constraints\Email;
  * @author gbortoli
  */
 class ScContactFormType extends AbstractType {
-   
+
+
     public function buildForm(FormBuilder $builder, array $options) { 
         $builder->add('name', 'text', array('label' => 'Nombre'));
         $builder->add('email', 'email', array('label' => 'E-Mail'));
         $builder->add('subject', 'text', array('label' => 'Asunto'));
         $builder->add('description', 'textarea', array('label' => 'Mensaje'));
+
+        $entity_id = FALSE;
+        if (array_key_exists('data', $options)) {
+             if (array_key_exists('entity_id', $options['data'])) { 
+             $entity_id = (int) $options['data']['entity_id'];
+         }
+        }
+
+        $builder->add('entity_id', 'hidden', array('data' => $entity_id));
+        
+        
     }
     
         /**
@@ -42,6 +54,7 @@ class ScContactFormType extends AbstractType {
                 ),
                 
                 'subject' => array(),
+                'entity_id' => array(),
                 
                 'description' => new NotBlank(array(
                     'message' => 'Debe escribir un mensaje para continuar.'

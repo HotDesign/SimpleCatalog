@@ -20,4 +20,11 @@
             {{ current_category.title }}
         {% endif %}
     </li>
+
+    <li class="rss-add">
+    <a href="{{ path('products_listing', {'slug': current_category.slug, '_format': 'xml' }) }}">
+        <img src="{{asset('_images/add_rss.png')}}" alt="RSS" width="18" />
+        </a>
+    </li>
+
 </ul>

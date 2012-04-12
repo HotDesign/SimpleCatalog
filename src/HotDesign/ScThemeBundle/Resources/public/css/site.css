@@ -10,3 +10,7 @@ body {
 .categoriesNavigation.active.link {
     font-weight:bold;
 }
+
+ul.breadcrumb li.rss-add {
+	float: right;
+} 

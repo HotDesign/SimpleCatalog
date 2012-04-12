@@ -13,6 +13,11 @@
         {% else %}
         <ul class="breadcrumb">
             <li class="active">Todos</li>
+             <li class="rss-add">
+    		<a href="{{ path('products_homepage', {'_format': 'xml' }) }}">
+        <img src="{{asset('_images/add_rss.png')}}" alt="RSS" width="18" />
+        </a>
+    </li>
         </ul>
     {% endif %}
     

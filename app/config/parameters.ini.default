@@ -18,7 +18,7 @@
     mailer_user       =
     mailer_password   =
 
-    locale            = en
+    locale            = es
 
     secret            = this_is_my_secret1312312
 

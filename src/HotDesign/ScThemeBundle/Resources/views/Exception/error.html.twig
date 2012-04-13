@@ -1,0 +1,15 @@
+{% extends theme_layout_html %}
+
+{%block title%}
+Hubo un error al procesar el pedido: {{ status_text }}
+{% endblock %}
+
+{%block content %}
+        <h1>Hubo un error al procesar el pedido</h1>
+        <h2>No se encontró la página.</h2>
+
+        <div>
+           Posiblemente algo mal ha pasado, contactese con nosotros para mayor información.
+        </div>
+
+{%endblock %}

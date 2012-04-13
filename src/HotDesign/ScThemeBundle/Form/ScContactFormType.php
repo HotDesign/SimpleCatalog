@@ -19,7 +19,7 @@ class ScContactFormType extends AbstractType {
         $builder->add('name', 'text', array('label' => 'Nombre'));
         $builder->add('email', 'email', array('label' => 'E-Mail'));
         $builder->add('subject', 'text', array('label' => 'Asunto'));
-        $builder->add('description', 'textarea', array('label' => 'Mensaje'));
+        $builder->add('description', 'textarea', array('label' => 'Mensaje', 'attr' => array('rows' => '10', 'cols' => 20),));
 
         $entity_id = FALSE;
         if (array_key_exists('data', $options)) {

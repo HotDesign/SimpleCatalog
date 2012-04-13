@@ -119,7 +119,7 @@ class ContactController extends Controller {
         }
 
         $this->container->get('session')->setFlash('alert-error', 'Hubo un error al procesar su formulario, intente nuevamente más tarde.');
-        return $this->render('HotDesignScThemeBundle:Contact:index.html.twig', array('form' => $form->createView()));
+        return $this->redirect($referer);
     }
 
 
